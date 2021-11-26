@@ -1,0 +1,151 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+
+public class ArrowUI : MonoBehaviour
+{
+    public int _curNumber;
+
+    public GameObject _image1v1;
+    public GameObject _image2v2;
+    public GameObject _image3v3;
+    public GameObject _image4v4;
+    public GameObject _imageBackToTitle;
+    public int _imageNum;
+
+    public GameObject _fade;
+    public GameObject _myFade;
+
+    public float _countParam1 = 0.5f;
+
+    private GameObject[] _imageInfo;
+    private RectTransform _rectTransform;
+    private bool _isDecide;
+    private bool _isCanDecide;
+
+    static public int selectNumber_;    //人数
+
+    public bool _isDebug = false;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        Application.targetFrameRate = 60;
+
+        _curNumber = 0;
+        _imageInfo = new GameObject[] { _image1v1, _image2v2, _image3v3, _image4v4, _imageBackToTitle };
+        _rectTransform = gameObject.GetComponent<RectTransform>();
+
+        gameObject.SetActive(false);
+        _isCanDecide = false;
+        _isDecide = false;
+
+        float time = _myFade.transform.GetComponent<MyFade>().GetFadeOutTime();
+        _fade.transform.GetComponent<Fade>().FadeOut(time, () => StartingUI());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //  下に移動
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            _curNumber++;
+            if (_curNumber >= _imageNum)
+            {
+                _curNumber = 0;
+            }
+        }
+
+        //  上に移動
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            _curNumber--;
+            if (_curNumber < 0)
+            {
+                _curNumber = _imageNum - 1;
+            }
+        }
+
+
+        //  決定
+        if (_isCanDecide)
+        {
+            if (!_isDecide)
+            {
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    for (int i = 0; i < _imageInfo.Length; i++)
+                    {
+                        if (i == _curNumber)
+                        {
+                            _imageInfo[i].transform.GetComponent<SelectUI>().LetsSelect();
+                            selectNumber_ = (i + 1) * 2;
+                        }
+                        else
+                            _imageInfo[i].transform.GetComponent<SelectUI>().LetsNotSelect();
+                    }
+
+                    gameObject.SetActive(true);
+                    _isDecide = true;
+                }
+            }
+        }
+
+        //  座標を反映
+        Vector3 pos = _rectTransform.localPosition;
+        pos.y = _imageInfo[_curNumber].gameObject.GetComponent<RectTransform>().localPosition.y;
+        _rectTransform.localPosition = pos;
+
+
+        if(_isDecide)
+        {
+            _countParam1 -= Time.deltaTime;
+
+            if (_isDebug) { _countParam1 = -1f; }
+
+            if(_countParam1 < 0f)
+            {
+                //  終了
+                float time = _myFade.transform.GetComponent<MyFade>().GetFadeInTime();
+
+                if (_isCanDecide)
+                {
+                    _fade.transform.GetComponent<Fade>().FadeIn(time, ChangeScene);
+                    _isCanDecide = false;
+                }
+            }
+        }
+    }
+
+    public void SetIsDecide(bool is_decide)
+    {
+        _isCanDecide = is_decide;
+    }
+
+    public void StartingUI()
+    {
+        for (int i = 0; i < _imageInfo.Length; i++)
+        {          
+            _imageInfo[i].transform.GetComponent<SelectUI>().SetIsStart(true);  
+        }
+    }
+
+    private void ChangeScene()
+    {
+        //  キャラ選択画面に飛ぶ
+        SceneManager.LoadScene("CharactorSelect");
+    }
+
+    public bool GetIsDebug()
+    {
+        return _isDebug;
+    }
+}

@@ -1,0 +1,150 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Photon.Pun;
+using UnityEngine.UI;
+
+public class SelectTeam : MonoBehaviourPunCallbacks
+{
+    private bool IsAllSelect;
+    private bool IsSelect;
+
+    private bool RedIsFull;
+    private bool BlueIsFull;
+    private int TeamSelect;
+    private int TeamNumber;
+    private int RedNumber;
+    private int BlueNumber;
+
+    public Text ErrorText;
+    public Image ArrowImage;
+    public Image ShitaImage;
+    public Text ExplanationText;
+
+    private NewWorkInfo nw_info;
+
+    private float curTime;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        IsSelect = false;
+        IsAllSelect = false;
+        RedIsFull = false;
+        BlueIsFull = false;
+        TeamSelect = 0;
+        TeamNumber = ArrowUI.selectNumber_;
+        TeamNumber /= 2;
+        RedNumber = 0;
+        BlueNumber = 0;
+        curTime = 0.0f;
+
+        nw_info = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
+
+        ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (IsAllSelect) return;
+
+        //自分だけが入る
+        if (photonView.IsMine)
+        {
+            if(curTime != 0.0f)
+            {
+                curTime -= Time.deltaTime;
+
+                if(curTime <= 0.0f)
+                {
+                    curTime = 0.0f;
+                    ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
+                }
+            }
+
+            //決定したら動かさない
+            //おぱしてぃーせってい
+            if (IsSelect)
+            {
+                ArrowImage.SetOpacity(0.0f);
+                ShitaImage.SetOpacity(0.0f);
+                ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
+                ExplanationText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
+
+                //全員が決めた
+                if (RedIsFull && BlueIsFull)
+                {
+                    IsAllSelect = true;
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    TeamSelect = 0;
+                }
+
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    TeamSelect = 1;
+                }
+
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    IsSelect = true;
+
+                    //満員だったらエラーオパシティ
+                    if (TeamSelect == 0 && RedIsFull)
+                    {
+                        ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 100.0f);
+                        curTime = 2.0f;
+                        return;
+                    }
+                    else if (TeamSelect == 1 && BlueIsFull)
+                    {
+                        ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 100.0f);
+                        curTime = 2.0f;
+                        return;
+                    }
+
+                    if (TeamSelect == 0)
+                    {
+                        nw_info.SetTeamNumber(RedNumber);
+                        nw_info.SetTeamColor(0);
+                        RedNumber++;
+                    }
+                    else if (TeamSelect == 1)
+                    {
+                        nw_info.SetTeamNumber(BlueNumber);
+                        nw_info.SetTeamColor(1);
+                        BlueNumber++;
+                    }
+
+                    IsSelect = true;
+                    nw_info.SetInstiate(true);
+                }
+
+                if(TeamSelect == 0)
+                {
+                    ArrowImage.transform.localEulerAngles =new Vector3(0,0, 180.0f);
+                }
+
+                if (TeamSelect == 1)
+                {
+                    ArrowImage.transform.localEulerAngles = new Vector3(0, 0, 0.0f);
+                }
+            }
+
+            if(RedNumber == TeamNumber)
+            {
+                RedIsFull = true;
+            }
+
+            if(BlueNumber == TeamNumber)
+            {
+                BlueIsFull = true;
+            }
+        }
+    }
+}
