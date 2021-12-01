@@ -39,6 +39,8 @@ public class SelectChara : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(charaNumber_);
+
         if (IsCheckRotation())
         {
             Selecte();
@@ -96,7 +98,7 @@ public class SelectChara : MonoBehaviour
   
                     //  ‰ñ“]Šj•ÏŠ·
                 camera_.transform.rotation = Quaternion.Euler(cam_rot);
-               }
+            }
 
             charaNumber_--;
 

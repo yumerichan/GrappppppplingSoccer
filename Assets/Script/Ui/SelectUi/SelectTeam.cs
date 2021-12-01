@@ -80,17 +80,33 @@ public class SelectTeam : MonoBehaviourPunCallbacks
             }
             else
             {
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                bool is_right = false;
+                bool is_left = false;
+
+                //  パッドの十字ボタン取得(正の数：右　負の数：左)
+                float input_button;
+                input_button = Input.GetAxis("Horizontal");
+
+                //  パッドのスティック値取得
+                float input_stick = Input.GetAxis("Horizontal");
+
+                if (input_button > 0 || input_stick > 0)
+                    is_right = true;
+
+                if (input_button < 0 || input_stick < 0)
+                    is_left = true;
+
+                if (Input.GetKeyDown(KeyCode.LeftArrow) || is_left)
                 {
                     TeamSelect = 0;
                 }
 
-                if (Input.GetKeyDown(KeyCode.RightArrow))
+                if (Input.GetKeyDown(KeyCode.RightArrow) || is_right)
                 {
                     TeamSelect = 1;
                 }
 
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Enter"))
                 {
                     IsSelect = true;
 
