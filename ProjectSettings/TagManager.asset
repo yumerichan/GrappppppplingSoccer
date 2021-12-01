@@ -15,6 +15,8 @@ TagManager:
   - GoalA
   - GoalB
   - NetWork
+  - RedGoal
+  - BlueGoal
   layers:
   - Default
   - TransparentFX

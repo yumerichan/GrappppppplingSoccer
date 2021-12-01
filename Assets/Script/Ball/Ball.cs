@@ -27,6 +27,8 @@ public class Ball : MonoBehaviour
 
     private GameObject _player;
 
+    private GoalScore _goalScore;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,7 @@ public class Ball : MonoBehaviour
         _curIceTime = _curBlackHoleTime = 0f;
         _rigidBody = transform.GetComponent<Rigidbody>();
         _cloneIceEffect = null;
+        _goalScore = GetComponent<GoalScore>();
     }
 
     private void Awake()
@@ -42,6 +45,7 @@ public class Ball : MonoBehaviour
         _curIceTime = _curBlackHoleTime = 0f;
         _rigidBody = transform.GetComponent<Rigidbody>();
         _cloneIceEffect = null;
+
     }
 
     // Update is called once per frame
@@ -168,6 +172,19 @@ public class Ball : MonoBehaviour
         {
             if (_isIce == true)
                 FinIceEffect();
+        }
+    }
+
+    //  ÉSÅ[ÉãîªíË
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "RedGoal")
+        {
+
+        }
+        else if(other.tag == "BuleGoal")
+        {
+
         }
     }
 }
