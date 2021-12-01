@@ -17,6 +17,11 @@ public class SelectChara : MonoBehaviour
     private bool preIsRight_ = false;   //前フレ右入力
     private bool preIsLeft_ = false;    //前フレ左入力
 
+    private bool IsRightRotation;
+    private bool IsLeftRotation;
+
+    private float CurrentCameraY;
+ 
     private enum CharaType
     {
         Wall,
@@ -34,7 +39,10 @@ public class SelectChara : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Selecte(); 
+        if (IsCheckRotation())
+        {
+            Selecte();
+        }
     }
 
     //  選択
@@ -42,8 +50,6 @@ public class SelectChara : MonoBehaviour
     {
         bool is_right = false;
         bool is_left = false;
-
-        Quaternion rot = camera_.transform.rotation;
 
         //  パッドの十字ボタン取得(正の数：右　負の数：左)
         float input_button;
@@ -58,18 +64,14 @@ public class SelectChara : MonoBehaviour
         if (input_button < 0 || input_stick < 0)
             is_left = true;
 
-        //  回転角計算用
-        //  Quaternion　をオイラー核に変換
-        Vector3 cam_rot = rot.eulerAngles;
-
+        
         //  右が押された
         if(preIsRight_ == false && is_right)
         {
-            //  カメラ回転
-            cam_rot += new Vector3(0, 90.0f, 0);
+            IsRightRotation = true;
 
-            //  回転核変換
-            camera_.transform.rotation = Quaternion.Euler(cam_rot);
+            //  カメラ回転
+            CurrentCameraY += 90.0f;           
 
             charaNumber_++;
 
@@ -80,12 +82,21 @@ public class SelectChara : MonoBehaviour
         //  左が押された
         if(preIsLeft_ == false && is_left)
         {
-            //  カメラ回転
-            //  カメラ回転
-            cam_rot += new Vector3(0, -90.0f, 0);
+            IsLeftRotation = true;
 
-            //  回転核変換
-            camera_.transform.rotation = Quaternion.Euler(cam_rot);
+            CurrentCameraY -= 90.0f;
+
+            if (CurrentCameraY == -90.0f)
+            {
+                CurrentCameraY = 270.0f;
+
+                Vector3 cam_rot = camera_.transform.rotation.eulerAngles;
+
+                cam_rot -= new Vector3(0.0f, 1.0f, 0.0f);
+  
+                    //  回転核変換
+                camera_.transform.rotation = Quaternion.Euler(cam_rot);
+               }
 
             charaNumber_--;
 
@@ -111,5 +122,83 @@ public class SelectChara : MonoBehaviour
     {
         //  キャラ選択画面に飛ぶ
         SceneManager.LoadScene("PlayScene");
+    }
+
+    private bool IsCheckRotation()
+    {
+        Quaternion rot = camera_.transform.rotation;
+        //  回転角計算用
+        //  Quaternion　をオイラー核に変換
+        Vector3 cam_rot = rot.eulerAngles;
+
+        if (IsLeftRotation)
+        {   
+            if (CurrentCameraY == 0.0f)
+            {
+                if (0 != (int)rot.eulerAngles.y)
+                {
+                    cam_rot -= new Vector3(0.0f, 1.0f, 0.0f);
+                }
+                else
+                {
+                    CurrentCameraY = 0;
+                    cam_rot.y = CurrentCameraY;
+                    IsLeftRotation = false;
+                }
+            }
+            else
+            {
+                if (CurrentCameraY < rot.eulerAngles.y)
+                {
+
+                    cam_rot -= new Vector3(0.0f, 1.0f, 0.0f);
+                }
+                else
+                {
+                    IsLeftRotation = false;
+                }
+            }
+
+            //  回転核変換
+            camera_.transform.rotation = Quaternion.Euler(cam_rot);
+
+            return false;
+        }
+        else if(IsRightRotation)
+        {
+            if (CurrentCameraY == 360.0f)
+            {
+                if (0 != (int)rot.eulerAngles.y)
+                {
+                    cam_rot += new Vector3(0.0f, 1.0f, 0.0f);
+                }
+                else
+                {
+                    CurrentCameraY = 0;
+                    cam_rot.y = CurrentCameraY;
+                    IsRightRotation = false;
+                }
+            }
+            else
+            {
+                if (CurrentCameraY > rot.eulerAngles.y)
+                {
+                    cam_rot += new Vector3(0.0f, 1.0f, 0.0f);
+                }
+                else
+                {
+                    cam_rot.y = CurrentCameraY;
+                    IsRightRotation = false;
+                }
+            }
+            
+
+            //  回転核変換
+            camera_.transform.rotation = Quaternion.Euler(cam_rot);
+
+            return false;
+        }
+
+        return true;
     }
 }
