@@ -163,7 +163,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                 case 1:
                     {
                         var position = new Vector3(0.0f, 0.0f, 0.0f);
-                        PhotonNetwork.Instantiate("Chara_Trap", position, Quaternion.identity);
+                        PhotonNetwork.Instantiate(name, position, Quaternion.identity);
                         player_number++;
 
                         PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);
@@ -172,7 +172,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                 case 2:
                     {
                         var position = new Vector3(0.0f, 0.0f, 0.0f);
-                        PhotonNetwork.Instantiate("Chara_Trap", position, Quaternion.identity);
+                        PhotonNetwork.Instantiate(name, position, Quaternion.identity);
 
                         charaName_ = name;
 
