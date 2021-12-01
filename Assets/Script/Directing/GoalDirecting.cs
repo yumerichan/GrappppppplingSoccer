@@ -52,7 +52,7 @@ public class GoalDirecting : MonoBehaviour
                 {
                     //  Ui‚ÌÀ•W‚ğQÆ
                     Vector3 pos = _rect.localPosition;
-                    pos.x -= _moveSpeed * Time.unscaledDeltaTime * 10;
+                    pos.x -= _moveSpeed * Time.unscaledDeltaTime * 15;
 
                     //  ˆÚ“®I‚í‚è
                     if(pos.x < 0)
