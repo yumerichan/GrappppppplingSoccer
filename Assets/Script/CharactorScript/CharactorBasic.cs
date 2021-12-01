@@ -524,5 +524,13 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             curSkillCoolTime_ += Time.deltaTime;
     }
 
+    public float GetCurSkillCoolTime()
+    {
+        return curSkillCoolTime_;
+    }
 
+    public float GetSkillCoolTime()
+    {
+        return skillCoolTime_;
+    }
 }

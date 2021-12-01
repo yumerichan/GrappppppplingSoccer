@@ -25,6 +25,7 @@ public class Ball : MonoBehaviour
     private bool _isBlackHole;              //吸い込んでいるか
     private Vector3 _blackHolePos;          //ブラックホール座標
 
+    private GameObject _player;
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +52,7 @@ public class Ball : MonoBehaviour
     }
 
     //氷結スキル発動
-    public void StartIceEffect()
+    public void StartIceEffect(GameObject player)
     {
         //先にブラックホールが出てたらしゅうりょう
         if (_isBlackHole)
@@ -75,11 +76,13 @@ public class Ball : MonoBehaviour
         //重力オフ
         _rigidBody.useGravity = false;
         _rigidBody.velocity = Vector3.zero;
+
+        _player = player;
+        
     }
 
     private void FinIceEffect()
     {
-
         //子を削除
         PhotonNetwork.Destroy(_cloneIceEffect.gameObject);
         _isIce = false;
@@ -87,6 +90,7 @@ public class Ball : MonoBehaviour
 
         //重力オン
         _rigidBody.useGravity = true;
+        _player.GetComponent<CharactorBasic>().isSkill_ = false;
     }
 
     //氷結スキルアップデート

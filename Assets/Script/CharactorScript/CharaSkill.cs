@@ -32,7 +32,7 @@ public class CharaSkill : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             //if(!_ball.transform.gameObject.GetComponent<Ball>().GetIsIce())
-                 _ball.transform.gameObject.GetComponent<Ball>().StartIceEffect();
+                 _ball.transform.gameObject.GetComponent<Ball>().StartIceEffect(this.gameObject);
         }
 
         //  •Ç
@@ -78,7 +78,8 @@ public class CharaSkill : MonoBehaviour
     {
         Vector3 wall_pos = transform.Find("WallPos").gameObject.transform.position;
 
-        PhotonNetwork.Instantiate("BarrierWall", wall_pos, transform.rotation);
+        GameObject baria = PhotonNetwork.Instantiate("BarrierWall", wall_pos, transform.rotation);
+        baria.transform.GetChild(0).GetComponent<WallEffect>().SetPlayer(this.gameObject);
     }
 
 
@@ -86,7 +87,7 @@ public class CharaSkill : MonoBehaviour
     public void OnSkillFriaze()
     {
         GameObject ball = GameObject.Find("Ball(Clone)");
-        ball.transform.gameObject.GetComponent<Ball>().StartIceEffect();
+        ball.transform.gameObject.GetComponent<Ball>().StartIceEffect(this.gameObject);
     }
 
     //  ƒgƒ‰ƒbƒv

@@ -14,6 +14,7 @@ public class WallEffect : MonoBehaviour
         STATE_NUM,
     };
 
+    private GameObject _player;
 
     public float _NormalHeight;     //•Ç‚Ì³‹K‰»‚Ì‚‚³
     public float _height;           //ŽÀÛ‚Ì•Ç‚Ì‚‚³
@@ -101,6 +102,15 @@ public class WallEffect : MonoBehaviour
         if (_alpha >= 1f)
         {
             PhotonNetwork.Destroy(transform.parent.gameObject);
+            _player.GetComponent<CharactorBasic>().isSkill_ = false;
+
+            _player = null;
         }
+    }
+
+    public void SetPlayer(GameObject player)
+    {
+        _player = player;
+
     }
 }
