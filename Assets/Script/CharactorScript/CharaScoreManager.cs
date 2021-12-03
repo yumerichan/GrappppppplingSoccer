@@ -9,6 +9,7 @@ public class CharaScoreManager : MonoBehaviour
     public static int _playerCnt;
 
     private CharaScore[] _all;
+    private NewWorkInfo _nwInfo;
     private int i;
 
     // Start is called before the first frame update
@@ -17,6 +18,7 @@ public class CharaScoreManager : MonoBehaviour
         _allScoreInfo = new CharaScore.CharaScoreInfo[8];
         _playerCnt = 0;
         _all = new CharaScore[8];
+        _nwInfo = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
         i = 0;
     }
 
@@ -26,6 +28,7 @@ public class CharaScoreManager : MonoBehaviour
         //  デバッグ終了
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
+
             for (int j = 0; j < i; j++)
             {
                 _all[j].SendScoreInfo();

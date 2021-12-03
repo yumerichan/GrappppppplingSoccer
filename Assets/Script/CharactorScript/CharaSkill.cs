@@ -76,9 +76,11 @@ public class CharaSkill : MonoBehaviour
     //  �ǐݒu
     public void OnSkillWall()
     {
-        Vector3 wall_pos = transform.Find("WallPos").gameObject.transform.position;
+        //Vector3 wall_pos = transform.Find("WallPos").gameObject.transform.position;
 
-        GameObject baria = PhotonNetwork.Instantiate("BarrierWall", wall_pos, transform.rotation);
+        Vector3 wall_pos = transform.position + (Camera.main.transform.forward * 3);
+
+        GameObject baria = PhotonNetwork.Instantiate("BarrierWall", wall_pos, Camera.main.transform.rotation);
         baria.transform.GetChild(0).GetComponent<WallEffect>().SetPlayer(this.gameObject);
     }
 

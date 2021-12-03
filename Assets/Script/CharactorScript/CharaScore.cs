@@ -6,6 +6,7 @@ public class CharaScore : MonoBehaviour
 {
     public struct CharaScoreInfo
     {
+        public int _goalNum;
         public int _goal;
         public int _skill;
         public int _skillCnt;
@@ -28,6 +29,7 @@ public class CharaScore : MonoBehaviour
         _scoreInfo._goal = _scoreInfo._grap = _scoreInfo._skill = _scoreInfo._skillCnt = 0;
         _scoreInfo._ballAtk = 0;
         _scoreInfo._teamKind = 0;
+        _scoreInfo._goalNum = 0;
         _nwInfo = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
         _scoreManager = GameObject.Find("CharaScoreManager");
         SendThis();
@@ -47,6 +49,8 @@ public class CharaScore : MonoBehaviour
     {
         _scoreInfo._goal += 800;
         _scoreInfo._allScore += 800;
+
+        _scoreInfo._goalNum++;
     }
 
     public void AddSkill()
@@ -75,6 +79,8 @@ public class CharaScore : MonoBehaviour
 
     public void SendScoreInfo()
     {
+        _scoreInfo._teamKind = _nwInfo.GetTeamColor();
+
         _scoreManager.transform.GetComponent<CharaScoreManager>
             ().ReceiveScoreInfo(_scoreInfo);
     }

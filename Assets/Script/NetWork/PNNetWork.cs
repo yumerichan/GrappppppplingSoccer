@@ -59,7 +59,6 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
             {
                 position = new Vector3(vec.x, vec.y, vec.z + 40.0f);
             }
-\
 
             Quaternion rot = new Quaternion(0.0f,180.0f,0.0f,0.0f);
             PhotonNetwork.Instantiate(name, position, rot);
