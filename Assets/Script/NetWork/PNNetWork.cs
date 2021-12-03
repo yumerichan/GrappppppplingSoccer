@@ -12,14 +12,9 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
     bool isBallCreate_;
     bool IsInstiate;
 
-    private int rednumber_;
-    private int bluebnumber_;
-
     private void Start()
     {
         player_number = 0;
-        rednumber_ = 0;
-        bluebnumber_ = 0;
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
         PhotonNetwork.ConnectUsingSettings();
         isBallCreate_ = false;
@@ -58,12 +53,12 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                 position = new Vector3(vec.x + 40.0f, vec.y, vec.z );
             }
 
-            if(GameObject.Find("Red2").GetComponent<RedSrart>().GetOnRedCollision())
+            if(GameObject.Find("Red2").GetComponent<RedSrart2>().GetOnRedCollision())
             {
                 position = new Vector3(vec.x - 40.0f, vec.y, vec.z);
             }
 
-            if (GameObject.Find("Red2").GetComponent<RedSrart>().GetOnRedCollision())
+            if (GameObject.Find("Red3").GetComponent<RedSrart3>().GetOnRedCollision())
             {
                 position = new Vector3(vec.x - 80.0f, vec.y, vec.z);
             }
@@ -158,7 +153,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                 case 1:
                     {
                         var position = new Vector3(0.0f, 0.0f, 0.0f);
-                        PhotonNetwork.Instantiate(name, position, Quaternion.identity);
+                        PhotonNetwork.Instantiate("Chara_Wall", position, Quaternion.identity);
                         player_number++;
 
                         PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);

@@ -102,10 +102,10 @@ public class SelectTeam : MonoBehaviourPunCallbacks
 
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Enter"))
                 {
-                    //IsSelect = true;
+                IsSelect = true;
 
-                    //満員だったらエラーオパシティ
-                    if (TeamSelect == 0 && RedIsFull)
+                //満員だったらエラーオパシティ
+                if (TeamSelect == 0 && RedIsFull)
                     {
                         ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 100.0f);
                         curTime = 2.0f;
