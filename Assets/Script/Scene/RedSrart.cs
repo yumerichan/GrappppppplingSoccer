@@ -7,12 +7,11 @@ public class RedSrart : MonoBehaviour
     // Start is called before the first frame update
     private bool IsCollision;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.tag == "Player")
-        {
+        if (other.tag == "Player")
             IsCollision = true;
-        }
+
     }
 
     public bool GetOnRedCollision()
