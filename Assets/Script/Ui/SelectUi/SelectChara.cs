@@ -39,8 +39,6 @@ public class SelectChara : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(charaNumber_);
-
         if (IsCheckRotation())
         {
             Selecte();

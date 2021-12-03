@@ -12,9 +12,14 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
     bool isBallCreate_;
     bool IsInstiate;
 
+    private int rednumber_;
+    private int bluebnumber_;
+
     private void Start()
     {
         player_number = 0;
+        rednumber_ = 0;
+        bluebnumber_ = 0;
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
         PhotonNetwork.ConnectUsingSettings();
         isBallCreate_ = false;
@@ -24,11 +29,19 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 
     private void Update()
     {
-        
+        //Debug.Log(nw_info.GetTeamNumber());
 
         if (!IsInstiate) return;
+
+        Debug.Log("Isins");
+
         if (!nw_info.GetInstiate()) return;
-        if (!photonView.IsMine) return;
+
+        Debug.Log("netins");
+
+        //if (!photonView.IsMine) return;
+
+        //Debug.Log("ismine");
 
         string name = SelectChara.charaName_;
 
@@ -36,84 +49,27 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         //赤
         if (nw_info.GetTeamColor() == 0)
         {
-            switch(nw_info.GetTeamNumber())
-            {
-                case 0:
-                    {
-                        var position = new Vector3(0.0f, 0.0f, 0.0f);
-                        PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                        charaName_ = name;
-
-                        PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);
-
-                        IsInstiate = false;
-                    }
-                    break;
-                case 1:
-                    {
-                        var position = new Vector3(0.0f, 0.0f, 0.0f);
-                        PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                        charaName_ = name;
-                        IsInstiate = false;
-                    }
-                    break;
-                case 2:
-                    {
-                        var position = new Vector3(0.0f, 0.0f, 0.0f);
-                        PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                        charaName_ = name;
-                        IsInstiate = false;
-                    }
-                    break;
-                case 3:
-                    {
-                        var position = new Vector3(0.0f, 0.0f, 0.0f);
-                        PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                        charaName_ = name;
-                        IsInstiate = false;
-                    }
-                    break;
-
-            }
+            Vector3 vec = GameObject.Find("RedStart").transform.position;
+            var position = new Vector3(vec.x, vec.y, vec.z);
+            Quaternion rot = new Quaternion(0.0f,180.0f,0.0f,0.0f);
+            PhotonNetwork.Instantiate(name, position, rot);
+            charaName_ = name;
+            IsInstiate = false;
         }
-        //赤
+        //青
         if (nw_info.GetTeamColor() == 1)
         {
-            switch (nw_info.GetTeamNumber())
-            {
-                case 0:
-                    {
-                var position = new Vector3(0.0f, 0.0f, 0.0f);
-                PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                charaName_ = name;
-                IsInstiate = false;
-            }
-            break;
-                case 1:
-                    {
-                        var position = new Vector3(0.0f, 0.0f, 0.0f);
-                        PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                        charaName_ = name;
-                        IsInstiate = false;
-                    }
-                    break;
-                case 2:
-                    {
-                var position = new Vector3(0.0f, 0.0f, 0.0f);
-                PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                charaName_ = name;
-                IsInstiate = false;
-            }
-            break;
-                case 3:
-                    {
-                var position = new Vector3(0.0f, 0.0f, 0.0f);
-                PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                charaName_ = name;
-                IsInstiate = false;
-            }
-            break;
+            Vector3 vec = GameObject.Find("BlueStart").transform.position;
+            var position = new Vector3(vec.x, vec.y, vec.z);
+            PhotonNetwork.Instantiate(name, position, Quaternion.identity);
+            charaName_ = name;
+            IsInstiate = false;
+        
         }
+
+        if((int)PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        {
+            PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);
         }
 
         // ルームが満員になったら、以降そのルームへの参加を不許可にする
@@ -136,7 +92,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         var roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = (byte)ArrowUI.selectNumber_;
         // "Room"という名前のルームに参加する（ルームが存在しなければ作成して参加する）
-        PhotonNetwork.JoinOrCreateRoom("room", roomOptions, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom("roojjm", roomOptions, TypedLobby.Default);
     }
 
     // ランダムで参加できるルームが存在しないなら、新規でルームを作成する
@@ -175,16 +131,12 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                         PhotonNetwork.Instantiate(name, position, Quaternion.identity);
 
                         charaName_ = name;
-
-
-
                     }
                     break;
                 case 3:
                     {
                         var position = new Vector3(0.0f, 0.0f, 0.0f);
                         PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                        player_number++;
                         charaName_ = name;
 
 

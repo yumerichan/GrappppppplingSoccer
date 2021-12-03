@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
 
 public class NewWorkInfo : MonoBehaviour
 {
     private int TeamColor;              //0 == ê‘ 1 == ê¬
-    private int TeamNumber;             //É`Å[ÉÄî‘çÜ
 
     private bool IsInstantiate;         //ê∂ê¨ÇµÇƒÇÊÇ¢Ç©ÅH
 
@@ -15,20 +12,12 @@ public class NewWorkInfo : MonoBehaviour
     void Start()
     {
         TeamColor = -1;
-        TeamNumber = -1;
         IsInstantiate = false;
-    }
-
-    
+    }  
 
     public void SetTeamColor(int color)
     {
         TeamColor = color;
-    }
-
-    public void SetTeamNumber(int number)
-    {
-        TeamNumber = number;
     }
 
     public void SetInstiate(bool ins)
@@ -44,10 +33,5 @@ public class NewWorkInfo : MonoBehaviour
     public int GetTeamColor()
     {
         return TeamColor;
-    }
-
-    public int GetTeamNumber()
-    {
-        return TeamNumber;
     }
 }
