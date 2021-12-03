@@ -6,10 +6,15 @@ public class GoalBlue : MonoBehaviour
 {
 
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        GoalScore score = GameObject.Find("Score&Timer").GetComponent<GoalScore>();
 
-        score.AddBuleScore();
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Ball")
+        {
+            GoalScore score = GameObject.Find("Score&Timer").GetComponent<GoalScore>();
+
+            score.AddBuleScore();
+        }
     }
 }

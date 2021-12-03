@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class GoalRed : MonoBehaviour
 {
-    
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        GoalScore score = GameObject.Find("Score&Timer").GetComponent<GoalScore>();
+        if (other.tag == "Ball")
+        {
+            GoalScore score = GameObject.Find("Score&Timer").GetComponent<GoalScore>();
 
-        score.AddRedScore();
+            score.AddRedScore();
+        }
     }
 }
