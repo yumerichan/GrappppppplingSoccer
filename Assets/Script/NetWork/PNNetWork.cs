@@ -12,14 +12,9 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
     bool isBallCreate_;
     bool IsInstiate;
 
-    private int rednumber_;
-    private int bluebnumber_;
-
     private void Start()
     {
         player_number = 0;
-        rednumber_ = 0;
-        bluebnumber_ = 0;
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
         PhotonNetwork.ConnectUsingSettings();
         isBallCreate_ = false;
@@ -51,13 +46,21 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         {
             Vector3 vec = GameObject.Find("RedStart").transform.position;
 
-            RedSrart red = GameObject.Find("RedStart").GetComponent<RedSrart>();
-
             var position = new Vector3(vec.x, vec.y, vec.z);
 
-            if (red.GetOnRedCollision())
+            if (GameObject.Find("Red1").GetComponent<RedSrart>().GetOnRedCollision())
             {
-                position = new Vector3(vec.x, vec.y, vec.z + 40.0f);
+                position = new Vector3(vec.x + 40.0f, vec.y, vec.z );
+            }
+
+            if(GameObject.Find("Red2").GetComponent<RedSrart2>().GetOnRedCollision())
+            {
+                position = new Vector3(vec.x - 40.0f, vec.y, vec.z);
+            }
+
+            if (GameObject.Find("Red3").GetComponent<RedSrart3>().GetOnRedCollision())
+            {
+                position = new Vector3(vec.x - 80.0f, vec.y, vec.z);
             }
 
             Quaternion rot = new Quaternion(0.0f,180.0f,0.0f,0.0f);
@@ -69,7 +72,29 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         if (nw_info.GetTeamColor() == 1)
         {
             Vector3 vec = GameObject.Find("BlueStart").transform.position;
+
+           
+            BlueStart blue = GameObject.Find("Blue1").GetComponent<BlueStart>();
+            BlueStart2 blue2 = GameObject.Find("Blue2").GetComponent<BlueStart2>();
+            BlueStart3 blue3 = GameObject.Find("Blue3").GetComponent<BlueStart3>();
+
             var position = new Vector3(vec.x, vec.y, vec.z);
+
+            if (blue.GetOnRedCollision())
+            {
+                position = new Vector3(vec.x + 40.0f, vec.y, vec.z);
+            }
+
+            if (blue2.GetOnRedCollision())
+            {
+                position = new Vector3(vec.x - 40.0f, vec.y, vec.z);
+            }
+
+            if (blue3.GetOnRedCollision())
+            {
+                position = new Vector3(vec.x - 80.0f, vec.y, vec.z);
+            }
+
             PhotonNetwork.Instantiate(name, position, Quaternion.identity);
             charaName_ = name;
             IsInstiate = false;
@@ -101,7 +126,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         var roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = (byte)ArrowUI.selectNumber_;
         // "Room"という名前のルームに参加する（ルームが存在しなければ作成して参加する）
-        PhotonNetwork.JoinOrCreateRoom("roojjm", roomOptions, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom("roojm", roomOptions, TypedLobby.Default);
     }
 
     // ランダムで参加できるルームが存在しないなら、新規でルームを作成する
@@ -128,7 +153,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                 case 1:
                     {
                         var position = new Vector3(0.0f, 0.0f, 0.0f);
-                        PhotonNetwork.Instantiate(name, position, Quaternion.identity);
+                        PhotonNetwork.Instantiate("Chara_Wall", position, Quaternion.identity);
                         player_number++;
 
                         PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);

@@ -18,6 +18,7 @@ TagManager:
   - RedGoal
   - BlueGoal
   - ResStart
+  - BlueStart
   layers:
   - Default
   - TransparentFX

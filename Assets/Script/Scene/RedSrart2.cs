@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedSrart : MonoBehaviour
+public class RedSrart2 : MonoBehaviour
 {
     // Start is called before the first frame update
     private bool IsCollision;
@@ -18,7 +18,6 @@ public class RedSrart : MonoBehaviour
     {
         return IsCollision;
     }
-
     public void SetIsCollision()
     {
         IsCollision = false;
