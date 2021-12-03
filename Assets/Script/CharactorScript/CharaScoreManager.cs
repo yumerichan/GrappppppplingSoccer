@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
-public class CharaScoreManager : MonoBehaviour
+public class CharaScoreManager : MonoBehaviourPunCallbacks
 {
     public static CharaScore.CharaScoreInfo[] _allScoreInfo;
     public static int _playerCnt;
