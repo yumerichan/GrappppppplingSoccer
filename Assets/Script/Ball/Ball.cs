@@ -26,6 +26,7 @@ public class Ball : MonoBehaviour
     private Vector3 _blackHolePos;          //ブラックホール座標
 
     private GameObject _player;
+    private GameObject _hitPlayer;
 
     private GoalScore _goalScore;
 
@@ -36,6 +37,7 @@ public class Ball : MonoBehaviour
         _curIceTime = _curBlackHoleTime = 0f;
         _rigidBody = transform.GetComponent<Rigidbody>();
         _cloneIceEffect = null;
+        _hitPlayer = null;
         _goalScore = GetComponent<GoalScore>();
     }
 
@@ -170,6 +172,13 @@ public class Ball : MonoBehaviour
         //  プレイヤーと当たったら
         if(collision.gameObject.tag == "Player")
         {
+            //更新
+            _hitPlayer = collision.gameObject;
+
+            //ボールに当たったスコア加算
+            _hitPlayer.transform.GetComponent<CharaScore>().AddBallAtk();
+
+
             if (_isIce == true)
                 FinIceEffect();
         }
@@ -180,11 +189,11 @@ public class Ball : MonoBehaviour
     {
         if(other.tag == "RedGoal")
         {
-
+            _hitPlayer.transform.GetComponent<CharaScore>().AddGoal();
         }
         else if(other.tag == "BuleGoal")
         {
-
+            _hitPlayer.transform.GetComponent<CharaScore>().AddGoal();
         }
     }
 }

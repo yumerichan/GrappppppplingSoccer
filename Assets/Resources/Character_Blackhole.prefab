@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 6748534499814933723}
   - component: {fileID: 6668333334618473813}
   - component: {fileID: 355970002469888589}
+  - component: {fileID: 3368415234285500967}
   m_Layer: 0
   m_Name: Character_Blackhole
   m_TagString: Player
@@ -409,8 +410,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
+  m_SynchronizeParameters:
+  - Type: 3
+    SynchronizeType: 0
+    Name: AnimState
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsLanding
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
+  - SynchronizeType: 0
+    LayerIndex: 1
 --- !u!114 &3973469798456747206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,6 +495,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3368415234285500967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008720877552305025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1df21a8789a3d4cadb1455a2b4c91a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreManager: {fileID: 0}
 --- !u!1 &1493892375015911179
 GameObject:
   m_ObjectHideFlags: 0
