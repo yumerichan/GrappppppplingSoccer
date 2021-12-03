@@ -51,20 +51,21 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         {
             Vector3 vec = GameObject.Find("RedStart").transform.position;
 
-            RedSrart red = GameObject.Find("Red1").GetComponent<RedSrart>();
-            RedSrart2 red2 = GameObject.Find("Red2").GetComponent<RedSrart2>();
-            
-
             var position = new Vector3(vec.x, vec.y, vec.z);
 
-            if (red.GetOnRedCollision())
+            if (GameObject.Find("Red1").GetComponent<RedSrart>().GetOnRedCollision())
             {
                 position = new Vector3(vec.x + 40.0f, vec.y, vec.z );
             }
 
-            if(red2.GetOnRedCollision())
+            if(GameObject.Find("Red2").GetComponent<RedSrart>().GetOnRedCollision())
             {
                 position = new Vector3(vec.x - 40.0f, vec.y, vec.z);
+            }
+
+            if (GameObject.Find("Red2").GetComponent<RedSrart>().GetOnRedCollision())
+            {
+                position = new Vector3(vec.x - 80.0f, vec.y, vec.z);
             }
 
             Quaternion rot = new Quaternion(0.0f,180.0f,0.0f,0.0f);
@@ -80,6 +81,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
            
             BlueStart blue = GameObject.Find("Blue1").GetComponent<BlueStart>();
             BlueStart2 blue2 = GameObject.Find("Blue2").GetComponent<BlueStart2>();
+            BlueStart3 blue3 = GameObject.Find("Blue3").GetComponent<BlueStart3>();
 
             var position = new Vector3(vec.x, vec.y, vec.z);
 
@@ -92,6 +94,12 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
             {
                 position = new Vector3(vec.x - 40.0f, vec.y, vec.z);
             }
+
+            if (blue3.GetOnRedCollision())
+            {
+                position = new Vector3(vec.x - 80.0f, vec.y, vec.z);
+            }
+
             PhotonNetwork.Instantiate(name, position, Quaternion.identity);
             charaName_ = name;
             IsInstiate = false;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlueStart : MonoBehaviour
+public class BlueStart3 : MonoBehaviour
 {
 
     private bool IsCollision;
@@ -17,8 +17,10 @@ public class BlueStart : MonoBehaviour
     {
         return IsCollision;
     }
+
     public void SetIsCollision()
     {
         IsCollision = false;
     }
 }
+

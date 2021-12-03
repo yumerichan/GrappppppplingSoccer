@@ -18,4 +18,8 @@ public class RedSrart2 : MonoBehaviour
     {
         return IsCollision;
     }
+    public void SetIsCollision()
+    {
+        IsCollision = false;
+    }
 }

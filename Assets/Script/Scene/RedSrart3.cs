@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlueStart : MonoBehaviour
+public class RedSrart3 : MonoBehaviour
 {
-
+    // Start is called before the first frame update
     private bool IsCollision;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -17,6 +18,7 @@ public class BlueStart : MonoBehaviour
     {
         return IsCollision;
     }
+
     public void SetIsCollision()
     {
         IsCollision = false;
