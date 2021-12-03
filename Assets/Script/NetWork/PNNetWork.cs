@@ -34,9 +34,9 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 
         Debug.Log("netins");
 
-        if (!photonView.IsMine) return;
+        //if (!photonView.IsMine) return;
 
-        Debug.Log("ismine");
+        //Debug.Log("ismine");
 
         string name = SelectChara.charaName_;
 
