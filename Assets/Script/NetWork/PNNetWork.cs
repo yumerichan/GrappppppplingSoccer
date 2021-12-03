@@ -24,11 +24,19 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 
     private void Update()
     {
-        
+        //Debug.Log(nw_info.GetTeamNumber());
 
         if (!IsInstiate) return;
+
+        Debug.Log("Isins");
+
         if (!nw_info.GetInstiate()) return;
+
+        Debug.Log("netins");
+
         if (!photonView.IsMine) return;
+
+        Debug.Log("ismine");
 
         string name = SelectChara.charaName_;
 

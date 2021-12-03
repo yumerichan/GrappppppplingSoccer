@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
 
 public class NewWorkInfo : MonoBehaviour
 {
@@ -17,9 +15,7 @@ public class NewWorkInfo : MonoBehaviour
         TeamColor = -1;
         TeamNumber = -1;
         IsInstantiate = false;
-    }
-
-    
+    }  
 
     public void SetTeamColor(int color)
     {
