@@ -50,7 +50,17 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         if (nw_info.GetTeamColor() == 0)
         {
             Vector3 vec = GameObject.Find("RedStart").transform.position;
+
+            RedSrart red = GameObject.Find("RedStart").GetComponent<RedSrart>();
+
             var position = new Vector3(vec.x, vec.y, vec.z);
+
+            if (red.GetOnRedCollision())
+            {
+                position = new Vector3(vec.x, vec.y, vec.z + 40.0f);
+            }
+\
+
             Quaternion rot = new Quaternion(0.0f,180.0f,0.0f,0.0f);
             PhotonNetwork.Instantiate(name, position, rot);
             charaName_ = name;
