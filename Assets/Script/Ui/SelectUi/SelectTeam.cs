@@ -48,9 +48,9 @@ public class SelectTeam : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        //Ž©•ª‚¾‚¯‚ª“ü‚é
-        if (photonView.IsMine)
-        {
+        ////Ž©•ª‚¾‚¯‚ª“ü‚é
+        //if (photonView.IsMine)
+        //{
             if(curTime != 0.0f)
             {
                 curTime -= Time.deltaTime;
@@ -153,6 +153,6 @@ public class SelectTeam : MonoBehaviourPunCallbacks
             {
                 BlueIsFull = true;
             }
-        }
+        
     }
 }

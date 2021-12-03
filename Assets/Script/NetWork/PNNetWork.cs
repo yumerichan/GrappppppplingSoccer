@@ -92,7 +92,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         var roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = (byte)ArrowUI.selectNumber_;
         // "Room"という名前のルームに参加する（ルームが存在しなければ作成して参加する）
-        PhotonNetwork.JoinOrCreateRoom("room", roomOptions, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom("roojjm", roomOptions, TypedLobby.Default);
     }
 
     // ランダムで参加できるルームが存在しないなら、新規でルームを作成する
