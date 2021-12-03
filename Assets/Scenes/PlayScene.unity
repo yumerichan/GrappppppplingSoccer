@@ -4201,7 +4201,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982413266}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4341,8 +4341,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2141362000}
-  - component: {fileID: 2141362002}
   - component: {fileID: 2141362001}
+  - component: {fileID: 2141362002}
   m_Layer: 0
   m_Name: Red2
   m_TagString: Untagged
@@ -4357,7 +4357,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2141361999}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 40, y: 0, z: 65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4386,7 +4386,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2141361999}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 208e5b6f6268c094591b7b61c32c322a, type: 3}
+  m_Script: {fileID: 11500000, guid: a40ce68e866b646449c6ebc66bd42a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2747235164836497567 stripped
