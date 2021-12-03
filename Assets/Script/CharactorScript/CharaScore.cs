@@ -19,7 +19,8 @@ public class CharaScore : MonoBehaviour
     }
 
     public CharaScoreInfo _scoreInfo;
-    public GameObject _scoreManager;
+    private GameObject _scoreManager;
+    private NewWorkInfo _nwInfo;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,11 @@ public class CharaScore : MonoBehaviour
         _scoreInfo._goal = _scoreInfo._grap = _scoreInfo._skill = _scoreInfo._skillCnt = 0;
         _scoreInfo._ballAtk = 0;
         _scoreInfo._teamKind = 0;
+        _nwInfo = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
+        _scoreManager = GameObject.Find("CharaScoreManager");
+        SendThis();
+
+
     }
 
     // Update is called once per frame
@@ -73,4 +79,13 @@ public class CharaScore : MonoBehaviour
             ().ReceiveScoreInfo(_scoreInfo);
     }
 
+    public void SendThis()
+    {
+        _scoreManager.GetComponent<CharaScoreManager>().ReceiveCharaScore(this);
+    }
+
+    public int GetTeamColor()
+    {
+        return _nwInfo.GetTeamColor();
+    }
 }

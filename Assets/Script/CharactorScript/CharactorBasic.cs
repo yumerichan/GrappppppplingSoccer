@@ -471,6 +471,9 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             if(is_grapple == false)
             {
                 this.GetComponent<Grappling>().ShotAnchor();
+
+                //グラップルスコア加算
+                this.GetComponent<CharaScore>().AddGrap();
             }
             else if(is_grapple)
             {
@@ -511,6 +514,9 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
 
             //  スキルCTリセット
             curSkillCoolTime_ = 0.0f;
+
+            //スキル発動スコア加算
+            this.GetComponent<CharaScore>().AddSkillCnt();
         }    
     }
 
