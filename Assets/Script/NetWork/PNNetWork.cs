@@ -51,8 +51,8 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         {
             Vector3 vec = GameObject.Find("RedStart").transform.position;
 
-            RedSrart red = GameObject.Find("RedStart").GetComponentInChildren<RedSrart>();
-            RedSrart2 red2 = GameObject.Find("RedStart").GetComponentInChildren<RedSrart2>();
+            RedSrart red = GameObject.Find("Red1").GetComponent<RedSrart>();
+            RedSrart2 red2 = GameObject.Find("Red2").GetComponent<RedSrart2>();
             
 
             var position = new Vector3(vec.x, vec.y, vec.z);
@@ -78,8 +78,8 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
             Vector3 vec = GameObject.Find("BlueStart").transform.position;
 
            
-            BlueStart blue = GameObject.Find("BlueStart").GetComponentInChildren<BlueStart>();
-            BlueStart2 blue2 = GameObject.Find("BlueStart").GetComponentInChildren<BlueStart2>();
+            BlueStart blue = GameObject.Find("Blue1").GetComponent<BlueStart>();
+            BlueStart2 blue2 = GameObject.Find("Blue2").GetComponent<BlueStart2>();
 
             var position = new Vector3(vec.x, vec.y, vec.z);
 
