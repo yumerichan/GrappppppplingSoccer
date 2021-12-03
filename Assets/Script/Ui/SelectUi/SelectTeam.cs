@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,8 +48,6 @@ public class SelectTeam : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if (IsAllSelect) return;
-
         //自分だけが入る
         if (photonView.IsMine)
         {
@@ -72,11 +71,6 @@ public class SelectTeam : MonoBehaviourPunCallbacks
                 ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
                 ExplanationText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
 
-                //全員が決めた
-                if (RedIsFull && BlueIsFull)
-                {
-                    IsAllSelect = true;
-                }
             }
             else
             {
@@ -108,7 +102,7 @@ public class SelectTeam : MonoBehaviourPunCallbacks
 
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Enter"))
                 {
-                    IsSelect = true;
+                    //IsSelect = true;
 
                     //満員だったらエラーオパシティ
                     if (TeamSelect == 0 && RedIsFull)
@@ -126,13 +120,11 @@ public class SelectTeam : MonoBehaviourPunCallbacks
 
                     if (TeamSelect == 0)
                     {
-                        nw_info.SetTeamNumber(RedNumber);
                         nw_info.SetTeamColor(0);
                         RedNumber++;
                     }
                     else if (TeamSelect == 1)
                     {
-                        nw_info.SetTeamNumber(BlueNumber);
                         nw_info.SetTeamColor(1);
                         BlueNumber++;
                     }
