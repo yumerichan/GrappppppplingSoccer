@@ -19,6 +19,7 @@ TagManager:
   - BlueGoal
   - ResStart
   - BlueStart
+  - playManager
   layers:
   - Default
   - TransparentFX

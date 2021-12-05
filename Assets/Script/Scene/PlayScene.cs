@@ -2,28 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.Collections.Generic;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
 
 public class PlayScene : MonoBehaviourPunCallbacks
 {
-    //  初期位置
+    //  赤チームのプレイヤーリスト
+    public List<GameObject> _redPlayerList { get; set; } = new List<GameObject>();
 
-    //  赤チームの初期位置
-    public Vector3[] _redTiemInitPos = new[] {
-       new Vector3 ( 0, 0, 0 ), //一番
-       new Vector3 ( 0, 0, 0 ), //二番
-       new Vector3 ( 0, 0, 0 ), //三番
-       new Vector3 ( 0, 0, 0 ), //四番
+    //  青チームのプレイヤーリスト
+    public List<GameObject> _bluePlayerList { get; set; } = new List<GameObject>();
+
+    //  赤チーム初期座標
+    private Vector3[] _redInitPos = new [] { 
+        new Vector3(0, 0 ,0),
+        new Vector3(0, 0 ,0),
+        new Vector3(0, 0 ,0),
+        new Vector3(0, 0 ,0),
     };
 
-    //  青チームの初期位置
-    public Vector3[] _buleTiemInitPos = new[] {
-       new Vector3 ( 0, 0, 0 ), //一番
-       new Vector3 ( 0, 0, 0 ), //二番
-       new Vector3 ( 0, 0, 0 ), //三番
-       new Vector3 ( 0, 0, 0 ), //四番
+    //  青チーム初期座標
+    private Vector3[] _blueInitPos = new[] {
+        new Vector3(0, 0 ,0),
+        new Vector3(0, 0 ,0),
+        new Vector3(0, 0 ,0),
+        new Vector3(0, 0 ,0),
     };
+
+    //  ボールのゲームオブジェクト
+    public GameObject _ball;
 
     //全体で使う
     static public bool m_IsStart;
@@ -36,9 +44,6 @@ public class PlayScene : MonoBehaviourPunCallbacks
 
         m_IsStart = false;
         m_IsEnd = false;
-
-        if (GameObject.FindGameObjectWithTag("Ball") == null)
-            PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -55,7 +60,48 @@ public class PlayScene : MonoBehaviourPunCallbacks
         //シーンで行いたいこと
     }
 
-    
+    //  ゲームスタート
+    public void RestartGame()
+    {
+        //  初期位置設定
+
+        int count = 0;
+
+        //  赤チーム位置リセット
+        foreach (GameObject player in _redPlayerList)
+        {
+            player.transform.position = _redInitPos[count];
+            count++;
+        }
+
+        count = 0;
+
+        //  青チーム
+        foreach (GameObject player in _bluePlayerList)
+        {
+            player.transform.position = _blueInitPos[count];
+            count++;
+        }
+
+        //  ボール
+        _ball.transform.position = new Vector3(0, 80, 0);
+
+        //  スタートの演出 ==============
+        //  出来たらここでリクエストする
+
+    }
+
+    //  赤チーム追加
+    public void AddRedPlayer(GameObject player)
+    {
+        _redPlayerList.Add(player);
+    }
+
+    //  青チーム追加
+    public void AddBluePlayer(GameObject player)
+    {
+        _bluePlayerList.Add(player);
+    }
 
     /*
       

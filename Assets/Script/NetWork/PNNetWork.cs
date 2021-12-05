@@ -9,15 +9,16 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
     public string charaName_ { get; set; }
     private NewWorkInfo nw_info;
 
-    bool isBallCreate_;
     bool IsInstiate;
+
+    private GameObject _playScene = null;
 
     private void Start()
     {
         player_number = 0;
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
         PhotonNetwork.ConnectUsingSettings();
-        isBallCreate_ = false;
+        IsInstiate = false;
 
         nw_info = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
     }
@@ -64,7 +65,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
             }
 
             Quaternion rot = new Quaternion(0.0f,180.0f,0.0f,0.0f);
-            PhotonNetwork.Instantiate(name, position, rot);
+            _playScene.GetComponent<PlayScene>().AddRedPlayer(PhotonNetwork.Instantiate(name, position, rot));
             charaName_ = name;
             IsInstiate = false;
         }
@@ -95,7 +96,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                 position = new Vector3(vec.x - 80.0f, vec.y, vec.z);
             }
 
-            PhotonNetwork.Instantiate(name, position, Quaternion.identity);
+            _playScene.GetComponent<PlayScene>().AddBluePlayer(PhotonNetwork.Instantiate(name, position, Quaternion.identity));
             charaName_ = name;
             IsInstiate = false;
         
@@ -112,6 +113,11 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
             PhotonNetwork.CurrentRoom.IsOpen = false;
             nw_info.SetInstiate(false);
         }
+
+        //  デバッグ用
+        //  エンターキーで初期位置に戻る
+        if (Input.GetKeyDown(KeyCode.Return))
+            _playScene.GetComponent<PlayScene>().RestartGame();
     }
 
     // マスターサーバーへの接続が成功した時に呼ばれるコールバック
@@ -127,6 +133,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         roomOptions.MaxPlayers = (byte)ArrowUI.selectNumber_;
         // "Room"という名前のルームに参加する（ルームが存在しなければ作成して参加する）
         PhotonNetwork.JoinOrCreateRoom("roojm", roomOptions, TypedLobby.Default);
+        
     }
 
     // ランダムで参加できるルームが存在しないなら、新規でルームを作成する
@@ -140,6 +147,9 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
     // ゲームサーバーへの接続が成功した時に呼ばれるコールバック
     public override void OnJoinedRoom()
     {
+        if ((int)PhotonNetwork.CurrentRoom.PlayerCount == 1)
+            _playScene = PhotonNetwork.Instantiate("PlaySceneManager", new Vector3(0, 0, 0), Quaternion.identity);
+
         IsInstiate = true;
 
         //デバッグ用
@@ -153,7 +163,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                 case 1:
                     {
                         var position = new Vector3(0.0f, 0.0f, 0.0f);
-                        PhotonNetwork.Instantiate("Chara_Wall", position, Quaternion.identity);
+                        PhotonNetwork.Instantiate(name, position, Quaternion.identity);
                         player_number++;
 
                         PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);
