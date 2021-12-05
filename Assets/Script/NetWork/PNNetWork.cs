@@ -123,11 +123,6 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
             PhotonNetwork.CurrentRoom.IsOpen = false;
             nw_info.SetInstiate(false);
         }
-
-        //  デバッグ用
-        //  エンターキーで初期位置に戻る
-        if (Input.GetKeyDown(KeyCode.Return))
-            _playScene.GetComponent<PlayScene>().RestartGame();
     }
 
     // マスターサーバーへの接続が成功した時に呼ばれるコールバック
