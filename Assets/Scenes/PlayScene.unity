@@ -2485,8 +2485,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dispTime: 2
   _moveSpeed: 1000
-  _slowTime: 0.1
+  _slowTime: 0.05
   _initPos: {x: 1170, y: 0, z: 0}
+--- !u!114 &1000017212 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3929389710202720052, guid: d32ba5dba4757c841bd50f093783f02a, type: 3}
+  m_PrefabInstance: {fileID: 1000017208}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000017210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1025316522
 GameObject:
   m_ObjectHideFlags: 0
@@ -3644,6 +3655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abcba2b1304ec2a47851d0a0dd5072a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _goalImage: {fileID: 1000017212}
 --- !u!65 &1588345636
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3927,6 +3939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeae72606bd97144d923ca7f0173ba1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _goalImage: {fileID: 1000017212}
 --- !u!65 &1686841396
 BoxCollider:
   m_ObjectHideFlags: 0

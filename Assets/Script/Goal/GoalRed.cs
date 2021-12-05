@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GoalRed : MonoBehaviour
 {
-
+    [SerializeField]
+    private Image _goalImage;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,6 +15,9 @@ public class GoalRed : MonoBehaviour
             GoalScore score = GameObject.Find("Score&Timer").GetComponent<GoalScore>();
 
             score.AddRedScore();
+
+            //  ゴール演出リクエスト
+            _goalImage.GetComponent<GoalDirecting>().RequestGoalDirecting();
         }
     }
 }
