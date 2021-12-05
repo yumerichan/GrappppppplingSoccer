@@ -72,6 +72,9 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 
             _gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, rot);
             _playScene.GetComponent<PlayScene>().AddRedPlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
+
+            //_playScene.GetComponent<PlayScene>().AddRedPlayer(PhotonNetwork.Instantiate(name, position, rot));
+
             charaName_ = name;
             IsInstiate = false;
         }
@@ -104,7 +107,10 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 
 
             _gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-            _playScene.GetComponent<PlayScene>().AddRedPlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
+            _playScene.GetComponent<PlayScene>().AddBluePlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
+           
+            //_playScene.GetComponent<PlayScene>().AddBluePlayer(PhotonNetwork.Instantiate(name, position, Quaternion.identity));
+
             charaName_ = name;
             IsInstiate = false;
         
