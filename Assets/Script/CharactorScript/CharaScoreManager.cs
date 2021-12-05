@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 
-public class CharaScoreManager : MonoBehaviourPunCallbacks
+public class CharaScoreManager : MonoBehaviour
 {
     public static CharaScore.CharaScoreInfo[] _allScoreInfo;
     public static int _playerCnt;
@@ -32,7 +32,8 @@ public class CharaScoreManager : MonoBehaviourPunCallbacks
 
             for (int j = 0; j < i; j++)
             {
-                _all[j].SendScoreInfo();
+                //_all[j].SendScoreInfo(j);
+                ReceiveScoreInfo(PNNetWork._gPlayerList[j].GetComponent<CharaScore>()._scoreInfo);
             }
 
             SceneManager.LoadScene("ResultScene");
