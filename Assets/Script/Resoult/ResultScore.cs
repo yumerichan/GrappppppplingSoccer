@@ -38,9 +38,9 @@ public class ResultScore : MonoBehaviour
             _resultInfo[i]._teamTxt = RESULT.transform.Find("Team" + (i + 1)).gameObject.GetComponent<Text>();
         }
 
-        CharaScore.CharaScoreInfo info1 = CharaScoreManager._allScoreInfo[0];
-        CharaScoreManager._allScoreInfo[0] = CharaScoreManager._allScoreInfo[2];
-        CharaScoreManager._allScoreInfo[2] = info1;
+        //CharaScore.CharaScoreInfo info1 = CharaScoreManager._allScoreInfo[0];
+        //CharaScoreManager._allScoreInfo[0] = CharaScoreManager._allScoreInfo[2];
+        //CharaScoreManager._allScoreInfo[2] = info1;
 
         for (int i = 0; i < CharaScoreManager._playerCnt; i++)
         {
