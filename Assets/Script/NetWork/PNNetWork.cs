@@ -11,8 +11,6 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 
     bool IsInstiate;
 
-    private GameObject _playScene = null;
-
     static public GameObject[] _gPlayerList;
 
     private void Start()
@@ -70,10 +68,11 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 
             Quaternion rot = new Quaternion(0.0f,180.0f,0.0f,0.0f);
 
-            _gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, rot);
-            _playScene.GetComponent<PlayScene>().AddRedPlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
+            //_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, rot);
+            //_playScene.GetComponent<PlayScene>().AddRedPlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
 
-            //_playScene.GetComponent<PlayScene>().AddRedPlayer(PhotonNetwork.Instantiate(name, position, rot));
+            _gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, rot);
+            GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>().AddRedPlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
 
             charaName_ = name;
             IsInstiate = false;
@@ -106,11 +105,11 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
             }
 
 
-            _gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-            _playScene.GetComponent<PlayScene>().AddBluePlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
-           
-            //_playScene.GetComponent<PlayScene>().AddBluePlayer(PhotonNetwork.Instantiate(name, position, Quaternion.identity));
+            //_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, Quaternion.identity);
+            //_playScene.GetComponent<PlayScene>().AddBluePlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
 
+            _gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, Quaternion.identity);
+            GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>().AddBluePlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
             charaName_ = name;
             IsInstiate = false;
 
@@ -157,7 +156,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
     public override void OnJoinedRoom()
     {
         if ((int)PhotonNetwork.CurrentRoom.PlayerCount == 1)
-            _playScene = PhotonNetwork.Instantiate("PlaySceneManager", new Vector3(0, 0, 0), Quaternion.identity);
+            PhotonNetwork.Instantiate("PlaySceneManager", new Vector3(0, 0, 0), Quaternion.identity);
 
         IsInstiate = true;
 
