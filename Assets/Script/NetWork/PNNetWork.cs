@@ -109,10 +109,10 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
             _playScene.GetComponent<PlayScene>().AddRedPlayer(player);
             charaName_ = name;
             IsInstiate = false;
-        
+
         }
 
-        if((int)PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        if ((int)PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);
         }
