@@ -20,4 +20,17 @@ public class GoalRed : MonoBehaviour
             _goalImage.GetComponent<GoalDirecting>().RequestGoalDirecting();
         }
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            GoalScore score = GameObject.Find("Score&Timer").GetComponent<GoalScore>();
+
+            score.AddRedScore();
+
+            //  ゴール演出リクエスト
+            _goalImage.GetComponent<GoalDirecting>().RequestGoalDirecting();
+        }
+    }
 }
