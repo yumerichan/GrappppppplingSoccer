@@ -70,9 +70,8 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 
             Quaternion rot = new Quaternion(0.0f,180.0f,0.0f,0.0f);
 
-            GameObject player = PhotonNetwork.Instantiate(name, position, rot);
-            _gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = player;
-            _playScene.GetComponent<PlayScene>().AddRedPlayer(player);
+            _gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, rot);
+            _playScene.GetComponent<PlayScene>().AddRedPlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
             charaName_ = name;
             IsInstiate = false;
         }
@@ -103,10 +102,9 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                 position = new Vector3(vec.x - 80.0f, vec.y, vec.z);
             }
 
-          
-            GameObject player = PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-            _gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = player;
-            _playScene.GetComponent<PlayScene>().AddRedPlayer(player);
+
+            _gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, Quaternion.identity);
+            _playScene.GetComponent<PlayScene>().AddRedPlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
             charaName_ = name;
             IsInstiate = false;
 
