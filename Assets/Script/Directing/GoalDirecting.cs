@@ -107,5 +107,8 @@ public class GoalDirecting : MonoBehaviour
 
         //  待機フェーズに移行
         _phase = Phase.Idle;
+
+        //  リスタート関数
+        GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>().RequestRestartGame();
     }
 }

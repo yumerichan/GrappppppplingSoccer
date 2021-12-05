@@ -424,9 +424,6 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         if (!photonView.IsMine)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Return))
-            GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>().RestartGame();
-
         //  スティックの値を取得
         tempDirection_.x = Input.GetAxis("Horizontal");
         tempDirection_.y = Input.GetAxis("Vertical");

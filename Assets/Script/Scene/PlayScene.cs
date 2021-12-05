@@ -61,7 +61,7 @@ public class PlayScene : MonoBehaviourPunCallbacks
     }
 
     //  ゲームスタート
-    public void RestartGame()
+    public void RequestRestartGame()
     {
         //  初期位置設定
 
