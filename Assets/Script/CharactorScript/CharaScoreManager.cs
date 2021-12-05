@@ -42,13 +42,26 @@ public class CharaScoreManager : MonoBehaviour
 
     public void ReceiveScoreInfo(CharaScore.CharaScoreInfo info)
     {
+        int a = info._allScore;
+
+        CharaScore.CharaScoreInfo infoo;
+        infoo._allScore = a;
+        infoo._ballAtk = 10;
+        infoo._goal = 0;
+        infoo._goalNum = 12;
+        infoo._grap = 1;
+        infoo._name = "ff";
+        infoo._skill = 123;
+        infoo._skillCnt = 0;
+        infoo._teamKind = 0;
+
         _allScoreInfo[_playerCnt] = info;
         _playerCnt++;
     }
 
     public void ReceiveCharaScore(CharaScore score)
     {
-        _all[i] = score;
+        //_all[i] = score;
         i++;
     }
 }
