@@ -77,7 +77,7 @@ public class CharaScore : MonoBehaviour
         _scoreInfo._allScore += 25;
     }
 
-    public void SendScoreInfo()
+    public void SendScoreInfo(int i)
     {
         _scoreInfo._teamKind = _nwInfo.GetTeamColor();
 
