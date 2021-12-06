@@ -27,6 +27,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
     {
         //Debug.Log(nw_info.GetTeamNumber());
 
+
         if (!IsInstiate) return;
 
         Debug.Log("Isins");

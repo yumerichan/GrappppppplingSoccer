@@ -20,6 +20,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         STATE_TYPE_SHOT,    //アンカー発射
         STATE_TYPE_GRAPPLE, //グラップル
         STATE_TYPE_BOOST,   //ブースト
+        STATE_TYPE_SKILL,   //スキル
 
         STATE_TYPE_NUM,
     }
@@ -45,7 +46,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     private Vector3 moveDirection_;     //移動方向
     private Vector3 latestPos_;         //前フレ座標
     private Vector2 tempDirection_;     //入力値格納
-    private Animator anime_;            //アニメーション操作
+   
     private float curSkillCoolTime_;    //現在のスキルCT
     private float skillCoolTime_;       //設定してあるスキルCT
     private bool isLanding;
@@ -71,6 +72,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     public SkillType skillType_ { get; set; }       //キャラごとのスキル
     [HideInInspector]
     public bool isSkill_ { get; set; }               //スキル発動中かどうか(プレイヤーの状態とは別)
+    [HideInInspector]
+    public Animator anime_ { get; set; }           //アニメーション操作
 
     private Rigidbody charaRb_;         //キャラのRigitBody
     private bool isCaughtTrap;          //罠に引っかかっているか
@@ -79,6 +82,9 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     //  スキル発動用デリゲート
     private delegate void SkillFunc();
     SkillFunc skillFunc_;
+
+    /*   デバッグ用 */
+    private CharactorStateType _prestate;
 
     // Start is called before the first frame update
 
@@ -142,8 +148,13 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
        
 
+=======
+        /*  前フレ状態を保存 */
+        _prestate = state_;
+>>>>>>> 0a129577cacc73b6e4146f95711472fa0968a076
 
         //  入力
         CharaInput();
@@ -172,7 +183,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             }
         }
 
-        if (/*charaRb_.velocity.y < 0*/anime_.GetInteger("AnimState") == (int)CharactorStateType.STATE_TYPE_JUMP && IsFall())
+        if (anime_.GetInteger("AnimState") == (int)CharactorStateType.STATE_TYPE_JUMP && IsFall())
         {
             AnimatorStateInfo animeStateInfo = anime_.GetCurrentAnimatorStateInfo(0);
             if (animeStateInfo.normalizedTime >= 0.9f)
@@ -182,12 +193,99 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             }
         }
 
-        //Debug.Log(state_ );
-        //Debug.Log(anime_.GetInteger("AnimState"));
+        if(_prestate != state_)
+        {
+            Debug.Log(state_ );
+            Debug.Log(anime_.GetInteger("AnimState"));
+        }
+
     }
 
-    //  移動処理
-    private void MoveUpdate()
+    //  入力関連===============================================
+    private void CharaInput()
+    {
+        //  自分が操作するプレイヤー以外は入力できない
+        if (!photonView.IsMine)
+            return;
+
+        //  スティックの値を取得
+        tempDirection_.x = Input.GetAxis("Horizontal");
+        tempDirection_.y = Input.GetAxis("Vertical");
+
+        //  トリガーの入力値
+        //  トリガー値が正の数 : LeftTrigger
+        //  トリガー値が負の数 : RightTrigger
+        float trigger_value = Input.GetAxis("Boost_Skill");
+
+        //  ボタン入力取得
+
+        //  ブースト
+        bool is_boost = false;
+
+        //  スキル
+        bool is_skill = false;
+
+        //  トリガーの値で入力された動作分け
+        if ((trigger_value > 0 || Input.GetKeyDown(KeyCode.E)) &&
+            state_ != CharactorStateType.STATE_TYPE_BOOST)
+            is_boost = true;
+        else if (trigger_value < 0 || Input.GetKeyDown(KeyCode.Q))
+            is_skill = true;
+
+        //  ジャンプ    ============================================================================
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
+        {
+            if (IsJump())
+            {
+                //  ジャンプ力加算
+                charaRb_.AddForce(transform.up * jumpPower_, ForceMode.Impulse);
+                {
+                    state_ = CharactorStateType.STATE_TYPE_JUMP;
+                    anime_.SetInteger("AnimState", (int)state_);
+                }
+            }
+        }
+
+        //   グラップル
+        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Grapple"))
+        {
+            //  グラップルフラグ取得
+            bool is_grapple = this.GetComponent<Grappling>().isGrappling_;
+
+            if (is_grapple == false)
+            {
+                this.GetComponent<Grappling>().ShotAnchor();
+
+                //グラップルスコア加算
+                this.GetComponent<CharaScore>().AddGrap();
+            }
+            else if (is_grapple)
+            {
+                this.GetComponent<Grappling>().isGrappling_ = false;
+                state_ = CharactorStateType.STATE_TYPE_FALL;
+                anime_.SetInteger("AnimState", (int)state_);
+            }
+        }
+
+        //   ブースト
+        if (is_boost)
+        {
+            this.GetComponent<Boost>().OnBoost();
+            state_ = CharactorStateType.STATE_TYPE_BOOST;
+            anime_.SetInteger("AnimState", (int)state_);
+        }
+
+        //  スキル
+        if (is_skill)
+        {
+            OnSkill();
+            state_ = CharactorStateType.STATE_TYPE_SKILL;
+            anime_.SetInteger("AnimState", (int)state_);
+        }
+    }
+
+        //  移動処理
+        private void MoveUpdate()
     {
         //  トラップ拘束中は移動できない
         if (isCaughtTrap)
@@ -209,6 +307,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         moveDirection_.Normalize();
         move_ = moveDirection_ * speed_;
 
+        //  移動量が少なかったら移動していない判定
         if((move_.x <= 0.3 && move_.x >= -0.3) &&
             (move_.z <= 0.3 && move_.z >= -0.3))
         {
@@ -238,6 +337,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         {
             float max_speed;
 
+            //  グラップル中は移動速度が速い
             if (state_ == CharactorStateType.STATE_TYPE_GRAPPLE)
             {
                 max_speed = maxGrappleSpeed_;
@@ -246,6 +346,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
                 if (charaRb_.velocity.magnitude > max_speed)
                     charaRb_.velocity = charaRb_.velocity.normalized * max_speed;
             }
+            //  それ以外はゆっくり
             else
             {
                 max_speed = maxMoveSpeed_;
@@ -273,9 +374,9 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         //  移動していたら
         if(Mathf.Abs(differenceDis.x) > rotDedZone_ || Mathf.Abs(differenceDis.z) > rotDedZone_)
         {
-            //  移動方向が同じなら回転しない
-            if (moveDirection_ == new Vector3(0, 0, 0))
-                return;
+            ////  移動方向が同じなら回転しない
+            //if (moveDirection_ == new Vector3(0, 0, 0))
+            //    return;
 
             //  進行方向に向かって回転
             Quaternion rot = Quaternion.LookRotation(differenceDis);
@@ -302,8 +403,6 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             state_ = CharactorStateType.STATE_TYPE_LANDING;
             anime_.SetInteger("AnimState", (int)state_);
             isLanding = true;
-
-
         }
     }
 
@@ -420,84 +519,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         }
     }
 
-    //  入力関連===============================================
-    private void CharaInput()
-    {
-        //  自分が操作するプレイヤー以外は入力できない
-        if (!photonView.IsMine)
-            return;
-
-        //  スティックの値を取得
-        tempDirection_.x = Input.GetAxis("Horizontal");
-        tempDirection_.y = Input.GetAxis("Vertical");
-
-        //  トリガーの入力値
-        //  トリガー値が正の数 : LeftTrigger
-        //  トリガー値が負の数 : RightTrigger
-        float trigger_value = Input.GetAxis("Boost_Skill");
-
-        //  ボタン入力取得
-
-        //  ブースト
-        bool is_boost = false;
-
-        //  スキル
-        bool is_skill = false;
-
-        //  トリガーの値で入力された動作分け
-        if ((trigger_value > 0 || Input.GetKeyDown(KeyCode.E)) && 
-            state_ != CharactorStateType.STATE_TYPE_BOOST)
-            is_boost = true;
-        else if (trigger_value < 0 || Input.GetKeyDown(KeyCode.Q))
-            is_skill = true;
-        
-        //  ジャンプ    ============================================================================
-       if(Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
-        {
-            if(IsJump())
-            {
-                //  ジャンプ力加算
-                charaRb_.AddForce(transform.up * jumpPower_, ForceMode.Impulse);
-                {
-                    state_ = CharactorStateType.STATE_TYPE_JUMP;
-                    anime_.SetInteger("AnimState", (int)state_);
-                }
-            }
-        }
-
-        //   グラップル
-        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Grapple"))
-        {
-            //  グラップルフラグ取得
-            bool is_grapple = this.GetComponent<Grappling>().isGrappling_;
-
-            if(is_grapple == false)
-            {
-                this.GetComponent<Grappling>().ShotAnchor();
-
-                //グラップルスコア加算
-                this.GetComponent<CharaScore>().AddGrap();
-            }
-            else if(is_grapple)
-            {
-                this.GetComponent<Grappling>().isGrappling_ = false;
-                state_ = CharactorStateType.STATE_TYPE_FALL;
-                anime_.SetInteger("AnimState", (int)state_);
-            }
-        }
-
-        //   ブースト
-        if (is_boost)
-        {
-            this.GetComponent<Boost>().OnBoost();
-            state_ = CharactorStateType.STATE_TYPE_BOOST;
-            anime_.SetInteger("AnimState", (int)state_);
-        }
-
-        //  スキル
-        if(is_skill)
-            OnSkill();
-    }
+   
 
     //  スキル
     private void OnSkill()

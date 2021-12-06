@@ -66,6 +66,7 @@ public class Grappling : MonoBehaviour
         Destroy(grapplePos_.gameObject);
 
         player_.GetComponent<CharactorBasic>().state_ = CharactorBasic.CharactorStateType.STATE_TYPE_SHOT;
+        player_.GetComponent<CharactorBasic>().anime_.SetInteger("AnimeState", (int)player_.GetComponent<CharactorBasic>().state_);
 
         isGrappling_ = true;
     }
