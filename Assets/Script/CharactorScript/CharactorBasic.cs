@@ -142,6 +142,9 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+       
+
+
         //  “ü—Í
         CharaInput();
 

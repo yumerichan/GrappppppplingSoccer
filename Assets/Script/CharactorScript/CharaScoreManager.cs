@@ -26,15 +26,13 @@ public class CharaScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         //  デバッグ終了
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
 
-            for (int j = 0; j < i; j++)
-            {
-                //_all[j].SendScoreInfo(j);
-                ReceiveScoreInfo(PNNetWork._gPlayerList[j].GetComponent<CharaScore>()._scoreInfo);
-            }
+            GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
 
             SceneManager.LoadScene("ResultScene");
         }

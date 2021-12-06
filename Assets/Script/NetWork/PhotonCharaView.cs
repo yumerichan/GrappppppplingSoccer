@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Realtime;
 
 public class PhotonCharaView : MonoBehaviour, IPunObservable
 {
@@ -14,6 +15,12 @@ public class PhotonCharaView : MonoBehaviour, IPunObservable
     {
         get { return _text; }
         set { _text = value; RequestOwner(); }
+    }
+
+    public int AAA
+    {
+        get { return _aaa; }
+        set { _aaa = value; RequestOwner(); }
     }
 
     void Awake()

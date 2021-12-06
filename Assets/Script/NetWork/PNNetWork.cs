@@ -11,11 +11,9 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 
     bool IsInstiate;
 
-    static public GameObject[] _gPlayerList;
 
     private void Start()
     {
-        _gPlayerList = new GameObject[8];
 
         player_number = 0;
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
@@ -71,8 +69,10 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
             //_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, rot);
             //_playScene.GetComponent<PlayScene>().AddRedPlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
 
-            _gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, rot);
-            GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>().AddRedPlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
+           GameObject aa = PhotonNetwork.Instantiate(name, position, rot,0);
+           GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>().AddRedPlayer(aa);
+
+            aa.transform.GetComponent<CharaScore>()._charaNumber = (int)PhotonNetwork.CurrentRoom.PlayerCount - 1;
 
             charaName_ = name;
             IsInstiate = false;
@@ -108,8 +108,13 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
             //_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, Quaternion.identity);
             //_playScene.GetComponent<PlayScene>().AddBluePlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
 
-            _gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1] = PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-            GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>().AddBluePlayer(_gPlayerList[(int)PhotonNetwork.CurrentRoom.PlayerCount - 1]);
+
+
+            GameObject aa = PhotonNetwork.Instantiate(name, position, Quaternion.identity,0);
+            GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>().AddBluePlayer(aa);
+
+            aa.transform.GetComponent<CharaScore>()._charaNumber = (int)PhotonNetwork.CurrentRoom.PlayerCount - 1;
+
             charaName_ = name;
             IsInstiate = false;
 
@@ -118,6 +123,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         if ((int)PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);
+            PhotonNetwork.Instantiate("CharaScoreManager", new Vector3(0, 0, 0), Quaternion.identity);
         }
 
         // ルームが満員になったら、以降そのルームへの参加を不許可にする
