@@ -22,7 +22,6 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         STATE_TYPE_BOOST,   //ブースト
         STATE_TYPE_SKILL,   //スキル
 
-
         STATE_TYPE_NUM,
     }
     public enum SkillType
