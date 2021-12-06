@@ -54,9 +54,6 @@ public class Boost : MonoBehaviour
 
         //  ボールの方向に力を加える
         rb_.AddForce(boost_vec, ForceMode.Impulse);
-
-        player_ = GameObject.FindGameObjectWithTag("Player");
-
        
         //  ゲージ更新処理
         curBoostGage_ -= consumptionAmount_;
