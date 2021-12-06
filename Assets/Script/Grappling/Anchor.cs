@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Anchor : MonoBehaviour
+public class Anchor : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private float shotSpeed_;          //ワイヤーの射出スピード
@@ -38,6 +39,9 @@ public class Anchor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine)
+            return;
+
         disPlayer_ = Vector3.Distance(transform.position, player_.transform.position);
 
         if (player_.GetComponent<Grappling>().isGrappling_)

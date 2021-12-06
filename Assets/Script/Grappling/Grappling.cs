@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Grappling : MonoBehaviour
+public class Grappling : MonoBehaviourPunCallbacks
 {
     private Transform grapplePos_;      //グラップルする座標
     private GameObject anchorClone_;    //アンカーのコピー(これを飛ばす)
     private GameObject player_;         //プレイヤー
 
-    [SerializeField]
-    private GameObject anchor_;     //アンカー(飛ばすやつの元)
+    //[SerializeField]
+    //private GameObject anchor_;     //アンカー(飛ばすやつの元)
     [SerializeField]
     private Transform shotPos_;     //アンカー発射位置
     [SerializeField]
@@ -62,7 +63,7 @@ public class Grappling : MonoBehaviour
         Quaternion anchorRot_ = Quaternion.Euler(shotDir_);
 
         //  アンカー生成
-        anchorClone_ = Instantiate(anchor_, block_.transform.position, anchorRot_) as GameObject;
+        anchorClone_ = PhotonNetwork.Instantiate("Anchor", block_.transform.position, anchorRot_) as GameObject;
         Destroy(grapplePos_.gameObject);
 
         player_.GetComponent<CharactorBasic>().state_ = CharactorBasic.CharactorStateType.STATE_TYPE_SHOT;
