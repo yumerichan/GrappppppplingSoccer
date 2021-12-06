@@ -148,13 +148,10 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
-       
 
-=======
         /*  前フレ状態を保存 */
         _prestate = state_;
->>>>>>> 0a129577cacc73b6e4146f95711472fa0968a076
+
 
         //  入力
         CharaInput();
@@ -257,7 +254,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
                 this.GetComponent<Grappling>().ShotAnchor();
 
                 //グラップルスコア加算
-                this.GetComponent<CharaScore>().AddGrap();
+                GetComponent<PhotonView>().RPC("AddGrap", RpcTarget.All);
             }
             else if (is_grapple)
             {
