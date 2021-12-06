@@ -7,7 +7,7 @@ public class Grappling : MonoBehaviourPunCallbacks
 {
     private Transform grapplePos_;      //グラップルする座標
     private GameObject anchorClone_;    //アンカーのコピー(これを飛ばす)
-    private GameObject player_;         //プレイヤー
+    private CharactorBasic _charaBasic;
 
     //[SerializeField]
     //private GameObject anchor_;     //アンカー(飛ばすやつの元)
@@ -37,7 +37,7 @@ public class Grappling : MonoBehaviourPunCallbacks
     {
         block_ = null;
         isGrappling_ = false;
-        player_ = GameObject.FindGameObjectWithTag("Player");
+        _charaBasic = GetComponent<CharactorBasic>();
     }
 
     // Update is called once per frame
@@ -64,10 +64,11 @@ public class Grappling : MonoBehaviourPunCallbacks
 
         //  アンカー生成
         anchorClone_ = PhotonNetwork.Instantiate("Anchor", block_.transform.position, anchorRot_) as GameObject;
+        anchorClone_.GetComponent<Anchor>().InitAnchor(this.gameObject);
         Destroy(grapplePos_.gameObject);
 
-        player_.GetComponent<CharactorBasic>().state_ = CharactorBasic.CharactorStateType.STATE_TYPE_SHOT;
-        player_.GetComponent<CharactorBasic>().anime_.SetInteger("AnimeState", (int)player_.GetComponent<CharactorBasic>().state_);
+        _charaBasic.state_ = CharactorBasic.CharactorStateType.STATE_TYPE_SHOT;
+        _charaBasic.anime_.SetInteger("AnimeState", (int)_charaBasic.state_);
 
         isGrappling_ = true;
     }

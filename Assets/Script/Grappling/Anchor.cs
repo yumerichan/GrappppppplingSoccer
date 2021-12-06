@@ -89,4 +89,10 @@ public class Anchor : MonoBehaviourPunCallbacks
         if (disPlayer_ <= 2)
             Destroy(gameObject);
     }
+
+    public void InitAnchor(GameObject player)
+    {
+        player_ = player;
+        springJoint_ = player_.GetComponent<SpringJoint>();
+    }
 }

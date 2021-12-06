@@ -1552,7 +1552,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cef2746e52c4ef42a3807d117f1404d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchor_: {fileID: 7874903905414735809, guid: 094eb1b8391e2844082cd67ce311f4db, type: 3}
   shotPos_: {fileID: 8236514690974370294}
   cameraPos_: {fileID: 0}
   playerPos_: {fileID: 8236514690341640756}
