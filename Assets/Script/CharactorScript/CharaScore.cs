@@ -76,7 +76,7 @@ public class CharaScore : MonoBehaviourPunCallbacks
     [PunRPC]
     public void AddSkillCnt()
     {
-        _scoreInfo._goal += 20;
+        _scoreInfo._skillCnt += 20;
         _scoreInfo._allScore += 20;
     }
 

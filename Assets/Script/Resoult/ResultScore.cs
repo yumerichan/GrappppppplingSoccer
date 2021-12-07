@@ -42,7 +42,7 @@ public class ResultScore : MonoBehaviour
         //CharaScoreManager._allScoreInfo[0] = CharaScoreManager._allScoreInfo[2];
         //CharaScoreManager._allScoreInfo[2] = info1;
 
-        for (int i = 0; i < CharaScoreManager._playerCnt; i++)
+        for (int i = 0; i < 8; i++)
         {
             CharaScore.CharaScoreInfo info = CharaScoreManager._allScoreInfo[i];
 

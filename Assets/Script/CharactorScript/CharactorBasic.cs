@@ -538,7 +538,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             curSkillCoolTime_ = 0.0f;
 
             //スキル発動スコア加算
-            this.GetComponent<CharaScore>().AddSkillCnt();
+            GetComponent<PhotonView>().RPC("AddSkillCnt", RpcTarget.All);
         }    
     }
 
