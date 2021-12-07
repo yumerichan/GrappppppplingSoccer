@@ -65,12 +65,10 @@ public class PlayScene : MonoBehaviourPunCallbacks
         //シーンで行いたいこと
     }
 
+    [PunRPC]
     //  ゲームスタート
     public void RequestRestartGame()
     {
-        if (_isGoalDirecting) return;
-
-        _isGoalDirecting = true;
 
         //  初期位置設定
 
@@ -99,8 +97,6 @@ public class PlayScene : MonoBehaviourPunCallbacks
         //  ボール
         _ball = GameObject.FindGameObjectWithTag("Ball");
         _ball.transform.position = new Vector3(0, 80, 0);
-
-        _isGoalDirecting = false;
 
         //  スタートの演出 ==============
         //  出来たらここでリクエストする

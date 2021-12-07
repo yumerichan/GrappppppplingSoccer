@@ -111,6 +111,6 @@ public class GoalDirecting : MonoBehaviour
         _phase = Phase.Idle;
 
         //  リスタート関数
-        GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>().RequestRestartGame();
+        GameObject.FindGameObjectWithTag("playManager").GetComponent<PhotonView>().RPC("RequestRestartGame", RpcTarget.All);
     }
 }
