@@ -79,6 +79,10 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     private bool isCaughtTrap;          //罠に引っかかっているか
     private float curRestrantTime;      //現在の拘束時間
 
+    //  チームカラー
+    [HideInInspector]
+    public int _teamColor { get; set; } //0：赤　１：青
+
     //  スキル発動用デリゲート
     private delegate void SkillFunc();
     SkillFunc skillFunc_;
@@ -141,7 +145,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             GameObject network = GameObject.FindGameObjectWithTag("NetWork");
             charaName_ = network.GetComponent<PNNetWork>().charaName_;
             CharaTypeInit();
-           
+            _teamColor = GameObject.Find("NetWork").GetComponent<NewWorkInfo>().GetTeamColor();
         }
     }
 

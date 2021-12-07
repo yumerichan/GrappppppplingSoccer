@@ -16,7 +16,7 @@ public class PlayScene : MonoBehaviourPunCallbacks
 
     //  赤チーム初期座標
     private Vector3[] _redInitPos = new [] { 
-        new Vector3(0, 0 ,0),
+        new Vector3(0, 0 ,50),
         new Vector3(0, 0 ,0),
         new Vector3(0, 0 ,0),
         new Vector3(0, 0 ,0),
@@ -24,7 +24,7 @@ public class PlayScene : MonoBehaviourPunCallbacks
 
     //  青チーム初期座標
     private Vector3[] _blueInitPos = new[] {
-        new Vector3(0, 0 ,0),
+        new Vector3(0, 0 ,-50),
         new Vector3(0, 0 ,0),
         new Vector3(0, 0 ,0),
         new Vector3(0, 0 ,0),
@@ -32,6 +32,8 @@ public class PlayScene : MonoBehaviourPunCallbacks
 
     //  ボールのゲームオブジェクト
     public GameObject _ball;
+
+    private NewWorkInfo nw_info;
 
     //全体で使う
     static public bool m_IsStart;
@@ -65,25 +67,30 @@ public class PlayScene : MonoBehaviourPunCallbacks
     {
         //  初期位置設定
 
-        int count = 0;
+        //  各チームカウント
+        int red_count = 0;
+        int blue_count = 0;
 
-        //  赤チーム位置リセット
-        foreach (GameObject player in _redPlayerList)
+        //  プレイヤー
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject obj in players)
         {
-            player.transform.position = _redInitPos[count];
-            count++;
-        }
-
-        count = 0;
-
-        //  青チーム
-        foreach (GameObject player in _bluePlayerList)
-        {
-            player.transform.position = _blueInitPos[count];
-            count++;
+            //  赤チーム
+            if (obj.GetComponent<CharactorBasic>()._teamColor == 0)
+            {
+                obj.transform.position = _redInitPos[red_count];
+                red_count++;
+            }
+            //  青チーム
+            else
+            {
+                obj.transform.position = _blueInitPos[red_count];
+                blue_count++;
+            }
         }
 
         //  ボール
+        _ball = GameObject.FindGameObjectWithTag("Ball");
         _ball.transform.position = new Vector3(0, 80, 0);
 
         //  スタートの演出 ==============
