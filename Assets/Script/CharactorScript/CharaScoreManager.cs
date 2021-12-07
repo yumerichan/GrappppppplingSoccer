@@ -34,6 +34,12 @@ public class CharaScoreManager : MonoBehaviour
 
             GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
 
+            for(int i = 0;i < player.Length;i++)
+            {
+                _allScoreInfo[i] = player[i].
+                    GetComponent<CharaScore>()._scoreInfo;
+            }
+
             SceneManager.LoadScene("ResultScene");
         }
     }
