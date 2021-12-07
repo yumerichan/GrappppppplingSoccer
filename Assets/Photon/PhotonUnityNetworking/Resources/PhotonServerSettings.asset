@@ -47,7 +47,11 @@ MonoBehaviour:
   - SendScoreInfo
   - InitPos
   - RequestGoalDirecting
+<<<<<<< HEAD
   - StartPlay
+=======
+  - RequestRestartGame
+>>>>>>> 6e3c4a9d17e919a82c6d181c658b53d2fd597ee9
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
