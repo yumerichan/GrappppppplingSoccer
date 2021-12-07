@@ -78,13 +78,13 @@ public class PlayScene : MonoBehaviourPunCallbacks
             //  赤チーム
             if (obj.GetComponent<CharactorBasic>()._teamColor == 0)
             {
-                obj.transform.position = _redInitPos[red_count];
+                obj.GetComponent<PhotonView>().RPC("InitPos", RpcTarget.All, _redInitPos[red_count]);
                 red_count++;
             }
             //  青チーム
             else
             {
-                obj.transform.position = _blueInitPos[red_count];
+                obj.GetComponent<PhotonView>().RPC("InitPos", RpcTarget.All, _blueInitPos[red_count]);
                 blue_count++;
             }
         }
@@ -109,6 +109,8 @@ public class PlayScene : MonoBehaviourPunCallbacks
     {
         _bluePlayerList.Add(player);
     }
+
+
 
     /*
       

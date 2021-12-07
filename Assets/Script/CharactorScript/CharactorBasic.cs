@@ -565,4 +565,12 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     {
         return skillCoolTime_;
     }
+
+    [PunRPC]
+    public void InitPos(Vector3 init_pos)
+    {
+        Vector3 pos = transform.position;
+        pos = init_pos;
+        transform.position = pos;
+    }
 }
