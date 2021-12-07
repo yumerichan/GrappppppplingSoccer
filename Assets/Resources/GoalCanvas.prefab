@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 246735398291719734}
   m_Layer: 5
   m_Name: GoalCanvas
-  m_TagString: Untagged
+  m_TagString: GoalCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -266,7 +266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3968977276659761556, guid: d32ba5dba4757c841bd50f093783f02a, type: 3}
       propertyPath: m_Name
-      value: Popup_Victory2
+      value: GoalImage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d32ba5dba4757c841bd50f093783f02a, type: 3}

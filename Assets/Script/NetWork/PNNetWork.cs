@@ -10,8 +10,6 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
     private NewWorkInfo nw_info;
 
     bool IsInstiate;
-    [SerializeField]
-    private Canvas _goalDirecting;
 
     private void Start()
     {

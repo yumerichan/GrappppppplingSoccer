@@ -373,7 +373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cef2746e52c4ef42a3807d117f1404d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchor_: {fileID: 7874903905414735809, guid: 094eb1b8391e2844082cd67ce311f4db, type: 3}
   shotPos_: {fileID: 1731535284116244791}
   cameraPos_: {fileID: 0}
   playerPos_: {fileID: 7664157607462506420}
@@ -470,7 +469,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008720877552305025}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 66379a2fb0519524684897aa87c58210, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -507,7 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f1df21a8789a3d4cadb1455a2b4c91a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreManager: {fileID: 0}
+  _charaNumber: 0
 --- !u!1 &1493892375015911179
 GameObject:
   m_ObjectHideFlags: 0
