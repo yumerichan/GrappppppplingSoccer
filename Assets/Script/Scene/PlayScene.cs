@@ -35,6 +35,8 @@ public class PlayScene : MonoBehaviourPunCallbacks
 
     private NewWorkInfo nw_info;
 
+    private bool _isGoalDirecting;
+
     //全体で使う
     static public bool m_IsStart;
     private bool m_IsEnd;
@@ -46,6 +48,7 @@ public class PlayScene : MonoBehaviourPunCallbacks
 
         m_IsStart = false;
         m_IsEnd = false;
+        _isGoalDirecting = false;
     }
 
     // Update is called once per frame
@@ -65,6 +68,10 @@ public class PlayScene : MonoBehaviourPunCallbacks
     //  ゲームスタート
     public void RequestRestartGame()
     {
+        if (_isGoalDirecting) return;
+
+        _isGoalDirecting = true;
+
         //  初期位置設定
 
         //  各チームカウント
@@ -84,7 +91,7 @@ public class PlayScene : MonoBehaviourPunCallbacks
             //  青チーム
             else
             {
-                obj.GetComponent<PhotonView>().RPC("InitPos", RpcTarget.All, _blueInitPos[red_count]);
+                obj.GetComponent<PhotonView>().RPC("InitPos", RpcTarget.All, _blueInitPos[blue_count]);
                 blue_count++;
             }
         }
@@ -92,6 +99,8 @@ public class PlayScene : MonoBehaviourPunCallbacks
         //  ボール
         _ball = GameObject.FindGameObjectWithTag("Ball");
         _ball.transform.position = new Vector3(0, 80, 0);
+
+        _isGoalDirecting = false;
 
         //  スタートの演出 ==============
         //  出来たらここでリクエストする

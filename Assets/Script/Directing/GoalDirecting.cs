@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class GoalDirecting : MonoBehaviour
 {
@@ -81,6 +82,7 @@ public class GoalDirecting : MonoBehaviour
         }
     }
 
+    [PunRPC]
     //  ƒS[ƒ‹‚ª“ü‚Á‚½‚Ì‰‰o‚ğŒÄ‚Ô
     public void RequestGoalDirecting()
     {
