@@ -17,17 +17,17 @@ public class PlayScene : MonoBehaviourPunCallbacks
     //  赤チーム初期座標
     private Vector3[] _redInitPos = new [] { 
         new Vector3(0, 0 ,50),
-        new Vector3(0, 0 ,0),
-        new Vector3(0, 0 ,0),
-        new Vector3(0, 0 ,0),
+        new Vector3(100, 0 ,50),
+        new Vector3(-100, 0 ,50),
+        new Vector3(0, 50 ,50),
     };
 
     //  青チーム初期座標
     private Vector3[] _blueInitPos = new[] {
         new Vector3(0, 0 ,-50),
-        new Vector3(0, 0 ,0),
-        new Vector3(0, 0 ,0),
-        new Vector3(0, 0 ,0),
+        new Vector3(100, 0 ,-50),
+        new Vector3(-100, 0 ,-50),
+        new Vector3(0, 50 ,-50),
     };
 
     //  ボールのゲームオブジェクト
@@ -69,6 +69,8 @@ public class PlayScene : MonoBehaviourPunCallbacks
     //  ゲームスタート
     public void RequestRestartGame()
     {
+        if (!photonView.IsMine)
+            return;
 
         //  初期位置設定
 
@@ -87,7 +89,7 @@ public class PlayScene : MonoBehaviourPunCallbacks
                 red_count++;
             }
             //  青チーム
-            else
+            else if(obj.GetComponent<CharactorBasic>()._teamColor == 1)
             {
                 obj.GetComponent<PhotonView>().RPC("InitPos", RpcTarget.All, _blueInitPos[blue_count]);
                 blue_count++;
