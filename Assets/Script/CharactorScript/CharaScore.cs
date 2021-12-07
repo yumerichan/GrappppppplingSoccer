@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class CharaScore : MonoBehaviourPunCallbacks
+public class CharaScore : MonoBehaviour
 {
     public struct CharaScoreInfo
     {
@@ -27,6 +27,10 @@ public class CharaScore : MonoBehaviourPunCallbacks
     public int _charaNumber;
 
 
+    public SelectTeam _selectTeam;
+
+    bool _isTeamSet;
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,23 +40,60 @@ public class CharaScore : MonoBehaviourPunCallbacks
         _scoreInfo._teamKind = 0;
         _scoreInfo._goalNum = 0; 
         _nwInfo = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
-        _scoreManager = GameObject.Find("CharaScoreManager");
-        SendThis();
 
+        _isTeamSet = false;
+
+
+        _selectTeam = GameObject.Find("GameCanvas").transform.Find("TeamSelectCanvas").gameObject.GetComponent<SelectTeam>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        //  自分が操作するプレイヤー以外は入力できない
-        if (!photonView.IsMine)
-            return;
+        
 
         if (Input.GetKeyDown(KeyCode.P))
         {
             GameObject.Find("CharaScoreManager(Clone)").
             GetComponent<PhotonCharaView>().Text = "うんち";
+        }
+
+        StepTeamSet();
+    }
+
+    void StepTeamSet()
+    {
+        if(_isTeamSet) { return; }
+
+
+        if (GameObject.Find("CharaScoreManager(Clone)").
+                 GetComponent<PhotonCharaView>() != null)
+        {
+            if (_selectTeam.GetTeamSelect() == 0)
+            {
+                PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
+                     GetComponent<PhotonCharaView>();
+
+                int all_num = view._allPlayerNum;
+                int red = view._redNum;
+
+                view.AllPlayerNum = all_num + 1;
+                view._redNum = red + 1;
+            }
+            else
+            {
+                PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
+                     GetComponent<PhotonCharaView>();
+
+                int all_num = view._allPlayerNum;
+                int blue = view._blueNum;
+
+                view.AllPlayerNum = all_num + 1;
+                view.BlueNum = blue + 1;
+            }
+
+            _isTeamSet = true;
         }
     }
 

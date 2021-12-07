@@ -9,7 +9,9 @@ public class PhotonCharaView : MonoBehaviour, IPunObservable
     private PhotonView photonView;
 
     public string _text;
-    public int _aaa;
+    public int _allPlayerNum;
+    public int _redNum;
+    public int _blueNum;
 
     public string Text
     {
@@ -17,10 +19,22 @@ public class PhotonCharaView : MonoBehaviour, IPunObservable
         set { _text = value; RequestOwner(); }
     }
 
-    public int AAA
+    public int AllPlayerNum
     {
-        get { return _aaa; }
-        set { _aaa = value; RequestOwner(); }
+        get { return _allPlayerNum; }
+        set { _allPlayerNum = value; RequestOwner(); }
+    }
+
+    public int RedNum
+    {
+        get { return _redNum; }
+        set { _redNum = value; RequestOwner(); }
+    }
+
+    public int BlueNum
+    {
+        get { return _blueNum; }
+        set { _blueNum = value; RequestOwner(); }
     }
 
     void Awake()
@@ -33,14 +47,16 @@ public class PhotonCharaView : MonoBehaviour, IPunObservable
         // オーナーの場合
         if (stream.IsWriting)
         {
-            stream.SendNext(this._text);
-            stream.SendNext(this._aaa);
+            stream.SendNext(this._allPlayerNum);
+            stream.SendNext(this._redNum);
+            stream.SendNext(this._blueNum);
         }
         // オーナー以外の場合
         else
         {
-            this._text = (string)stream.ReceiveNext();
-            this._aaa = (int)stream.ReceiveNext();
+            this._allPlayerNum = (int)stream.ReceiveNext();
+            this._redNum = (int)stream.ReceiveNext();
+            this._blueNum = (int)stream.ReceiveNext();
         }
     }
 

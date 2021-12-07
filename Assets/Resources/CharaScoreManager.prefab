@@ -82,7 +82,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: 
-  _aaa: 0
+  _allPlayerNum: 0
+  _redNum: 0
+  _blueNum: 0
 --- !u!114 &2504582642641580118
 MonoBehaviour:
   m_ObjectHideFlags: 0

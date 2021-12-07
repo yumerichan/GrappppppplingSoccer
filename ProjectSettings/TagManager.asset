@@ -21,6 +21,7 @@ TagManager:
   - BlueStart
   - playManager
   - GoalCanvas
+  - TeamSelect
   layers:
   - Default
   - TransparentFX

@@ -123,7 +123,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         if ((int)PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);
-            PhotonNetwork.Instantiate("CharaScoreManager", new Vector3(0, 0, 0), Quaternion.identity);
+            
             PhotonNetwork.Instantiate("GoalCanvas", new Vector3(0, 0, 0), Quaternion.identity);
         }
 
@@ -148,6 +148,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         roomOptions.MaxPlayers = (byte)ArrowUI.selectNumber_;
         // "Room"という名前のルームに参加する（ルームが存在しなければ作成して参加する）
         PhotonNetwork.JoinOrCreateRoom("roojm", roomOptions, TypedLobby.Default);
+
         
     }
 
@@ -157,6 +158,8 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         // ルームの参加人数を設定する
 
         //PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);
+
+        PhotonNetwork.Instantiate("CharaScoreManager", new Vector3(0, 0, 0), Quaternion.identity);
     }
 
     // ゲームサーバーへの接続が成功した時に呼ばれるコールバック
