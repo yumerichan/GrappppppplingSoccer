@@ -79,7 +79,7 @@ public class CharaScore : MonoBehaviour
                 int red = view._redNum;
 
                 view.AllPlayerNum = all_num + 1;
-                view._redNum = red + 1;
+                view.RedNum = red + 1;
             }
             else
             {
