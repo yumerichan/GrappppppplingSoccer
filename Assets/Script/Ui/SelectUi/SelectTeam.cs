@@ -26,6 +26,8 @@ public class SelectTeam : MonoBehaviour
     public Image ArrowImage;
     public Image ShitaImage;
     public Text ExplanationText;
+    private bool _isDecide;
+    public bool GetIsDecide() { return _isDecide; }
 
     private NewWorkInfo nw_info;
 
@@ -39,8 +41,9 @@ public class SelectTeam : MonoBehaviour
         IsSelect = false;
         IsAllSelect = false;
         RedIsFull = false;
+        _isDecide = false;
         BlueIsFull = false;
-        TeamSelect = -1;
+        TeamSelect = 0;
         TeamNumber = ArrowUI.selectNumber_;
         TeamNumber /= 2;
         RedNumber = 0;
@@ -133,12 +136,16 @@ public class SelectTeam : MonoBehaviour
                 {
                     nw_info.SetTeamColor(0);
                     RedNumber++;
+
+                    
                 }
                 else if (TeamSelect == 1)
                 {
                     nw_info.SetTeamColor(1);
                     BlueNumber++;
                 }
+
+                _isDecide = true;
 
                 IsSelect = true;
                 nw_info.SetInstiate(true);
@@ -156,30 +163,29 @@ public class SelectTeam : MonoBehaviour
             {
                 ArrowImage.transform.localEulerAngles = new Vector3(0, 0, 0.0f);
 
-
             }
         }
 
 
-        if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
-        {
+        //if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        //{
 
-            PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
-                           GetComponent<PhotonCharaView>();
+        //    PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
+        //                   GetComponent<PhotonCharaView>();
 
-            view.RedTeamNum = RedNumber;
-            view.BlueTeamNum = BlueNumber;
+        //    view.RedTeamNum = RedNumber;
+        //    view.BlueTeamNum = BlueNumber;
 
 
-            if (view.RedTeamNum == TeamNumber)
-            {
-                RedIsFull = true;
-            }
+        //    if (view.RedTeamNum == TeamNumber)
+        //    {
+        //        RedIsFull = true;
+        //    }
 
-            if (view.BlueTeamNum == TeamNumber)
-            {
-                BlueIsFull = true;
-            }
-        }
+        //    if (view.BlueTeamNum == TeamNumber)
+        //    {
+        //        BlueIsFull = true;
+        //    }
+        //}
     }
 }

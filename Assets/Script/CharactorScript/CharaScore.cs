@@ -65,7 +65,7 @@ public class CharaScore : MonoBehaviour
     void StepTeamSet()
     {
         if(_isTeamSet) { return; }
-        if (_selectTeam.GetTeamSelect() == -1) { return; }
+        if (_selectTeam.GetIsDecide() == false) { return; }
 
 
             if (GameObject.Find("CharaScoreManager(Clone)").
