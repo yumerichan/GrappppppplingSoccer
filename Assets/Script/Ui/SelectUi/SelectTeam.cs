@@ -167,16 +167,16 @@ public class SelectTeam : MonoBehaviour
             PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
                            GetComponent<PhotonCharaView>();
 
-            view.RedNum = RedNumber;
-            view.BlueNum = BlueNumber;
+            view.RedTeamNum = RedNumber;
+            view.BlueTeamNum = BlueNumber;
 
 
-            if (view.RedNum == TeamNumber)
+            if (view.RedTeamNum == TeamNumber)
             {
                 RedIsFull = true;
             }
 
-            if (view.BlueNum == TeamNumber)
+            if (view.BlueTeamNum == TeamNumber)
             {
                 BlueIsFull = true;
             }
