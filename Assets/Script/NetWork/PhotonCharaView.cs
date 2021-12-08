@@ -12,6 +12,8 @@ public class PhotonCharaView : MonoBehaviour, IPunObservable
     public int _allPlayerNum;
     public int _redNum;
     public int _blueNum;
+    public int _redTeamNum;
+    public int _blueTeamNum;
 
     public string Text
     {
@@ -37,6 +39,18 @@ public class PhotonCharaView : MonoBehaviour, IPunObservable
         set { _blueNum = value; RequestOwner(); }
     }
 
+    public int RedTeamNum
+    {
+        get { return _redTeamNum; }
+        set { _redNum = value; RequestOwner(); }
+    }
+
+    public int BlueTeamNum
+    {
+        get { return _blueTeamNum; }
+        set { _blueNum = value; RequestOwner(); }
+    }
+
     void Awake()
     {
         this.photonView = GetComponent<PhotonView>();
@@ -50,6 +64,8 @@ public class PhotonCharaView : MonoBehaviour, IPunObservable
             stream.SendNext(this._allPlayerNum);
             stream.SendNext(this._redNum);
             stream.SendNext(this._blueNum);
+            stream.SendNext(this._redTeamNum);
+            stream.SendNext(this._blueTeamNum);
         }
         // オーナー以外の場合
         else
@@ -57,6 +73,8 @@ public class PhotonCharaView : MonoBehaviour, IPunObservable
             this._allPlayerNum = (int)stream.ReceiveNext();
             this._redNum = (int)stream.ReceiveNext();
             this._blueNum = (int)stream.ReceiveNext();
+            this._redTeamNum = (int)stream.ReceiveNext();
+            this._blueTeamNum = (int)stream.ReceiveNext();
         }
     }
 
