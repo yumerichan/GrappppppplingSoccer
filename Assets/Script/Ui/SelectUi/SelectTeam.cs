@@ -67,6 +67,10 @@ public class SelectTeam : MonoBehaviourPunCallbacks
             }
         }
 
+        PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
+                        GetComponent<PhotonCharaView>();
+
+
         //åàíËÇµÇΩÇÁìÆÇ©Ç≥Ç»Ç¢
         //Ç®ÇœÇµÇƒÇ°Å[ÇπÇ¡ÇƒÇ¢
         if (IsSelect)
@@ -125,9 +129,7 @@ public class SelectTeam : MonoBehaviourPunCallbacks
                 }
 
 
-                PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
-                        GetComponent<PhotonCharaView>();
-
+                
 
                 if (TeamSelect == 0)
                 {
