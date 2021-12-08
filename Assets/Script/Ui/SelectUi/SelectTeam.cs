@@ -5,7 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 
-public class SelectTeam : MonoBehaviourPunCallbacks
+public class SelectTeam : MonoBehaviour
 {
     private bool IsAllSelect;
     private bool IsSelect;
@@ -69,13 +69,16 @@ public class SelectTeam : MonoBehaviourPunCallbacks
             }
         }
 
-
+ 
         //PhotonCharaView view = null;
-        //if (GameObject.Find("CharaScoreManager(Clone)").
-        //                GetComponent<PhotonCharaView>() != null)
+        //if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
         //{
-        //     view = GameObject.Find("CharaScoreManager(Clone)").
-        //                    GetComponent<PhotonCharaView>();
+        //    if (GameObject.Find("CharaScoreManager(Clone)").
+        //               GetComponent<PhotonCharaView>() != null)
+        //    {
+        //        view = GameObject.Find("CharaScoreManager(Clone)").
+        //                       GetComponent<PhotonCharaView>();
+        //    }
         //}
 
 
@@ -144,14 +147,18 @@ public class SelectTeam : MonoBehaviourPunCallbacks
                     nw_info.SetTeamColor(0);
                     RedNumber++;
 
-                    //view.RedNum = RedNumber;
+                    //if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1 &&
+                    //    view != null)
+                    //    view.RedNum = RedNumber;
                 }
                 else if (TeamSelect == 1)
                 {
                     nw_info.SetTeamColor(1);
                     BlueNumber++;
 
-                    //view.BlueNum = BlueNumber;
+                    //if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1 &&
+                    //   view != null)
+                    //    view.BlueNum = BlueNumber;
                 }
 
                 IsSelect = true;
@@ -174,15 +181,21 @@ public class SelectTeam : MonoBehaviourPunCallbacks
             }
         }
 
-        //if (view.RedNum == TeamNumber)
+
+
+        //if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1 &&
+        //               view != null)
         //{
-        //    RedIsFull = true;
+        //    if (view.RedNum == TeamNumber)
+        //    {
+        //        RedIsFull = true;
+        //    }
+
+        //    if (view.BlueNum == TeamNumber)
+        //    {
+        //        BlueIsFull = true;
+        //    }
         //}
 
-        //if(view.BlueNum == TeamNumber)
-        //{
-        //    BlueIsFull = true;
-        //}
-        
     }
 }
