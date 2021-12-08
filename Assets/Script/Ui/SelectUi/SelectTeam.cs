@@ -31,6 +31,8 @@ public class SelectTeam : MonoBehaviourPunCallbacks
 
     private float curTime;
 
+    public bool IsDebug;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -111,7 +113,7 @@ public class SelectTeam : MonoBehaviourPunCallbacks
 
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Enter"))
             {
-                IsSelect = true;
+                IsSelect = IsDebug;
 
 
             //満員だったらエラーオパシティ

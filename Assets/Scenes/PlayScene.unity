@@ -1118,6 +1118,7 @@ MonoBehaviour:
   ArrowImage: {fileID: 1685542931}
   ShitaImage: {fileID: 1584422700}
   ExplanationText: {fileID: 1614255959}
+  IsDebug: 0
 --- !u!114 &353926833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2596,6 +2597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4550744543fea7747b66dffd8a2aad73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _roomName: rooom
 --- !u!114 &1057651735
 MonoBehaviour:
   m_ObjectHideFlags: 0
