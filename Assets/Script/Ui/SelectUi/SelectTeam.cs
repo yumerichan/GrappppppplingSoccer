@@ -40,7 +40,7 @@ public class SelectTeam : MonoBehaviour
         IsAllSelect = false;
         RedIsFull = false;
         BlueIsFull = false;
-        TeamSelect = 0;
+        TeamSelect = -1;
         TeamNumber = ArrowUI.selectNumber_;
         TeamNumber /= 2;
         RedNumber = 0;

@@ -65,9 +65,10 @@ public class CharaScore : MonoBehaviour
     void StepTeamSet()
     {
         if(_isTeamSet) { return; }
+        if (_selectTeam.GetTeamSelect() == -1) { return; }
 
 
-        if (GameObject.Find("CharaScoreManager(Clone)").
+            if (GameObject.Find("CharaScoreManager(Clone)").
                  GetComponent<PhotonCharaView>() != null)
         {
             if (_selectTeam.GetTeamSelect() == 0)
@@ -77,9 +78,11 @@ public class CharaScore : MonoBehaviour
 
                 int all_num = view._allPlayerNum;
                 int red = view._redNum;
+                int blue = view._blueNum;
 
                 view.AllPlayerNum = all_num + 1;
                 view.RedNum = red + 1;
+                view.BlueNum = blue;
             }
             else
             {
@@ -87,9 +90,11 @@ public class CharaScore : MonoBehaviour
                      GetComponent<PhotonCharaView>();
 
                 int all_num = view._allPlayerNum;
+                int red = view._redNum;
                 int blue = view._blueNum;
 
                 view.AllPlayerNum = all_num + 1;
+                view.RedNum = red;
                 view.BlueNum = blue + 1;
             }
 
