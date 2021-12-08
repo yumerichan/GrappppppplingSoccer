@@ -69,8 +69,14 @@ public class SelectTeam : MonoBehaviourPunCallbacks
             }
         }
 
-        PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
-                        GetComponent<PhotonCharaView>();
+
+        //PhotonCharaView view = null;
+        //if (GameObject.Find("CharaScoreManager(Clone)").
+        //                GetComponent<PhotonCharaView>() != null)
+        //{
+        //     view = GameObject.Find("CharaScoreManager(Clone)").
+        //                    GetComponent<PhotonCharaView>();
+        //}
 
 
         //Œˆ’è‚µ‚½‚ç“®‚©‚³‚È‚¢
@@ -138,14 +144,14 @@ public class SelectTeam : MonoBehaviourPunCallbacks
                     nw_info.SetTeamColor(0);
                     RedNumber++;
 
-                    view.RedNum = RedNumber;
+                    //view.RedNum = RedNumber;
                 }
                 else if (TeamSelect == 1)
                 {
                     nw_info.SetTeamColor(1);
                     BlueNumber++;
 
-                    view.BlueNum = BlueNumber;
+                    //view.BlueNum = BlueNumber;
                 }
 
                 IsSelect = true;
@@ -168,15 +174,15 @@ public class SelectTeam : MonoBehaviourPunCallbacks
             }
         }
 
-        if (view.RedNum == TeamNumber)
-        {
-            RedIsFull = true;
-        }
+        //if (view.RedNum == TeamNumber)
+        //{
+        //    RedIsFull = true;
+        //}
 
-        if(view.BlueNum == TeamNumber)
-        {
-            BlueIsFull = true;
-        }
+        //if(view.BlueNum == TeamNumber)
+        //{
+        //    BlueIsFull = true;
+        //}
         
     }
 }
