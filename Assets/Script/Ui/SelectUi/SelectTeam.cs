@@ -31,6 +31,8 @@ public class SelectTeam : MonoBehaviourPunCallbacks
 
     private float curTime;
 
+    public bool IsDebug;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +68,10 @@ public class SelectTeam : MonoBehaviourPunCallbacks
                 ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
             }
         }
+
+        PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
+                        GetComponent<PhotonCharaView>();
+
 
         //決定したら動かさない
         //おぱしてぃーせってい
@@ -107,7 +113,8 @@ public class SelectTeam : MonoBehaviourPunCallbacks
 
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Enter"))
             {
-                IsSelect = true;
+                IsSelect = IsDebug;
+
 
             //満員だったらエラーオパシティ
             if (TeamSelect == 0 && RedIsFull)
@@ -123,6 +130,7 @@ public class SelectTeam : MonoBehaviourPunCallbacks
                     return;
                 }
 
+
                 
 
                 if (TeamSelect == 0)
@@ -130,16 +138,14 @@ public class SelectTeam : MonoBehaviourPunCallbacks
                     nw_info.SetTeamColor(0);
                     RedNumber++;
 
-                  
-
-                    
+                    view.RedNum = RedNumber;
                 }
                 else if (TeamSelect == 1)
                 {
                     nw_info.SetTeamColor(1);
                     BlueNumber++;
 
-                   
+                    view.BlueNum = BlueNumber;
                 }
 
                 IsSelect = true;
@@ -162,12 +168,12 @@ public class SelectTeam : MonoBehaviourPunCallbacks
             }
         }
 
-        if(RedNumber == TeamNumber)
+        if (view.RedNum == TeamNumber)
         {
             RedIsFull = true;
         }
 
-        if(BlueNumber == TeamNumber)
+        if(view.BlueNum == TeamNumber)
         {
             BlueIsFull = true;
         }

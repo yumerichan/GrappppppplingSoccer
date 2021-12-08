@@ -17,17 +17,17 @@ public class PlayScene : MonoBehaviourPunCallbacks
     //  赤チーム初期座標
     private Vector3[] _redInitPos = new [] { 
         new Vector3(0, 0 ,50),
-        new Vector3(0, 0 ,0),
-        new Vector3(0, 0 ,0),
-        new Vector3(0, 0 ,0),
+        new Vector3(100, 0 ,50),
+        new Vector3(-100, 0 ,50),
+        new Vector3(0, 60 ,50),
     };
 
     //  青チーム初期座標
     private Vector3[] _blueInitPos = new[] {
         new Vector3(0, 0 ,-50),
-        new Vector3(0, 0 ,0),
-        new Vector3(0, 0 ,0),
-        new Vector3(0, 0 ,0),
+        new Vector3(100, 0 ,-50),
+        new Vector3(-100, 0 ,-50),
+        new Vector3(0, 60,-50),
     };
 
     //  ボールのゲームオブジェクト
