@@ -28,30 +28,27 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: jp
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
-  - ClickRpc
-  - DestroyRpc
-  - DestroySpaceship
-  - Fire
-  - RespawnSpaceship
   - AddBallAtk
   - AddGoal
   - AddGrap
   - AddSkill
   - AddSkillCnt
-  - SendScoreInfo
+  - ClickRpc
+  - DestroyRpc
+  - DestroySpaceship
+  - Fire
   - InitPos
   - RequestGoalDirecting
-<<<<<<< HEAD
-  - StartPlay
-=======
   - RequestRestartGame
->>>>>>> 6e3c4a9d17e919a82c6d181c658b53d2fd597ee9
+  - RespawnSpaceship
+  - SendScoreInfo
+  - StartPlay
   DisableAutoOpenWizard: 1
   ShowSettings: 0
-  DevRegionSetOnce: 1
+  DevRegionSetOnce: 0
