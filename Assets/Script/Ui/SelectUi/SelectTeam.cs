@@ -5,7 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 
-public class SelectTeam : MonoBehaviourPunCallbacks
+public class SelectTeam : MonoBehaviour
 {
     private bool IsAllSelect;
     private bool IsSelect;
@@ -58,26 +58,16 @@ public class SelectTeam : MonoBehaviourPunCallbacks
         ////自分だけが入る
         //if (photonView.IsMine)
         //{
-        if(curTime != 0.0f)
+        if (curTime != 0.0f)
         {
             curTime -= Time.deltaTime;
 
-            if(curTime <= 0.0f)
+            if (curTime <= 0.0f)
             {
                 curTime = 0.0f;
                 ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
             }
         }
-
-
-        //PhotonCharaView view = null;
-        //if (GameObject.Find("CharaScoreManager(Clone)").
-        //                GetComponent<PhotonCharaView>() != null)
-        //{
-        //     view = GameObject.Find("CharaScoreManager(Clone)").
-        //                    GetComponent<PhotonCharaView>();
-        //}
-
 
         //決定したら動かさない
         //おぱしてぃーせってい
@@ -122,8 +112,8 @@ public class SelectTeam : MonoBehaviourPunCallbacks
                 IsSelect = IsDebug;
 
 
-            //満員だったらエラーオパシティ
-            if (TeamSelect == 0 && RedIsFull)
+                //満員だったらエラーオパシティ
+                if (TeamSelect == 0 && RedIsFull)
                 {
                     ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 100.0f);
                     curTime = 2.0f;
@@ -137,52 +127,59 @@ public class SelectTeam : MonoBehaviourPunCallbacks
                 }
 
 
-                
+
 
                 if (TeamSelect == 0)
                 {
                     nw_info.SetTeamColor(0);
                     RedNumber++;
-
-                    //view.RedNum = RedNumber;
                 }
                 else if (TeamSelect == 1)
                 {
                     nw_info.SetTeamColor(1);
                     BlueNumber++;
-
-                    //view.BlueNum = BlueNumber;
                 }
 
                 IsSelect = true;
                 nw_info.SetInstiate(true);
             }
 
-          
+
 
             if (TeamSelect == 0)
             {
-                ArrowImage.transform.localEulerAngles = new Vector3(0,0, 180.0f);
-                
+                ArrowImage.transform.localEulerAngles = new Vector3(0, 0, 180.0f);
+
             }
 
             if (TeamSelect == 1)
             {
                 ArrowImage.transform.localEulerAngles = new Vector3(0, 0, 0.0f);
-                
+
 
             }
         }
 
-        //if (view.RedNum == TeamNumber)
-        //{
-        //    RedIsFull = true;
-        //}
 
-        //if(view.BlueNum == TeamNumber)
-        //{
-        //    BlueIsFull = true;
-        //}
-        
+        if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        {
+
+            PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
+                           GetComponent<PhotonCharaView>();
+
+            view.RedNum = RedNumber;
+            view.BlueNum = BlueNumber;
+
+
+            if (view.RedNum == TeamNumber)
+            {
+                RedIsFull = true;
+            }
+
+            if (view.BlueNum == TeamNumber)
+            {
+                BlueIsFull = true;
+            }
+        }
     }
 }
