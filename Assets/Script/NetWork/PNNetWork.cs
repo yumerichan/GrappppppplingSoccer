@@ -125,7 +125,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         if ((int)PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);
-            
+            GameObject a = PhotonNetwork.Instantiate("CharaScoreManager", new Vector3(0, 0, 0), Quaternion.identity);
             PhotonNetwork.Instantiate("GoalCanvas", new Vector3(0, 0, 0), Quaternion.identity);
         }
 
@@ -161,7 +161,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 
         //PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);
 
-        PhotonNetwork.Instantiate("CharaScoreManager", new Vector3(0, 0, 0), Quaternion.identity);
+        
     }
 
     // ゲームサーバーへの接続が成功した時に呼ばれるコールバック
