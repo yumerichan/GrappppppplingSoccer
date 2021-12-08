@@ -109,6 +109,7 @@ public class SelectTeam : MonoBehaviourPunCallbacks
             {
                 IsSelect = true;
 
+
             //満員だったらエラーオパシティ
             if (TeamSelect == 0 && RedIsFull)
                 {
@@ -123,23 +124,24 @@ public class SelectTeam : MonoBehaviourPunCallbacks
                     return;
                 }
 
-                
+
+                PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
+                        GetComponent<PhotonCharaView>();
+
 
                 if (TeamSelect == 0)
                 {
                     nw_info.SetTeamColor(0);
                     RedNumber++;
 
-                  
-
-                    
+                    view.RedNum = RedNumber;
                 }
                 else if (TeamSelect == 1)
                 {
                     nw_info.SetTeamColor(1);
                     BlueNumber++;
 
-                   
+                    view.BlueNum = BlueNumber;
                 }
 
                 IsSelect = true;
@@ -162,12 +164,12 @@ public class SelectTeam : MonoBehaviourPunCallbacks
             }
         }
 
-        if(RedNumber == TeamNumber)
+        if (view.RedNum == TeamNumber)
         {
             RedIsFull = true;
         }
 
-        if(BlueNumber == TeamNumber)
+        if(view.BlueNum == TeamNumber)
         {
             BlueIsFull = true;
         }
