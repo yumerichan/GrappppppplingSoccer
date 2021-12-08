@@ -145,7 +145,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             GameObject network = GameObject.FindGameObjectWithTag("NetWork");
             charaName_ = network.GetComponent<PNNetWork>().charaName_;
             CharaTypeInit();
-            _teamColor = GameObject.Find("NetWork").GetComponent<NewWorkInfo>().GetTeamColor();
+            _teamColor = -1;
         }
     }
 
@@ -156,6 +156,14 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         /*  前フレ状態を保存 */
         _prestate = state_;
 
+        //  チームカラー設定
+        if(_teamColor == -1)
+        {
+            if(GameObject.Find("NetWork").GetComponent<NewWorkInfo>().GetInstiate() == true)
+            {
+                _teamColor = GameObject.Find("NetWork").GetComponent<NewWorkInfo>().GetTeamColor();
+            }
+        }
 
         //  入力
         CharaInput();
