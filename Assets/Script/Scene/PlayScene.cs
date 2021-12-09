@@ -35,7 +35,7 @@ public class PlayScene : MonoBehaviourPunCallbacks
 
     private NewWorkInfo nw_info;
 
-    private bool _isGoalDirecting;
+    public bool _isGoalDirecting { get; set; }
 
     //全体で使う
     static public bool m_IsStart;
@@ -69,6 +69,10 @@ public class PlayScene : MonoBehaviourPunCallbacks
     //  ゲームスタート
     public void RequestRestartGame()
     {
+        if (_isGoalDirecting == true)
+            return;
+
+        _isGoalDirecting = true;
 
         //  初期位置設定
 

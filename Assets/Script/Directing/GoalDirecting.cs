@@ -91,6 +91,9 @@ public class GoalDirecting : MonoBehaviour
 
         //  移動フェーズに移行
         _phase = Phase.Move;
+
+        //  リスタートのフラグを折っておく
+        GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>()._isGoalDirecting = false;
     }
 
     //  ゴール演出終了
@@ -111,6 +114,6 @@ public class GoalDirecting : MonoBehaviour
         _phase = Phase.Idle;
 
         //  リスタート関数
-        GameObject.FindGameObjectWithTag("playManager").GetComponent<PhotonView>().RPC("RequestRestartGame", RpcTarget.All);
+        GameObject.FindGameObjectWithTag("playManager").GetComponent<PhotonView>().RPC("RequestRestartGame", RpcTarget.MasterClient);
     }
 }
