@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 599708978439069262}
   - component: {fileID: 599736338615971744}
   - component: {fileID: 4617992786200546086}
+  - component: {fileID: -6263845458395932440}
   m_Layer: 0
   m_Name: TrapEffect
   m_TagString: Trap
@@ -29,9 +30,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705152990673683946}
-  m_LocalRotation: {x: 0.03410464, y: 0.26931915, z: -0.0095438855, w: 0.96239966}
+  m_LocalRotation: {x: 0.015851209, y: 0.6728245, z: -0.014422179, w: 0.7394917}
   m_LocalPosition: {x: 21.329254, y: 0.081097424, z: -7.981843}
-  m_LocalScale: {x: 15, y: 15, z: 15}
+  m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -139,5 +140,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d1b8bb4ca38a840bf22c0889ced9e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeLimit: 30
+  _addAlpha: 0.01
+  _timeLimit: 12
   _TrapBombEffect: {fileID: 100014, guid: bf45ce4b3f00f9e46b9d5fe323032271, type: 3}
+  _trapTeamKind: 0
+  _bombSpeed: 400
+--- !u!114 &-6263845458395932440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705152990673683946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
