@@ -106,7 +106,12 @@ public class CharaSkill : MonoBehaviour
     {
         Vector3 wall_pos = transform.Find("TrapPos").gameObject.transform.position;
 
-        GameObject a = PhotonNetwork.Instantiate("TrapEffect", wall_pos, transform.rotation);
+        GameObject a = null;
+        if (GameObject.Find("GameCanvas").transform.Find("TeamSelectCanvas").gameObject.GetComponent<SelectTeam>().GetTeamSelect() == 0)
+            a = PhotonNetwork.Instantiate("TrapEffectRed", wall_pos, transform.rotation);
+        else
+            a = PhotonNetwork.Instantiate("TrapEffectBlue", wall_pos, transform.rotation);
+
         a.GetComponent<TrapEffect>().SetPlayer(this.gameObject);
         a.GetComponent<TrapEffect>().SetTrapTeamKind
             (this.gameObject.GetComponent<CharaScore>()._scoreInfo._teamKind);
