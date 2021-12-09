@@ -38,7 +38,7 @@ public class Boost : MonoBehaviour
     }
 
     //  ブーストボタンが押されたら
-    public void OnBoost()
+    public void OnBallBoost()
     {
         //  ゲージが溜まってないなら
         if(consumptionAmount_ > curBoostGage_)
@@ -54,12 +54,35 @@ public class Boost : MonoBehaviour
         rb_.velocity = new Vector3(0, 0, 0);
 
         ////  キャラクターからボールへのベクトル生成
-        //Vector3 boost_vec = (ball_.transform.position - this.transform.position).normalized * boostPower_;
+        Vector3 boost_vec = (ball_.transform.position - this.transform.position).normalized * boostPower_;
 
-        Vector3 boost_vec = _camera.transform.forward.normalized * boostPower_;
         //  ボールの方向に力を加える
         rb_.AddForce(boost_vec, ForceMode.Impulse);
        
+        //  ゲージ更新処理
+        curBoostGage_ -= consumptionAmount_;
+        boostUI_.GetComponent<CircleSlider>().SetBoost(curBoostGage_);
+    }
+
+    //  カメラ方向にブースト
+    public void OnCamBoost()
+    {
+        //  ゲージが溜まってないなら
+        if (consumptionAmount_ > curBoostGage_)
+        {
+            //  撃てない！！！
+            return;
+        }
+
+        //  移動量リセット
+        rb_.velocity = new Vector3(0, 0, 0);
+
+        //  カメラが向いている方向にブースト
+        Vector3 boost_vec = _camera.transform.forward.normalized * boostPower_;
+
+        //  ボールの方向に力を加える
+        rb_.AddForce(boost_vec, ForceMode.Impulse);
+
         //  ゲージ更新処理
         curBoostGage_ -= consumptionAmount_;
         boostUI_.GetComponent<CircleSlider>().SetBoost(curBoostGage_);

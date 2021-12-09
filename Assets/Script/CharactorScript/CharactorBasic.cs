@@ -78,6 +78,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     private Rigidbody charaRb_;         //キャラのRigitBody
     private bool isCaughtTrap;          //罠に引っかかっているか
     private float curRestrantTime;      //現在の拘束時間
+    private bool _preIsBallBoost;           //前フレのブースト入力
+    private bool _preIsCamBoost;           //前フレのブースト入力
 
     //  チームカラー
     [HideInInspector]
@@ -137,6 +139,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         curSkillCoolTime_ = 10.0f;
         isCaughtTrap = false;
         curRestrantTime = 0f;
+        _preIsBallBoost = false;
+        _preIsCamBoost = false;
 
         //  キャラごとの初期設定
         if (photonView.IsMine)
@@ -217,22 +221,19 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         //  トリガーの入力値
         //  トリガー値が正の数 : LeftTrigger
         //  トリガー値が負の数 : RightTrigger
-        float trigger_value = Input.GetAxis("Boost_Skill");
+        float trigger_value = Input.GetAxis("Boost");
 
         //  ボタン入力取得
 
         //  ブースト
-        bool is_boost = false;
-
-        //  スキル
-        bool is_skill = false;
+        bool is_ball_boost = false;
+        bool is_cam_boost = false;
 
         //  トリガーの値で入力された動作分け
-        if ((trigger_value > 0 || Input.GetKeyDown(KeyCode.E)) &&
-            state_ != CharactorStateType.STATE_TYPE_BOOST)
-            is_boost = true;
-        else if (trigger_value < 0 || Input.GetKeyDown(KeyCode.Q))
-            is_skill = true;
+        if ((trigger_value > 0 || Input.GetKeyDown(KeyCode.E)))
+            is_ball_boost = true;
+        else if (trigger_value < 0 || Input.GetKeyDown(KeyCode.R))
+            is_cam_boost = true;
 
         //  ジャンプ    ============================================================================
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
@@ -270,15 +271,25 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         }
 
         //   ブースト
-        if (is_boost)
+        if (is_ball_boost && _preIsBallBoost == false)
         {
-            this.GetComponent<Boost>().OnBoost();
+            this.GetComponent<Boost>().OnBallBoost();
+            state_ = CharactorStateType.STATE_TYPE_BOOST;
+            anime_.SetInteger("AnimState", (int)state_);
+        }
+        else if(is_cam_boost && _preIsCamBoost == false)
+        {
+            this.GetComponent<Boost>().OnCamBoost();
             state_ = CharactorStateType.STATE_TYPE_BOOST;
             anime_.SetInteger("AnimState", (int)state_);
         }
 
+        //  ブースト入力保存
+        _preIsBallBoost = is_ball_boost;
+        _preIsCamBoost = is_cam_boost;
+
         //  スキル
-        if (is_skill)
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("Skill"))
         {
             OnSkill();
             state_ = CharactorStateType.STATE_TYPE_SKILL;
