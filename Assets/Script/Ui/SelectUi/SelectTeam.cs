@@ -170,7 +170,7 @@ public class SelectTeam : MonoBehaviour
         //if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
         //{
 
-        //    PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
+        //    PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
         //                   GetComponent<PhotonCharaView>();
 
         //    view.RedTeamNum = RedNumber;

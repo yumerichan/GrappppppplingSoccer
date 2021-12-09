@@ -10,16 +10,26 @@ public class CharaScoreManager : MonoBehaviour
     public static int _playerCnt;
 
     private CharaScore[] _all;
-    private NewWorkInfo _nwInfo;
     private int i;
+
+    private GameObject _minePlayer;
 
     // Start is called before the first frame update
     void Start()
     {
         _allScoreInfo = new CharaScore.CharaScoreInfo[8];
+
+        for(int i = 0;i < _allScoreInfo.Length;i++)
+        {
+            _allScoreInfo[i]._goal = _allScoreInfo[i]._grap = _allScoreInfo[i]._skill = _allScoreInfo[i]._skillCnt = 0;
+            _allScoreInfo[i]._ballAtk = 0;
+            _allScoreInfo[i]._teamKind = -1;
+            _allScoreInfo[i]._goalNum = 0;
+            _allScoreInfo[i]._isMine = false;
+            _allScoreInfo[i]._isData = false;
+        }
         _playerCnt = 0;
         _all = new CharaScore[8];
-        _nwInfo = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
         i = 0;
     }
 
@@ -38,6 +48,11 @@ public class CharaScoreManager : MonoBehaviour
             {
                 _allScoreInfo[i] = player[i].
                     GetComponent<CharaScore>()._scoreInfo;
+
+                if(player[i] == _minePlayer)
+                {
+                    _allScoreInfo[i]._isMine = true;
+                }
             }
 
             SceneManager.LoadScene("ResultScene");
@@ -67,5 +82,10 @@ public class CharaScoreManager : MonoBehaviour
     {
         //_all[i] = score;
         i++;
+    }
+
+    public void SetMinePlayer(GameObject player)
+    {
+        _minePlayer = player;
     }
 }
