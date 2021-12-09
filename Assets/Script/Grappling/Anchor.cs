@@ -29,8 +29,6 @@ public class Anchor : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        player_ = GameObject.FindGameObjectWithTag("Player");
-        springJoint_ = player_.GetComponent<SpringJoint>();
         rigitBody_ = GetComponent<Rigidbody>();
 
         isHit_ = false;
