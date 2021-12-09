@@ -18,6 +18,8 @@ public class CharaScore : MonoBehaviour
 
         public int _teamKind;
         public string _name;
+        public bool _isMine;
+        public bool _isData;
     }
 
     public CharaScoreInfo _scoreInfo;
@@ -35,10 +37,14 @@ public class CharaScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _scoreManager = GameObject.Find("CharaScoreManager");
+        _scoreManager.GetComponent<CharaScoreManager>().SetMinePlayer(this.gameObject);
         _scoreInfo._goal = _scoreInfo._grap = _scoreInfo._skill = _scoreInfo._skillCnt = 0;
         _scoreInfo._ballAtk = 0;
-        _scoreInfo._teamKind = 0;
-        _scoreInfo._goalNum = 0; 
+        _scoreInfo._teamKind = -1;
+        _scoreInfo._goalNum = 0;
+        _scoreInfo._isMine = false;
+        _scoreInfo._isData = true;
         _nwInfo = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
 
         _isTeamSet = false;
@@ -51,13 +57,6 @@ public class CharaScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            GameObject.Find("CharaScoreManager(Clone)").
-            GetComponent<PhotonCharaView>().Text = "‚¤‚ñ‚¿";
-        }
 
         StepTeamSet();
     }
@@ -68,12 +67,12 @@ public class CharaScore : MonoBehaviour
         if (_selectTeam.GetIsDecide() == false) { return; }
 
 
-            if (GameObject.Find("CharaScoreManager(Clone)").
+        if (GameObject.Find("CharaViewManager(Clone)").
                  GetComponent<PhotonCharaView>() != null)
         {
             if (_selectTeam.GetTeamSelect() == 0)
             {
-                PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
+                PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                      GetComponent<PhotonCharaView>();
 
                 int all_num = view._allPlayerNum;
@@ -83,10 +82,12 @@ public class CharaScore : MonoBehaviour
                 view.AllPlayerNum = all_num + 1;
                 view.RedNum = red + 1;
                 view.BlueNum = blue;
+
+
             }
             else
             {
-                PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
+                PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                      GetComponent<PhotonCharaView>();
 
                 int all_num = view._allPlayerNum;
@@ -98,6 +99,8 @@ public class CharaScore : MonoBehaviour
                 view.BlueNum = blue + 1;
             }
 
+
+            _scoreInfo._teamKind = _selectTeam.GetTeamSelect();
             _isTeamSet = true;
         }
     }

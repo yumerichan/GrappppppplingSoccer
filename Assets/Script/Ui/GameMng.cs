@@ -27,10 +27,10 @@ public class GameMng : MonoBehaviour
 
         if (!_isStart)
         {
-            if (GameObject.Find("CharaScoreManager(Clone)").
+            if (GameObject.Find("CharaViewManager(Clone)").
                GetComponent<PhotonCharaView>() != null)
             {
-                PhotonCharaView view = GameObject.Find("CharaScoreManager(Clone)").
+                PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                    GetComponent<PhotonCharaView>();
                 _curRed = view._redNum;
                 _curBlue = view._blueNum;

@@ -20,14 +20,21 @@ public class ResultScore : MonoBehaviour
         public Text _scoreTxt;
     }
 
-
+    private int _myTeamNumber;
 
     private ResultScoreInfo[] _resultInfo;
 
     // Start is called before the first frame update
     void Start()
     {
-        _scoreText = new string[CharaScoreManager._playerCnt];
+        //まずは自分のチームナンバーを入れる
+        for (int i = 0; i < 8; i++)
+        {
+            CharaScore.CharaScoreInfo info = CharaScoreManager._allScoreInfo[i];
+            if (info._isMine) { _myTeamNumber = info._teamKind; }
+        }
+
+            _scoreText = new string[CharaScoreManager._playerCnt];
         _resultInfo = new ResultScoreInfo[8];
 
         for (int i = 0; i < 8; i++)
@@ -38,15 +45,52 @@ public class ResultScore : MonoBehaviour
             _resultInfo[i]._teamTxt = RESULT.transform.Find("Team" + (i + 1)).gameObject.GetComponent<Text>();
         }
 
-        //CharaScore.CharaScoreInfo info1 = CharaScoreManager._allScoreInfo[0];
-        //CharaScoreManager._allScoreInfo[0] = CharaScoreManager._allScoreInfo[2];
-        //CharaScoreManager._allScoreInfo[2] = info1;
+        //narabikae
+        for (int i = 0; i < CharaScoreManager._allScoreInfo.Length; i++)
+        {
+            for (int j = i + 1; j < CharaScoreManager._allScoreInfo.Length; j++)
+            {
+                if (CharaScoreManager._allScoreInfo[i]._allScore <
+                    CharaScoreManager._allScoreInfo[j]._allScore)
+                {
+                    CharaScore.CharaScoreInfo tmp = CharaScoreManager._allScoreInfo[i];
+                    CharaScoreManager._allScoreInfo[i] = CharaScoreManager._allScoreInfo[j];
+                    CharaScoreManager._allScoreInfo[j] = tmp;
+                }
+                else if (CharaScoreManager._allScoreInfo[i]._allScore ==
+                    CharaScoreManager._allScoreInfo[j]._allScore)
+                {
+                    if (CharaScoreManager._allScoreInfo[i]._goalNum <
+                    CharaScoreManager._allScoreInfo[j]._goalNum)
+                    {
+                        CharaScore.CharaScoreInfo tmp = CharaScoreManager._allScoreInfo[i];
+                        CharaScoreManager._allScoreInfo[i] = CharaScoreManager._allScoreInfo[j];
+                        CharaScoreManager._allScoreInfo[j] = tmp;
+                    }
+                }
+            }
+        }
+
 
         for (int i = 0; i < 8; i++)
         {
             CharaScore.CharaScoreInfo info = CharaScoreManager._allScoreInfo[i];
 
-            _resultInfo[i]._nameTxt.text = info._name;
+            if (info._isData == false) { continue; }
+
+            if(info._isMine)
+            {
+                _resultInfo[i]._nameTxt.text = "YOU";
+            }
+            else if(info._teamKind == _myTeamNumber)
+            {
+                _resultInfo[i]._nameTxt.text = "ALLY";
+            }
+            else if(info._teamKind != _myTeamNumber)
+            {
+                _resultInfo[i]._nameTxt.text = "ENEMY";
+            }
+            
             _resultInfo[i]._goalTxt.text = info._goalNum.ToString();
             _resultInfo[i]._scoreTxt.text = info._allScore.ToString();
 
@@ -55,13 +99,16 @@ public class ResultScore : MonoBehaviour
                 _resultInfo[i]._teamTxt.text = "Red";
                 _resultInfo[i]._teamTxt.color = Color.red;
             }
-            else
+            else if(info._teamKind == 1)
             {
                 _resultInfo[i]._teamTxt.text = "Blue";
                 _resultInfo[i]._teamTxt.color = Color.blue;
             }
 
         }
+
+
+        
     }
 
     // Update is called once per frame
