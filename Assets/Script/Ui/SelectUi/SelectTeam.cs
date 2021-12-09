@@ -5,7 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 
-public class SelectTeam : MonoBehaviour
+public class SelectTeam : MonoBehaviourPunCallbacks
 {
     private bool IsAllSelect;
     private bool IsSelect;
@@ -19,8 +19,6 @@ public class SelectTeam : MonoBehaviour
     }
 
     private int TeamNumber;
-    private int RedNumber;
-    private int BlueNumber;
 
     public Text ErrorText;
     public Image ArrowImage;
@@ -48,11 +46,11 @@ public class SelectTeam : MonoBehaviour
         TeamSelect = 0;
         TeamNumber = ArrowUI.selectNumber_;
         TeamNumber /= 2;
-        RedNumber = 0;
-        BlueNumber = 0;
         curTime = 0.0f;
 
         nw_info = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
+
+       
 
         ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
     }
@@ -78,9 +76,6 @@ public class SelectTeam : MonoBehaviour
         //Ç®ÇœÇµÇƒÇ°Å[ÇπÇ¡ÇƒÇ¢
         if (IsSelect)
         {
-
-
-
             //ëSàıÇ™åàíËÇµÇΩÇÁ
             if (IsAllSelect || IsDebug)
             {
@@ -139,26 +134,17 @@ public class SelectTeam : MonoBehaviour
                     return;
                 }
 
-
-
-
                 if (TeamSelect == 0)
                 {
                     nw_info.SetTeamColor(0);
-                    RedNumber++;
-
-                    RedNumText.text = RedNumber.ToString();
                 }
                 else if (TeamSelect == 1)
                 {
                     nw_info.SetTeamColor(1);
-                    BlueNumber++;
-
-                    BlueNumText.text = BlueNumber.ToString();
                 }
 
-              
-                IsSelect = true;
+                _isDecide = true;
+                  IsSelect = true;
                 nw_info.SetInstiate(true);
             }
 
@@ -177,27 +163,22 @@ public class SelectTeam : MonoBehaviour
             }
         }
 
+        PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
+                    GetComponent<PhotonCharaView>();
 
-        if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        RedNumText.text = view.RedNum.ToString();
+        BlueNumText.text = view.BlueNum.ToString();
+
+        if (view.RedNum == TeamNumber)
         {
-
-            PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
-                           GetComponent<PhotonCharaView>();
-
-            view.RedTeamNum = RedNumber;
-            view.BlueTeamNum = BlueNumber;
-
-
-            if (view.RedTeamNum == TeamNumber)
-            {
-                RedIsFull = true;
-            }
-
-            if (view.BlueTeamNum == TeamNumber)
-            {
-                BlueIsFull = true;
-            }
+            RedIsFull = true;
         }
+
+        if (view.BlueNum == TeamNumber)
+        {
+            BlueIsFull = true;
+        }
+        
 
         //ëSàıÇ™åàÇﬂÇΩ
         if(RedIsFull && BlueIsFull)

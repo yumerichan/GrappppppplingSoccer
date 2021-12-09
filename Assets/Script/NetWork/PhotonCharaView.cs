@@ -12,8 +12,6 @@ public class PhotonCharaView : MonoBehaviour, IPunObservable
     public int _allPlayerNum;
     public int _redNum;
     public int _blueNum;
-    public int _redTeamNum;
-    public int _blueTeamNum;
     public int _redScore;
     public int _blueScore;
 
@@ -38,18 +36,6 @@ public class PhotonCharaView : MonoBehaviour, IPunObservable
     public int BlueNum
     {
         get { return _blueNum; }
-        set { _blueNum = value; RequestOwner(); }
-    }
-
-    public int RedTeamNum
-    {
-        get { return _redTeamNum; }
-        set { _redNum = value; RequestOwner(); }
-    }
-
-    public int BlueTeamNum
-    {
-        get { return _blueTeamNum; }
         set { _blueNum = value; RequestOwner(); }
     }
 
@@ -78,8 +64,6 @@ public class PhotonCharaView : MonoBehaviour, IPunObservable
             stream.SendNext(this._allPlayerNum);
             stream.SendNext(this._redNum);
             stream.SendNext(this._blueNum);
-            stream.SendNext(this._redTeamNum);
-            stream.SendNext(this._blueTeamNum);
             stream.SendNext(this._redScore);
             stream.SendNext(this._blueScore);
         }
@@ -89,8 +73,6 @@ public class PhotonCharaView : MonoBehaviour, IPunObservable
             this._allPlayerNum = (int)stream.ReceiveNext();
             this._redNum = (int)stream.ReceiveNext();
             this._blueNum = (int)stream.ReceiveNext();
-            this._redTeamNum = (int)stream.ReceiveNext();
-            this._blueTeamNum = (int)stream.ReceiveNext();
             this._redScore = (int)stream.ReceiveNext();
             this._blueScore = (int)stream.ReceiveNext();
         }

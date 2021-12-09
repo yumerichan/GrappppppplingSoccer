@@ -1188,7 +1188,7 @@ MonoBehaviour:
   ExplanationText: {fileID: 1614255959}
   RedNumText: {fileID: 1140934008}
   BlueNumText: {fileID: 1615349127}
-  IsDebug: 1
+  IsDebug: 0
 --- !u!114 &353926833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2798,6 +2798,7 @@ GameObject:
   - component: {fileID: 1057651734}
   - component: {fileID: 1057651737}
   - component: {fileID: 1057651735}
+  - component: {fileID: 1057651738}
   m_Layer: 0
   m_Name: NetWork
   m_TagString: NetWork
@@ -2817,7 +2818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4550744543fea7747b66dffd8a2aad73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomName: room
+  _roomName: gfgd
 --- !u!114 &1057651735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2862,10 +2863,25 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 1057651738}
   sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1057651738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057651733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0647d5698726e4db3a9e997f8af753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _redTeamNum: 0
+  _blueTeamNum: 0
 --- !u!1 &1072645883
 GameObject:
   m_ObjectHideFlags: 3
