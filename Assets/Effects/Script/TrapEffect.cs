@@ -38,6 +38,9 @@ public class TrapEffect : MonoBehaviour
         _alpha = 1f;
         GetComponent<Renderer>().material.SetFloat("_Dissolve", 1);
         _boxColl = GetComponent<SphereCollider>();
+
+        //GetComponent<Renderer>().material.SetColor("_RimColor", new Color(0, 255, 177, 9));
+        //GetComponent<Renderer>().material.SetFloat("_RimSpread", 0.6f);
     }
 
     // Update is called once per frame
