@@ -508,6 +508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera_: {fileID: 1281656624}
+  _rotYSpeed: 10
 --- !u!4 &1740278941
 Transform:
   m_ObjectHideFlags: 0

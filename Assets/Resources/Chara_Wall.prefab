@@ -1455,7 +1455,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ball: {fileID: 0}
   _wallEffect: {fileID: 7857907099486829718, guid: 81547a8a9473da34ea5f5c8cf1b576c2, type: 3}
-  _trapEffect: {fileID: 705152990673683946, guid: 3d9be2694f95c0447869b6a6d305f9aa, type: 3}
   _blackHole: {fileID: 0}
   _bomb: {fileID: 0}
 --- !u!114 &8236514690341640754
