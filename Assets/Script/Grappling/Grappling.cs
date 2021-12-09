@@ -67,7 +67,7 @@ public class Grappling : MonoBehaviourPunCallbacks
         anchorClone_.GetComponent<Anchor>().InitAnchor(this.gameObject);
         Destroy(grapplePos_.gameObject);
 
-        _charaBasic.state_ = CharactorBasic.CharactorStateType.STATE_TYPE_SHOT;
+        _charaBasic.state_ = CharactorBasic.CharactorStateType.STATE_TYPE_GRAPPLE;
         _charaBasic.anime_.SetInteger("AnimeState", (int)_charaBasic.state_);
 
         isGrappling_ = true;
