@@ -232,6 +232,7 @@ MonoBehaviour:
   consumptionAmount_: 25
   curBoostGage_: 50
   boostUI_: {fileID: 3212432621958025729}
+  _camera: {fileID: 0}
 --- !u!114 &5917087414711958534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,7 +280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cef2746e52c4ef42a3807d117f1404d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchor_: {fileID: 7874903905414735809, guid: 094eb1b8391e2844082cd67ce311f4db, type: 3}
   shotPos_: {fileID: 631736444923296564}
   cameraPos_: {fileID: 0}
   playerPos_: {fileID: 8259261291952875423}
@@ -413,7 +413,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f1df21a8789a3d4cadb1455a2b4c91a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreManager: {fileID: 0}
+  _charaNumber: 0
+  _selectTeam: {fileID: 0}
 --- !u!1 &511445231422628870
 GameObject:
   m_ObjectHideFlags: 0
