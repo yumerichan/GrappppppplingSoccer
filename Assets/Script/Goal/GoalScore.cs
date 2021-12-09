@@ -13,34 +13,35 @@ public class GoalScore : MonoBehaviour
     private int _redScore;
     private int _buleScore;
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateScore()
     {
-        
+        PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
+                        GetComponent<PhotonCharaView>();
+
+
+        _redScoreText.text = view.RedScore.ToString();
+        _buleScoreText.text = view.BlueScore.ToString();
     }
 
-    private void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-    }
-
-    //  赤チームスコア加算
+        //  赤チームスコア加算
     public void AddRedScore()
     {
-        _redScore += 1;
-        _redScoreText.text = _redScore.ToString();
+        _redScore += 1;   
     }
 
     //  青チームスコア加算
     public void AddBuleScore()
     {
-        _buleScore += 1;
-        _buleScoreText.text = _buleScore.ToString();
+        _buleScore += 1; 
+    }
+
+    public int GetRedScore()
+    {
+        return _redScore;
+    }
+
+    public int GetBlueScore()
+    {
+        return _buleScore;
     }
 }

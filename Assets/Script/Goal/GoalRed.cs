@@ -18,7 +18,14 @@ public class GoalRed : MonoBehaviour
 
             GoalScore score = GameObject.Find("Score&Timer").GetComponent<GoalScore>();
 
+            PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
+                         GetComponent<PhotonCharaView>();
+
             score.AddRedScore();
+
+            view.RedScore = score.GetRedScore();
+
+            score.UpdateScore();
 
             //  ゴール演出リクエスト
             _goalImage.GetComponent<PhotonView>().RPC("RequestGoalDirecting", RpcTarget.All);
