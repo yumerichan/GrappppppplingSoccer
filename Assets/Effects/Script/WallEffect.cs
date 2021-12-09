@@ -92,6 +92,8 @@ public class WallEffect : MonoBehaviour
         if(_effectTime <= _curTime)
         {
             _state = State.FIN;
+            _boxColl.enabled = false;
+            _player.GetComponent<CharactorBasic>().isSkill_ = false;
         }
     }
 
@@ -102,7 +104,7 @@ public class WallEffect : MonoBehaviour
         if (_alpha >= 1f)
         {
             PhotonNetwork.Destroy(transform.parent.gameObject);
-            _player.GetComponent<CharactorBasic>().isSkill_ = false;
+           
 
             _player = null;
         }

@@ -1347,7 +1347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8236514690341640763}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.684709, y: -0.4176426, z: -2.3561764}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8236514690545516581}
@@ -1422,6 +1422,7 @@ MonoBehaviour:
   consumptionAmount_: 25
   curBoostGage_: 50
   boostUI_: {fileID: 8236514690747882951}
+  _camera: {fileID: 0}
 --- !u!114 &8236514690341640752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,7 +1455,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ball: {fileID: 0}
   _wallEffect: {fileID: 7857907099486829718, guid: 81547a8a9473da34ea5f5c8cf1b576c2, type: 3}
-  _trapEffect: {fileID: 705152990673683946, guid: 3d9be2694f95c0447869b6a6d305f9aa, type: 3}
   _blackHole: {fileID: 0}
   _bomb: {fileID: 0}
 --- !u!114 &8236514690341640754

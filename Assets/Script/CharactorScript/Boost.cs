@@ -21,10 +21,14 @@ public class Boost : MonoBehaviour
     [SerializeField]
     private GameObject boostUI_;            //ブーストUI
 
+    [SerializeField]
+    private Camera _camera;                 //カメラ
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //  カメラ取得
+        _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -49,9 +53,10 @@ public class Boost : MonoBehaviour
         //  移動量リセット
         rb_.velocity = new Vector3(0, 0, 0);
 
-        //  キャラクターからボールへのベクトル生成
-        Vector3 boost_vec = (ball_.transform.position - this.transform.position).normalized * boostPower_;
+        ////  キャラクターからボールへのベクトル生成
+        //Vector3 boost_vec = (ball_.transform.position - this.transform.position).normalized * boostPower_;
 
+        Vector3 boost_vec = _camera.transform.forward.normalized * boostPower_;
         //  ボールの方向に力を加える
         rb_.AddForce(boost_vec, ForceMode.Impulse);
        

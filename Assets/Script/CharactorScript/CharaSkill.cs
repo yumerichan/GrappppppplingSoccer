@@ -7,7 +7,7 @@ public class CharaSkill : MonoBehaviour
 {
     public GameObject _ball;
     public GameObject _wallEffect;
-    public GameObject _trapEffect;
+    private GameObject _trapEffect;
     public GameObject _blackHole;
 
     //=============
@@ -48,7 +48,9 @@ public class CharaSkill : MonoBehaviour
         {
             Vector3 wall_pos = transform.Find("TrapPos").gameObject.transform.position;
 
-            Instantiate(_trapEffect, wall_pos, transform.rotation);
+            GameObject a = PhotonNetwork.Instantiate("TrapEffect", wall_pos, transform.rotation);
+            a.GetComponent<TrapEffect>().SetPlayer(this.gameObject);
+        
         }
 
         //  bura
@@ -65,9 +67,16 @@ public class CharaSkill : MonoBehaviour
         //  罠との当たり判定
         if (other.gameObject.tag == "Trap")
         {
-            gameObject.GetComponent<CharactorBasic>().GetCaughtInTrap();
-            other.gameObject.GetComponent<TrapEffect>().CreateBomb();
-            Destroy(other.gameObject);
+            //  同じチームの人には当たらない
+            if (this.gameObject.GetComponent<CharaScore>()._scoreInfo._teamKind !=
+                other.gameObject.GetComponent<TrapEffect>()._trapTeamKind)
+            {
+
+                gameObject.GetComponent<CharactorBasic>().GetCaughtInTrap();
+                other.gameObject.GetComponent<TrapEffect>().CreateBomb();
+                PhotonNetwork.Destroy(other.gameObject);
+                this.gameObject.GetComponent<CharactorBasic>().isSkill_ = false;
+            }
         }
     }
 
@@ -97,7 +106,10 @@ public class CharaSkill : MonoBehaviour
     {
         Vector3 wall_pos = transform.Find("TrapPos").gameObject.transform.position;
 
-        Instantiate(_trapEffect, wall_pos, transform.rotation);
+        GameObject a = PhotonNetwork.Instantiate("TrapEffect", wall_pos, transform.rotation);
+        a.GetComponent<TrapEffect>().SetPlayer(this.gameObject);
+        a.GetComponent<TrapEffect>().SetTrapTeamKind
+            (this.gameObject.GetComponent<CharaScore>()._scoreInfo._teamKind);
     }
 
     //  ブラックホール

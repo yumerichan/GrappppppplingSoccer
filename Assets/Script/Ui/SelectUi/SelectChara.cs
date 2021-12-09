@@ -21,6 +21,8 @@ public class SelectChara : MonoBehaviour
     private bool IsLeftRotation;
 
     private float CurrentCameraY;
+
+    public float _rotYSpeed;
  
     private enum CharaType
     {
@@ -137,7 +139,7 @@ public class SelectChara : MonoBehaviour
             {
                 if (0 != (int)rot.eulerAngles.y)
                 {
-                    cam_rot -= new Vector3(0.0f, 1.0f, 0.0f);
+                    cam_rot -= new Vector3(0.0f, _rotYSpeed, 0.0f);
                 }
                 else
                 {
@@ -151,11 +153,12 @@ public class SelectChara : MonoBehaviour
                 if (CurrentCameraY < rot.eulerAngles.y)
                 {
 
-                    cam_rot -= new Vector3(0.0f, 1.0f, 0.0f);
+                    cam_rot -= new Vector3(0.0f, _rotYSpeed, 0.0f);
                 }
                 else
                 {
                     IsLeftRotation = false;
+                    cam_rot.y = CurrentCameraY;
                 }
             }
 
@@ -170,7 +173,7 @@ public class SelectChara : MonoBehaviour
             {
                 if (0 != (int)rot.eulerAngles.y)
                 {
-                    cam_rot += new Vector3(0.0f, 1.0f, 0.0f);
+                    cam_rot += new Vector3(0.0f, _rotYSpeed, 0.0f);
                 }
                 else
                 {
@@ -183,7 +186,7 @@ public class SelectChara : MonoBehaviour
             {
                 if (CurrentCameraY > rot.eulerAngles.y)
                 {
-                    cam_rot += new Vector3(0.0f, 1.0f, 0.0f);
+                    cam_rot += new Vector3(0.0f, _rotYSpeed, 0.0f);
                 }
                 else
                 {
