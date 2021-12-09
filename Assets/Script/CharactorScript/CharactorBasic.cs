@@ -152,18 +152,21 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine)
+            return;
 
         /*  前フレ状態を保存 */
         _prestate = state_;
 
         //  チームカラー設定
-        if(_teamColor == -1)
+        if (_teamColor == -1)
         {
-            if(GameObject.Find("NetWork").GetComponent<NewWorkInfo>().GetInstiate() == true)
+            if (GameObject.Find("NetWork").GetComponent<NewWorkInfo>().GetInstiate() == true)
             {
                 _teamColor = GameObject.Find("NetWork").GetComponent<NewWorkInfo>().GetTeamColor();
             }
         }
+        
 
         //  入力
         CharaInput();
