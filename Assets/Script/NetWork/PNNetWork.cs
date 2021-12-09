@@ -75,6 +75,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
            GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>().AddRedPlayer(aa);
 
             aa.transform.GetComponent<CharaScore>()._charaNumber = (int)PhotonNetwork.CurrentRoom.PlayerCount - 1;
+            aa.transform.GetComponent<CharactorBasic>()._teamColor = nw_info.GetTeamColor();
 
             charaName_ = name;
             IsInstiate = false;
@@ -116,6 +117,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
             GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>().AddBluePlayer(aa);
 
             aa.transform.GetComponent<CharaScore>()._charaNumber = (int)PhotonNetwork.CurrentRoom.PlayerCount - 1;
+            aa.transform.GetComponent<CharactorBasic>()._teamColor = nw_info.GetTeamColor();
 
             charaName_ = name;
             IsInstiate = false;
