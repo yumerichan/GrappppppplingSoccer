@@ -32,25 +32,25 @@ public class PhotonCharaView : MonoBehaviour, IPunObservable
     public int RedNum
     {
         get { return _redNum; }
-        set { _redNum = value; RequestOwner(); }
+        set { _redNum = value; }
     }
 
     public int BlueNum
     {
         get { return _blueNum; }
-        set { _blueNum = value; RequestOwner(); }
+        set { _blueNum = value; }
     }
 
     public int RedTeamNum
     {
         get { return _redTeamNum; }
-        set { _redNum = value; RequestOwner(); }
+        set { _redTeamNum = value; RequestOwner(); }
     }
 
     public int BlueTeamNum
     {
         get { return _blueTeamNum; }
-        set { _blueNum = value; RequestOwner(); }
+        set { _blueTeamNum = value; RequestOwner(); }
     }
 
     public int RedScore

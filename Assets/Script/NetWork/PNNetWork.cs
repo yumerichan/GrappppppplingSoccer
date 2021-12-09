@@ -4,7 +4,6 @@ using Photon.Realtime;
 
 public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 {
-    int player_number;
     [HideInInspector]
     public string charaName_ { get; set; }
     private NewWorkInfo nw_info;
@@ -12,16 +11,19 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
     public string _roomName;
 
     bool IsInstiate;
+    bool IsCheck;
 
     private void Start()
     {
 
-        player_number = 0;
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
         PhotonNetwork.ConnectUsingSettings();
         IsInstiate = false;
+        IsCheck = false;
 
         nw_info = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
+
+       
     }
 
     private void Update()
@@ -40,6 +42,12 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         //if (!photonView.IsMine) return;
 
         //Debug.Log("ismine");
+
+        if ((int)PhotonNetwork.CurrentRoom.PlayerCount == 0&& !IsCheck)
+        {
+            IsCheck = true;
+           
+        }
 
         string name = SelectChara.charaName_;
 
@@ -151,7 +159,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         var roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = (byte)ArrowUI.selectNumber_;
         // "Room"という名前のルームに参加する（ルームが存在しなければ作成して参加する）
-        PhotonNetwork.JoinOrCreateRoom("rooom", roomOptions, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom(_roomName, roomOptions, TypedLobby.Default);
 
         
     }
@@ -174,6 +182,8 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 
         IsInstiate = true;
 
+        
+
         //デバッグ用
 
         if ((int)PhotonNetwork.CurrentRoom.MaxPlayers == 0)
@@ -186,7 +196,6 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                     {
                         var position = new Vector3(0.0f, 0.0f, 0.0f);
                         PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                        player_number++;
 
                         PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);
                     }
@@ -213,7 +222,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                     {
                         var position = new Vector3(0.0f, 0.0f, 0.0f);
                         PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                        player_number++;
+  
                         charaName_ = name;
 
 
@@ -224,7 +233,6 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                     {
                         var position = new Vector3(0.0f, 0.0f, 0.0f);
                         PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                        player_number++;
                         charaName_ = name;
 
 
@@ -235,7 +243,6 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                     {
                         var position = new Vector3(0.0f, 0.0f, 0.0f);
                         PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                        player_number++;
                         charaName_ = name;
 
 
@@ -246,7 +253,6 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
                     {
                         var position = new Vector3(0.0f, 0.0f, 0.0f);
                         PhotonNetwork.Instantiate(name, position, Quaternion.identity);
-                        player_number++;
                         charaName_ = name;
 
 

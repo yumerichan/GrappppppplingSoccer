@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class CharaScore : MonoBehaviour
+public class CharaScore : MonoBehaviourPunCallbacks
 {
     public struct CharaScoreInfo
     {
@@ -37,6 +37,8 @@ public class CharaScore : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!photonView.IsMine) { return; }
+
         _scoreManager = GameObject.Find("CharaScoreManager");
         _scoreManager.GetComponent<CharaScoreManager>().SetMinePlayer(this.gameObject);
         _scoreInfo._goal = _scoreInfo._grap = _scoreInfo._skill = _scoreInfo._skillCnt = 0;
@@ -57,6 +59,7 @@ public class CharaScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!photonView.IsMine) { return; }
 
         StepTeamSet();
     }
@@ -70,7 +73,7 @@ public class CharaScore : MonoBehaviour
         if (GameObject.Find("CharaViewManager(Clone)").
                  GetComponent<PhotonCharaView>() != null)
         {
-            if (_selectTeam.GetTeamSelect() == 0)
+            if (_nwInfo.GetTeamColor() == 0)
             {
                 PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                      GetComponent<PhotonCharaView>();
@@ -79,13 +82,14 @@ public class CharaScore : MonoBehaviour
                 int red = view._redNum;
                 int blue = view._blueNum;
 
-                view.AllPlayerNum = all_num + 1;
+                
                 view.RedNum = red + 1;
                 view.BlueNum = blue;
+                view.AllPlayerNum = all_num + 1;
 
 
             }
-            else
+            else if(_nwInfo.GetTeamColor() == 1)
             {
                 PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                      GetComponent<PhotonCharaView>();
@@ -94,9 +98,10 @@ public class CharaScore : MonoBehaviour
                 int red = view._redNum;
                 int blue = view._blueNum;
 
-                view.AllPlayerNum = all_num + 1;
+                
                 view.RedNum = red;
                 view.BlueNum = blue + 1;
+                view.AllPlayerNum = all_num + 1;
             }
 
 

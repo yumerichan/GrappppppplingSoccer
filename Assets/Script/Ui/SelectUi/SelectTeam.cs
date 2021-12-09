@@ -37,6 +37,8 @@ public class SelectTeam : MonoBehaviour
 
     public bool IsDebug;
 
+    private float _selectCnt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +53,7 @@ public class SelectTeam : MonoBehaviour
         RedNumber = 0;
         BlueNumber = 0;
         curTime = 0.0f;
+        _selectCnt = 1f;
 
         nw_info = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
 
@@ -120,46 +123,27 @@ public class SelectTeam : MonoBehaviour
                 TeamSelect = 1;
             }
 
+
+            
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Enter"))
             {
-                IsSelect = IsDebug;
+                
 
-
-                //満員だったらエラーオパシティ
-                if (TeamSelect == 0 && RedIsFull)
+                if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
                 {
-                    ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 100.0f);
-                    curTime = 2.0f;
-                    return;
+                    if (GameObject.Find("CharaViewManager(Clone)").
+                                GetComponent<PhotonCharaView>() != null)
+                    {
+                        _selectCnt -= Time.deltaTime;
+
+                        if(_selectCnt < 0f)
+                            SelectingTeam();
+                    }
                 }
-                else if (TeamSelect == 1 && BlueIsFull)
+                else;
                 {
-                    ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 100.0f);
-                    curTime = 2.0f;
-                    return;
+                    SelectingTeam();
                 }
-
-
-
-
-                if (TeamSelect == 0)
-                {
-                    nw_info.SetTeamColor(0);
-                    RedNumber++;
-
-                    RedNumText.text = RedNumber.ToString();
-                }
-                else if (TeamSelect == 1)
-                {
-                    nw_info.SetTeamColor(1);
-                    BlueNumber++;
-
-                    BlueNumText.text = BlueNumber.ToString();
-                }
-
-              
-                IsSelect = true;
-                nw_info.SetInstiate(true);
             }
 
 
@@ -182,10 +166,10 @@ public class SelectTeam : MonoBehaviour
         {
 
             PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
-                           GetComponent<PhotonCharaView>();
+                            GetComponent<PhotonCharaView>();
 
-            view.RedTeamNum = RedNumber;
-            view.BlueTeamNum = BlueNumber;
+            //view.RedTeamNum = RedNumber;
+            //view.BlueTeamNum = BlueNumber;
 
 
             if (view.RedTeamNum == TeamNumber)
@@ -200,9 +184,47 @@ public class SelectTeam : MonoBehaviour
         }
 
         //全員が決めた
-        if(RedIsFull && BlueIsFull)
+        if (RedIsFull && BlueIsFull)
         {
             IsAllSelect = true;
         }
+    }
+
+    private void SelectingTeam()
+    {
+        IsSelect = IsDebug;
+
+        //満員だったらエラーオパシティ
+        if (TeamSelect == 0 && RedIsFull)
+        {
+            ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 100.0f);
+            curTime = 2.0f;
+            return;
+        }
+        else if (TeamSelect == 1 && BlueIsFull)
+        {
+            ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 100.0f);
+            curTime = 2.0f;
+            return;
+        }
+
+        if (TeamSelect == 0)
+        {
+            nw_info.SetTeamColor(0);
+            RedNumber++;
+
+            RedNumText.text = RedNumber.ToString();
+        }
+        else if (TeamSelect == 1)
+        {
+            nw_info.SetTeamColor(1);
+            BlueNumber++;
+
+            BlueNumText.text = BlueNumber.ToString();
+        }
+
+        _isDecide = true;
+        IsSelect = true;
+        nw_info.SetInstiate(true);
     }
 }
