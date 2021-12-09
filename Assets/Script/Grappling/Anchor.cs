@@ -63,7 +63,7 @@ public class Anchor : MonoBehaviourPunCallbacks
         if(collider.tag == "Block")
         {
             isHit_ = true;
-            player_.GetComponent<CharactorBasic>().state_ = CharactorBasic.CharactorStateType.STATE_TYPE_GRAPPLE;
+            //player_.GetComponent<CharactorBasic>().state_ = CharactorBasic.CharactorStateType.STATE_TYPE_GRAPPLE;
         }
     }
 
