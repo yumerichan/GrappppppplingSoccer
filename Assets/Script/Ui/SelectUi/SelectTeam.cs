@@ -82,10 +82,12 @@ public class SelectTeam : MonoBehaviour
 
 
             //‘Sˆõ‚ªŒˆ’è‚µ‚½‚ç
-            if (IsAllSelect)
+            if (IsAllSelect || IsDebug)
             {
                 ArrowImage.SetOpacity(0.0f);
                 ShitaImage.SetOpacity(0.0f);
+                RedNumText.color = new Color(RedNumText.color.r, RedNumText.color.g, RedNumText.color.b, 0.0f);
+                BlueNumText.color = new Color(BlueNumText.color.r, BlueNumText.color.g, BlueNumText.color.b, 0.0f);
                 ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
                 ExplanationText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
             }

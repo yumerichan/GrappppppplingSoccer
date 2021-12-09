@@ -232,6 +232,7 @@ MonoBehaviour:
   consumptionAmount_: 25
   curBoostGage_: 50
   boostUI_: {fileID: 3212432621958025729}
+  _camera: {fileID: 0}
 --- !u!114 &5917087414711958534
 MonoBehaviour:
   m_ObjectHideFlags: 0
