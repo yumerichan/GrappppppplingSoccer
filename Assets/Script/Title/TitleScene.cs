@@ -47,7 +47,7 @@ public class TitleScene : MonoBehaviour
         scale4.x = 0.8f;
         _allButtons[_curSelect].transform.GetChild(0).transform.localScale = scale4;
 
-        GameObject.Find("FadeManager").gameObject.GetComponent<MyFade>().StartFadeOut();
+        //GameObject.Find("FadeManager").gameObject.GetComponent<MyFade>().StartFadeOut();
     }
 
     // Update is called once per frame
