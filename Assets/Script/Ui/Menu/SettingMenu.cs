@@ -6,14 +6,9 @@ using UnityEngine.UI;
 
 public class SettingMenu : MonoBehaviourPunCallbacks
 {
-    public Image _optionUi;       //オプション画面
-    public Image _settingUi;        //設定画面
-    public Image _caneraSettingUi;  //カメラ感度設定
-    public Image _valumeSettingUi;  //音量設定
-    public Image _operationUi;      //操作説明UI;
-    public bool _isMenu;        //メニュー画面が開かれているか
+    public bool _isMenu { get; set; }        //メニュー画面が開かれているか
 
-    public Image[] _menuUis;    //メニュー関連のUI
+    public Image[] _menuUis { get; set; }    //メニュー関連のUI
 
     public enum MenuUiType
     {
@@ -39,16 +34,35 @@ public class SettingMenu : MonoBehaviourPunCallbacks
 
         if(Input.GetButtonDown("Option"))
         {
+            //  メニューが開かれていない
             if(_isMenu == false)
             {
                 //  セッティング画面表示
-                _optionUi.gameObject.SetActive(true);
+                _menuUis[(int)MenuUiType.MENU_TYPE_OPTION].gameObject.SetActive(true);
                 _isMenu = true;
             }
+
+            //  何かしらのメニューが開かれている場合
             else if(_isMenu == true)
             {
-
+                DeleteUi();
             }
         }
+    }
+
+    private void DeleteUi()
+    {
+        //  すべてのメニューを非アクティブにして、メニューフラグを折る
+        foreach (Image image in _menuUis)
+        {
+            image.gameObject.SetActive(false);
+            _isMenu = false;
+        }
+    }
+
+    //  Uiアクティブセット
+    public void SetUi(MenuUiType type, bool active)
+    {
+        _menuUis[(int)type].gameObject.SetActive(active);
     }
 }
