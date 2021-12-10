@@ -4616,7 +4616,7 @@ MonoBehaviour:
   BlueSlashText: {fileID: 887995399}
   ErrorText: {fileID: 498385130}
   TeamSelectImage: {fileID: 1259025275}
-  IsDebug: 0
+  IsDebug: 1
 --- !u!114 &1358787833
 MonoBehaviour:
   m_ObjectHideFlags: 0
