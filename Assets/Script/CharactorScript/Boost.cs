@@ -48,7 +48,7 @@ public class Boost : MonoBehaviour
         }
 
         ball_ = GameObject.FindGameObjectWithTag("Ball");
-        rb_ = GetComponent<Rigidbody>();
+        rb_ = this.GetComponent<Rigidbody>();
 
         //  移動量リセット
         rb_.velocity = new Vector3(0, 0, 0);
@@ -73,6 +73,8 @@ public class Boost : MonoBehaviour
             //  撃てない！！！
             return;
         }
+
+        rb_ = GetComponent<Rigidbody>();
 
         //  移動量リセット
         rb_.velocity = new Vector3(0, 0, 0);
