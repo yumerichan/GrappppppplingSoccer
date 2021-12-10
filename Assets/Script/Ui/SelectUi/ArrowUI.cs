@@ -33,11 +33,14 @@ public class ArrowUI : MonoBehaviour
 
     public bool _isDebug = false;
 
+    private float _coolTime;
+
     // Start is called before the first frame update
     void Start()
     {
 
         Application.targetFrameRate = 60;
+        _coolTime = 0f;
 
         _curNumber = 0;
         _imageInfo = new GameObject[] { _image1v1, _image2v2, _image3v3, _image4v4, _imageBackToTitle };
@@ -54,23 +57,56 @@ public class ArrowUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //  下に移動
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        bool is_down = false;
+        bool is_up = false;
+
+        //  パッドの十字ボタン取得(正の数：右　負の数：左)
+        float input_button;
+        input_button = Input.GetAxis("Vertical");
+
+        //  パッドのスティック値取得
+        float input_stick = Input.GetAxis("Vertical");
+
+        if (input_button > 0 || input_stick > 0)
+            is_up = true;
+
+        if (input_button < 0 || input_stick < 0)
+            is_down = true;
+
+        if (_coolTime <= 0f)
         {
-            _curNumber++;
-            if (_curNumber >= _imageNum)
+            //  下に移動
+            if (Input.GetKeyDown(KeyCode.DownArrow) || is_down)
             {
-                _curNumber = 0;
+                _curNumber++;
+                if (_curNumber >= _imageNum)
+                {
+                    _curNumber = 0;
+                }
+
+                _coolTime = 0.4f;
+            }
+
+            //  上に移動
+            if (Input.GetKeyDown(KeyCode.UpArrow) || is_up)
+            {
+                _curNumber--;
+                if (_curNumber < 0)
+                {
+                    _curNumber = _imageNum - 1;
+                }
+
+                _coolTime = 0.4f;
             }
         }
-
-        //  上に移動
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        else
         {
-            _curNumber--;
-            if (_curNumber < 0)
+            _coolTime -= Time.deltaTime;
+
+            if (!Input.GetKeyDown(KeyCode.DownArrow) && !is_up &&
+                !Input.GetKeyDown(KeyCode.UpArrow) && !is_down)
             {
-                _curNumber = _imageNum - 1;
+                _coolTime = 0f;
             }
         }
 
@@ -80,7 +116,7 @@ public class ArrowUI : MonoBehaviour
         {
             if (!_isDecide)
             {
-                if (Input.GetKeyDown(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Enter"))
                 {
                     for (int i = 0; i < _imageInfo.Length; i++)
                     {
