@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class GameTime : MonoBehaviour
 {
@@ -56,7 +57,6 @@ public class GameTime : MonoBehaviour
         
     }
 
-    [PunRPC]
     public void StartPlay()
     {
         _timeKind = TimeKind.PLAY;
@@ -72,6 +72,19 @@ public class GameTime : MonoBehaviour
 
         //  ŽžŠÔ‚ð•\Ž¦
         gameTimeText_.text = string.Format("{0:00}:{1:00}", minutes, second);
+
+        //=========================================================================
+        if (curTime_ <= 0f)
+        {
+            GameObject.Find("CharaScoreManager").GetComponent<CharaScoreManager>().LetsGoResult();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+
+            curTime_ = 0f;
+        }
+        //=========================================================================
     }
 
 

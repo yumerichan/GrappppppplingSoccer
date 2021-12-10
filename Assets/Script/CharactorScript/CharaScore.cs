@@ -66,7 +66,7 @@ public class CharaScore : MonoBehaviourPunCallbacks
 
     void StepTeamSet()
     {
-        if(_isTeamSet) { return; }
+        if (_isTeamSet) { return; }
         if (_selectTeam.GetIsDecide() == false) { return; }
 
 
@@ -82,14 +82,14 @@ public class CharaScore : MonoBehaviourPunCallbacks
                 int red = view._redNum;
                 int blue = view._blueNum;
 
-                
+
                 view.RedNum = red + 1;
                 view.BlueNum = blue;
                 view.AllPlayerNum = all_num + 1;
 
 
             }
-            else if(_nwInfo.GetTeamColor() == 1)
+            else if (_nwInfo.GetTeamColor() == 1)
             {
                 PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                      GetComponent<PhotonCharaView>();
@@ -98,7 +98,7 @@ public class CharaScore : MonoBehaviourPunCallbacks
                 int red = view._redNum;
                 int blue = view._blueNum;
 
-                
+
                 view.RedNum = red;
                 view.BlueNum = blue + 1;
                 view.AllPlayerNum = all_num + 1;
@@ -155,6 +155,12 @@ public class CharaScore : MonoBehaviourPunCallbacks
 
         _scoreManager.transform.GetComponent<CharaScoreManager>
             ().ReceiveScoreInfo(_scoreInfo);
+    }
+
+    [PunRPC]
+    public void StartTimer()
+    {
+        GameObject.Find("GameCanvas/Score&Timer/Timer01/Text").GetComponent<GameTime>().StartPlay();
     }
 
     public void SendThis()
