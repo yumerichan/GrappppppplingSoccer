@@ -71,11 +71,55 @@ public class SelectTeam : MonoBehaviour
         nw_info = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
 
         ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
+
+        RedImage.enabled = false;
+        BlueImage.enabled = false; ;
+        RedNumText.enabled = false;
+        BlueNumText.enabled = false;
+        RedArrowImage.enabled = false;
+        BlueArrowImage.enabled = false;
+        TeamSelectUnderText.enabled = false;
+        TeamSelectTopText.enabled = false;
+        RedText.enabled = false;
+        BlueText.enabled = false;
+        RedNumDispText.enabled = false;
+        BlueNumDispText.enabled = false; 
+        RedSlashText.enabled = false; 
+        BlueSlashText.enabled = false;
+        RedMaxNumText.enabled = false;
+        BlueMaxNumText.enabled = false;
+        ErrorText.enabled = false;
+        TeamSelectImage.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        {
+            if (GameObject.Find("CharaViewManager(Clone)").
+                                GetComponent<PhotonCharaView>() == null) { return; }
+        }
+
+        RedImage.enabled = true;
+        BlueImage.enabled = true;
+        RedNumText.enabled = true;
+        BlueNumText.enabled = true;
+        RedArrowImage.enabled = true;
+        BlueArrowImage.enabled = true;
+        TeamSelectUnderText.enabled = true;
+        TeamSelectTopText.enabled = true;
+        RedText.enabled = true;
+        BlueText.enabled = true;
+        RedNumDispText.enabled = true;
+        BlueNumDispText.enabled = true;
+        RedSlashText.enabled = true;
+        BlueSlashText.enabled = true;
+        RedMaxNumText.enabled = true;
+        BlueMaxNumText.enabled = true;
+        ErrorText.enabled = true;
+        TeamSelectImage.enabled = true;
+
         ////Ž©•ª‚¾‚¯‚ª“ü‚é
         //if (photonView.IsMine)
         //{
