@@ -28,6 +28,8 @@ public class SelectTeam : MonoBehaviour
     public Text ExplanationText;
     public Text RedNumText;
     public Text BlueNumText;
+    public Image RedNumImage;
+    public Image BlueNumImage;
     private bool _isDecide;
     public bool GetIsDecide() { return _isDecide; }
 
@@ -89,6 +91,8 @@ public class SelectTeam : MonoBehaviour
             {
                 ArrowImage.SetOpacity(0.0f);
                 ShitaImage.SetOpacity(0.0f);
+                RedNumImage.SetOpacity(0.0f);
+                BlueNumImage.SetOpacity(0.0f);
                 RedNumText.color = new Color(RedNumText.color.r, RedNumText.color.g, RedNumText.color.b, 0.0f);
                 BlueNumText.color = new Color(BlueNumText.color.r, BlueNumText.color.g, BlueNumText.color.b, 0.0f);
                 ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
