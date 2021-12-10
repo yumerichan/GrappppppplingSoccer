@@ -616,20 +616,4 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         pos = init_pos;
         transform.position = pos;
     }
-
-    public void FinSkill()
-    {
-        
-    }
-
-    public void OnCollisionStay(Collision collision)
-    {
-        //  ’n–Ê‚Æ“–‚½‚Á‚Ä‚¢‚ê‚Î‘Ò‹@‚É
-        if (collision.gameObject.tag.Equals("Ground"))
-        {
-            state_ = CharactorStateType.STATE_TYPE_IDLE;
-            anime_.SetInteger("AnimState", (int)state_);
-        }
-       
-    }
 }

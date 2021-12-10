@@ -13,10 +13,11 @@ public class GoalScore : MonoBehaviour
     private int _redScore;
     private int _buleScore;
 
+    private bool _GetScore;
+
     public void Update()
     {
-        if (GameObject.Find("CharaViewManager(Clone)").
-                         GetComponent<PhotonCharaView>() == null)return;
+        if (!_GetScore) return;
 
         PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                         GetComponent<PhotonCharaView>();
@@ -24,18 +25,23 @@ public class GoalScore : MonoBehaviour
 
         _redScoreText.text = view.RedScore.ToString();
         _buleScoreText.text = view.BlueScore.ToString();
+
+        _GetScore = false;
     }
 
         //  赤チームスコア加算
     public void AddRedScore()
     {
-        _redScore += 1;   
+        _redScore += 1;
+        _GetScore = true;
     }
 
     //  青チームスコア加算
     public void AddBuleScore()
     {
-        _buleScore += 1; 
+        _buleScore += 1;
+
+        _GetScore = true;
     }
 
     public int GetRedScore()
