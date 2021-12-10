@@ -19,10 +19,7 @@ public class SelectTeam : MonoBehaviour
     }
 
     private int TeamNumber;
-    private int RedNumber;
-    private int BlueNumber;
-
-
+   
     public Image RedImage;
     public Image BlueImage;
     public Text RedNumText;
@@ -67,8 +64,6 @@ public class SelectTeam : MonoBehaviour
         TeamNumber /= 2;
         RedMaxNumText.text = TeamNumber.ToString();
         BlueMaxNumText.text = TeamNumber.ToString();
-        RedNumber = 0;
-        BlueNumber = 0;
         curTime = 0.0f;
         _selectCnt = 1f;
         BlueArrowImage.SetOpacity(0.0f);
@@ -76,11 +71,55 @@ public class SelectTeam : MonoBehaviour
         nw_info = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
 
         ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
+
+        RedImage.enabled = false;
+        BlueImage.enabled = false; ;
+        RedNumText.enabled = false;
+        BlueNumText.enabled = false;
+        RedArrowImage.enabled = false;
+        BlueArrowImage.enabled = false;
+        TeamSelectUnderText.enabled = false;
+        TeamSelectTopText.enabled = false;
+        RedText.enabled = false;
+        BlueText.enabled = false;
+        RedNumDispText.enabled = false;
+        BlueNumDispText.enabled = false; 
+        RedSlashText.enabled = false; 
+        BlueSlashText.enabled = false;
+        RedMaxNumText.enabled = false;
+        BlueMaxNumText.enabled = false;
+        ErrorText.enabled = false;
+        TeamSelectImage.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        {
+            if (GameObject.Find("CharaViewManager(Clone)").
+                                GetComponent<PhotonCharaView>() == null) { return; }
+        }
+
+        RedImage.enabled = true;
+        BlueImage.enabled = true;
+        RedNumText.enabled = true;
+        BlueNumText.enabled = true;
+        RedArrowImage.enabled = true;
+        BlueArrowImage.enabled = true;
+        TeamSelectUnderText.enabled = true;
+        TeamSelectTopText.enabled = true;
+        RedText.enabled = true;
+        BlueText.enabled = true;
+        RedNumDispText.enabled = true;
+        BlueNumDispText.enabled = true;
+        RedSlashText.enabled = true;
+        BlueSlashText.enabled = true;
+        RedMaxNumText.enabled = true;
+        BlueMaxNumText.enabled = true;
+        ErrorText.enabled = true;
+        TeamSelectImage.enabled = true;
+
         ////自分だけが入る
         //if (photonView.IsMine)
         //{
@@ -95,10 +134,36 @@ public class SelectTeam : MonoBehaviour
             }
         }
 
+        if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        {
+            PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
+                            GetComponent<PhotonCharaView>();
+
+            RedNumText.text = view.RedNum.ToString();
+
+            BlueNumText.text = view.BlueNum.ToString();
+
+            if (view.RedNum == TeamNumber)
+            {
+                RedIsFull = true;
+            }
+
+            if (view.BlueNum == TeamNumber)
+            {
+                BlueIsFull = true;
+            }
+        }
+
         //決定したら動かさない
         //おぱしてぃーせってい
         if (IsSelect)
         {
+            PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
+                            GetComponent<PhotonCharaView>();
+
+            RedNumText.text = view.RedNum.ToString();
+
+            BlueNumText.text = view.BlueNum.ToString();
 
             //全員が決定したら
             if (IsAllSelect || IsDebug)
@@ -117,6 +182,8 @@ public class SelectTeam : MonoBehaviour
                 BlueNumDispText.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
                 RedSlashText.color= new Color(0.0f, 0.0f, 0.0f, 0.0f);
                 BlueSlashText.color= new Color(0.0f, 0.0f, 0.0f, 0.0f);
+                RedMaxNumText.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+                BlueMaxNumText.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
                 ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
                 TeamSelectImage.SetOpacity(0.0f);
             }
@@ -169,6 +236,7 @@ public class SelectTeam : MonoBehaviour
                 else;
                 {
                     SelectingTeam();
+
                 }
             }
 
@@ -182,24 +250,6 @@ public class SelectTeam : MonoBehaviour
             {
                 BlueArrowImage.SetOpacity(1.0f);
                 RedArrowImage.SetOpacity(0.0f);
-            }
-        }
-
-
-        if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
-        {
-
-            PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
-                            GetComponent<PhotonCharaView>(); 
-
-            if (view.RedTeamNum == TeamNumber)
-            {
-                RedIsFull = true;
-            }
-
-            if (view.BlueTeamNum == TeamNumber)
-            {
-                BlueIsFull = true;
             }
         }
 
@@ -217,13 +267,13 @@ public class SelectTeam : MonoBehaviour
         //満員だったらエラーオパシティ
         if (TeamSelect == 0 && RedIsFull)
         {
-            ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 100.0f);
+            ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 1.0f);
             curTime = 2.0f;
             return;
         }
         else if (TeamSelect == 1 && BlueIsFull)
         {
-            ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 100.0f);
+            ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 1.0f);
             curTime = 2.0f;
             return;
         }
@@ -231,16 +281,10 @@ public class SelectTeam : MonoBehaviour
         if (TeamSelect == 0)
         {
             nw_info.SetTeamColor(0);
-            RedNumber++;
-
-            RedNumText.text = RedNumber.ToString();
         }
         else if (TeamSelect == 1)
         {
             nw_info.SetTeamColor(1);
-            BlueNumber++;
-
-            BlueNumText.text = BlueNumber.ToString();
         }
 
         _isDecide = true;
