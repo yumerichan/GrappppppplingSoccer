@@ -59,6 +59,24 @@ public class CharaScoreManager : MonoBehaviour
         }
     }
 
+    public void FinGame()
+    {
+        GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+
+        for (int i = 0; i < player.Length; i++)
+        {
+            _allScoreInfo[i] = player[i].
+                GetComponent<CharaScore>()._scoreInfo;
+
+            if (player[i] == _minePlayer)
+            {
+                _allScoreInfo[i]._isMine = true;
+            }
+        }
+
+        SceneManager.LoadScene("ResultScene");
+    }
+
     public void ReceiveScoreInfo(CharaScore.CharaScoreInfo info)
     {
         //int a = info._allScore;

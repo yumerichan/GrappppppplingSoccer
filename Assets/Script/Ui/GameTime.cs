@@ -56,7 +56,7 @@ public class GameTime : MonoBehaviour
         
     }
 
-    [PunRPC]
+
     public void StartPlay()
     {
         _timeKind = TimeKind.PLAY;
@@ -72,6 +72,12 @@ public class GameTime : MonoBehaviour
 
         //  ŽžŠÔ‚ð•\Ž¦
         gameTimeText_.text = string.Format("{0:00}:{1:00}", minutes, second);
+    
+        if (curTime_ <= 0f)
+        {
+            _timeKind = TimeKind.FIN;
+        }
+    
     }
 
 
@@ -83,6 +89,6 @@ public class GameTime : MonoBehaviour
 
     private void StepFin()
     {
-
+        GameObject.Find("CharaScoreManager").GetComponent<CharaScoreManager>().FinGame();
     }
 }
