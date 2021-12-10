@@ -56,7 +56,6 @@ public class GameTime : MonoBehaviour
         
     }
 
-    [PunRPC]
     public void StartPlay()
     {
         _timeKind = TimeKind.PLAY;

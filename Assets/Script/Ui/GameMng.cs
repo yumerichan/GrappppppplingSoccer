@@ -44,7 +44,7 @@ public class GameMng : MonoBehaviour
                     for (int i = 0; i < player.Length; i++)
                     {
                         player[i].GetComponent<PhotonView>()
-                            .RPC("StartPlay", RpcTarget.All);
+                            .RPC("StartTimer", RpcTarget.All);
                         _isStart = true;
                     }
                 }
