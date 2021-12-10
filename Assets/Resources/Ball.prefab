@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2822989970664234453}
   - component: {fileID: 8431922434216584335}
   - component: {fileID: 1690033123850038656}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4503700205492480574}
   - component: {fileID: 7776901946314215519}
   - component: {fileID: 611420140650501929}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Inner shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 6459627887477232862}
   - component: {fileID: 6749361351496274938}
   - component: {fileID: 986101563207352313}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 266312806228243821}
   - component: {fileID: 6912408564876875569}
   - component: {fileID: 5290230715855736019}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ball
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 538716712752312053}
   - component: {fileID: 3296942518743667658}
   - component: {fileID: 3796784131412631368}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
