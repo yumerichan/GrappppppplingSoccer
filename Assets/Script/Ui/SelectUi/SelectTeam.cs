@@ -19,10 +19,7 @@ public class SelectTeam : MonoBehaviour
     }
 
     private int TeamNumber;
-    private int RedNumber;
-    private int BlueNumber;
-
-
+   
     public Image RedImage;
     public Image BlueImage;
     public Text RedNumText;
@@ -67,8 +64,7 @@ public class SelectTeam : MonoBehaviour
         TeamNumber /= 2;
         RedMaxNumText.text = TeamNumber.ToString();
         BlueMaxNumText.text = TeamNumber.ToString();
-        RedNumber = 0;
-        BlueNumber = 0;
+
         curTime = 0.0f;
         _selectCnt = 1f;
         BlueArrowImage.SetOpacity(0.0f);
@@ -92,6 +88,27 @@ public class SelectTeam : MonoBehaviour
             {
                 curTime = 0.0f;
                 ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
+            }
+        }
+
+        if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        {
+
+            PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
+                            GetComponent<PhotonCharaView>();
+
+            RedNumText.text = view.RedTeamNum.ToString();
+
+            BlueNumText.text = view.BlueTeamNum.ToString();
+
+            if (view.RedTeamNum == TeamNumber)
+            {
+                RedIsFull = true;
+            }
+
+            if (view.BlueTeamNum == TeamNumber)
+            {
+                BlueIsFull = true;
             }
         }
 
@@ -185,24 +202,6 @@ public class SelectTeam : MonoBehaviour
             }
         }
 
-
-        if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
-        {
-
-            PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
-                            GetComponent<PhotonCharaView>(); 
-
-            if (view.RedTeamNum == TeamNumber)
-            {
-                RedIsFull = true;
-            }
-
-            if (view.BlueTeamNum == TeamNumber)
-            {
-                BlueIsFull = true;
-            }
-        }
-
         //‘Sˆõ‚ªŒˆ‚ß‚½
         if (RedIsFull && BlueIsFull)
         {
@@ -231,16 +230,11 @@ public class SelectTeam : MonoBehaviour
         if (TeamSelect == 0)
         {
             nw_info.SetTeamColor(0);
-            RedNumber++;
-
-            RedNumText.text = RedNumber.ToString();
+            
         }
         else if (TeamSelect == 1)
         {
             nw_info.SetTeamColor(1);
-            BlueNumber++;
-
-            BlueNumText.text = BlueNumber.ToString();
         }
 
         _isDecide = true;
