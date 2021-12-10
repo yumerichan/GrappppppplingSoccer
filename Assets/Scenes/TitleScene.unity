@@ -245,10 +245,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6108562975329746906, guid: 972cfd940fafef0459c25b2ac2a79c07, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108562975329746906, guid: 972cfd940fafef0459c25b2ac2a79c07, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
       objectReference: {fileID: 0}
@@ -428,7 +424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 405516, guid: df4d150442079784896e00e30bb03200, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 405516, guid: df4d150442079784896e00e30bb03200, type: 3}
       propertyPath: m_LocalScale.x
@@ -497,7 +493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 405516, guid: df4d150442079784896e00e30bb03200, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 405516, guid: df4d150442079784896e00e30bb03200, type: 3}
       propertyPath: m_LocalScale.x
@@ -628,41 +624,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6912408564876875569, guid: 0e4a770731b04704788c7218f9e32ba9, type: 3}
-      propertyPath: sceneViewId
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8366262154350317710, guid: 0e4a770731b04704788c7218f9e32ba9, type: 3}
     - {fileID: -985276009942481788, guid: 0e4a770731b04704788c7218f9e32ba9, type: 3}
     - {fileID: 2572956028779383176, guid: 0e4a770731b04704788c7218f9e32ba9, type: 3}
     - {fileID: 1602945195980448062, guid: 0e4a770731b04704788c7218f9e32ba9, type: 3}
-    - {fileID: 266312806228243821, guid: 0e4a770731b04704788c7218f9e32ba9, type: 3}
-    - {fileID: 6912408564876875569, guid: 0e4a770731b04704788c7218f9e32ba9, type: 3}
-    - {fileID: 5290230715855736019, guid: 0e4a770731b04704788c7218f9e32ba9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0e4a770731b04704788c7218f9e32ba9, type: 3}
---- !u!1 &1563786217 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6120341465122782921, guid: 0e4a770731b04704788c7218f9e32ba9, type: 3}
-  m_PrefabInstance: {fileID: 1332205050}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1563786218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563786217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e44d9b99d44c3c54c88c1d73119e8f13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  r_x: 10
-  r_y: 10
-  r_z: 10
-  speed: 80
-  maxTime: 5
 --- !u!1 &1576397690
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 405516, guid: df4d150442079784896e00e30bb03200, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 405516, guid: df4d150442079784896e00e30bb03200, type: 3}
       propertyPath: m_LocalScale.x
@@ -900,6 +867,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4d150442079784896e00e30bb03200, type: 3}
+--- !u!1 &1892519768 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1810968633390572553, guid: 0e4a770731b04704788c7218f9e32ba9, type: 3}
+  m_PrefabInstance: {fileID: 1332205050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1892519769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892519768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44d9b99d44c3c54c88c1d73119e8f13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  r_x: 10
+  r_y: 10
+  r_z: 10
+  speed: 80
+  maxTime: 5
 --- !u!1 &1937102388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,7 +995,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 405516, guid: df4d150442079784896e00e30bb03200, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 405516, guid: df4d150442079784896e00e30bb03200, type: 3}
       propertyPath: m_LocalScale.x
