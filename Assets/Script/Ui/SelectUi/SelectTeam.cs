@@ -31,6 +31,8 @@ public class SelectTeam : MonoBehaviour
     public Image RedNumImage;
     public Image BlueNumImage;
     private bool _isDecide;
+
+    public GameObject _canvas;
     public bool GetIsDecide() { return _isDecide; }
 
     private NewWorkInfo nw_info;
@@ -40,6 +42,7 @@ public class SelectTeam : MonoBehaviour
     public bool IsDebug;
 
     private float _selectCnt;
+
 
     // Start is called before the first frame update
     void Start()
@@ -55,16 +58,28 @@ public class SelectTeam : MonoBehaviour
         RedNumber = 0;
         BlueNumber = 0;
         curTime = 0.0f;
-        _selectCnt = 1f;
+        _selectCnt = 3f;
+
 
         nw_info = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
 
         ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
+
+        ArrowImage.enabled = false;
+        ShitaImage.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GameObject.Find("CharaViewManager(Clone)").
+                                GetComponent<PhotonCharaView>() == null)
+        {
+            return;
+        }
+
+        ArrowImage.enabled = true;
+        ShitaImage.enabled = true;
         ////Ž©•ª‚¾‚¯‚ª“ü‚é
         //if (photonView.IsMine)
         //{
@@ -127,7 +142,6 @@ public class SelectTeam : MonoBehaviour
                 TeamSelect = 1;
             }
 
-
             
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Enter"))
             {
@@ -138,14 +152,14 @@ public class SelectTeam : MonoBehaviour
                     if (GameObject.Find("CharaViewManager(Clone)").
                                 GetComponent<PhotonCharaView>() != null)
                     {
-                        _selectCnt -= Time.deltaTime;
-
-                        if(_selectCnt < 0f)
+                        
+                        if (_selectCnt < 0f)
                             SelectingTeam();
                     }
                 }
                 else;
                 {
+
                     SelectingTeam();
                 }
             }

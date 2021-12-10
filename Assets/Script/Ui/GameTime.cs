@@ -79,7 +79,7 @@ public class GameTime : MonoBehaviour
             GameObject.Find("CharaScoreManager").GetComponent<CharaScoreManager>().LetsGoResult();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+        if (Input.GetKeyDown(KeyCode.Alpha9))
         {
 
             curTime_ = 0f;
