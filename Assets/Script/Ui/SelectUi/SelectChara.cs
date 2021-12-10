@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SelectChara : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class SelectChara : MonoBehaviour
     private string[] name_ = { "Chara_Wall", "Chara_Freeze" ,
         "Chara_Trap" , "Character_Blackhole" };     //名前
 
+    private string[] charaname_ = { "卓哉", "フリーザァ" ,
+        "ジャッキー" , "ベイル" };     //名前
+    private string[] skill_ = { "壁を張るらしい！ \nボールや敵を止めれるぞ！", "その場で一時的にボールを止めれる！", "トラップを設置して敵プレイヤーを妨害！", "自分の能力を強化！ \n相手に有利をとれ！" };
+
     private int charaNumber_;   //番号
 
     private bool preIsRight_ = false;   //前フレ右入力
@@ -21,6 +26,11 @@ public class SelectChara : MonoBehaviour
     private bool IsLeftRotation;
 
     private float CurrentCameraY;
+
+    public Text SkillText;
+    public Text NameText;
+
+
 
     public float _rotYSpeed;
  
@@ -36,6 +46,8 @@ public class SelectChara : MonoBehaviour
     void Start()
     {
         charaNumber_ = 0;
+        NameText.text = charaname_[charaNumber_].ToString();
+        SkillText.text = skill_[charaNumber_].ToString();
     }
 
     // Update is called once per frame
@@ -79,6 +91,9 @@ public class SelectChara : MonoBehaviour
 
             if (charaNumber_ > (int)CharaType.BlacHole)
                 charaNumber_ = (int)CharaType.Wall;
+
+            NameText.text = charaname_[charaNumber_].ToString();
+            SkillText.text = skill_[charaNumber_].ToString();
         }
 
         //  左が押された
@@ -104,6 +119,9 @@ public class SelectChara : MonoBehaviour
 
             if (charaNumber_ < (int)CharaType.Wall)
                 charaNumber_ = (int)CharaType.BlacHole;
+
+            NameText.text = charaname_[charaNumber_].ToString();
+            SkillText.text = skill_[charaNumber_].ToString();
         }
 
         //  入力振らg保存
