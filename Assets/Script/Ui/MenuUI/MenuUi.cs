@@ -120,7 +120,7 @@ public class MenuUi : MonoBehaviour
     {
         if (!GetMenuActive(MenuType.MENU_TYPE_VALUME)) return;
 
-        _volumetext[(int)VolumeType.VOLUME_TYPE_BGM].text = /*_volume[(int)VolumeType.VOLUME_TYPE_BGM].ToString()*/"2121" + "%";
+        _volumetext[(int)VolumeType.VOLUME_TYPE_BGM].text = _volume[(int)VolumeType.VOLUME_TYPE_BGM].ToString() + "%";
         _volumetext[(int)VolumeType.VOLUME_TYPE_SE].text = _volume[(int)VolumeType.VOLUME_TYPE_SE].ToString() + "%";
         _volumetext[(int)VolumeType.VOLUME_TYPE_MASTER].text = _volume[(int)VolumeType.VOLUME_TYPE_MASTER].ToString() + "%";
     }
