@@ -284,7 +284,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!145 &3840804823475612177
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -326,6 +326,7 @@ MonoBehaviour:
   consumptionAmount_: 25
   curBoostGage_: 50
   boostUI_: {fileID: 8019488097296792714}
+  _camera: {fileID: 0}
 --- !u!114 &2137047718628146773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,7 +359,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ball: {fileID: 0}
   _wallEffect: {fileID: 0}
-  _trapEffect: {fileID: 0}
   _blackHole: {fileID: 0}
   _bomb: {fileID: 0}
 --- !u!114 &2703611846351469397
@@ -507,6 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charaNumber: 0
+  _selectTeam: {fileID: 0}
 --- !u!1 &1493892375015911179
 GameObject:
   m_ObjectHideFlags: 0
