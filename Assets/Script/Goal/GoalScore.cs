@@ -13,8 +13,11 @@ public class GoalScore : MonoBehaviour
     private int _redScore;
     private int _buleScore;
 
-    public void UpdateScore()
+    public void Update()
     {
+        if (GameObject.Find("CharaViewManager(Clone)").
+                         GetComponent<PhotonCharaView>() == null)return;
+
         PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                         GetComponent<PhotonCharaView>();
 
