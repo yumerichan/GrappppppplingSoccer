@@ -97,16 +97,16 @@ public class SelectTeam : MonoBehaviour
             PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                             GetComponent<PhotonCharaView>();
 
-            RedNumText.text = view.RedTeamNum.ToString();
+            RedNumText.text = view.RedNum.ToString();
 
-            BlueNumText.text = view.BlueTeamNum.ToString();
+            BlueNumText.text = view.BlueNum.ToString();
 
-            if (view.RedTeamNum == TeamNumber)
+            if (view.RedNum == TeamNumber)
             {
                 RedIsFull = true;
             }
 
-            if (view.BlueTeamNum == TeamNumber)
+            if (view.BlueNum == TeamNumber)
             {
                 BlueIsFull = true;
             }
