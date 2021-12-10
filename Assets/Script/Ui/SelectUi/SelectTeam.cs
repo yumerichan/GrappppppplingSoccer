@@ -263,6 +263,7 @@ public class SelectTeam : MonoBehaviour
     private void SelectingTeam()
     {
         IsSelect = IsDebug;
+        _isDecide = IsDebug;
 
         //満員だったらエラーオパシティ
         if (TeamSelect == 0 && RedIsFull)
