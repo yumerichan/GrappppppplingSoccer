@@ -64,7 +64,6 @@ public class SelectTeam : MonoBehaviour
         TeamNumber /= 2;
         RedMaxNumText.text = TeamNumber.ToString();
         BlueMaxNumText.text = TeamNumber.ToString();
-
         curTime = 0.0f;
         _selectCnt = 1f;
         BlueArrowImage.SetOpacity(0.0f);
@@ -93,7 +92,6 @@ public class SelectTeam : MonoBehaviour
 
         if ((int)PhotonNetwork.CurrentRoom.PlayerCount > 1)
         {
-
             PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                             GetComponent<PhotonCharaView>();
 
@@ -116,6 +114,12 @@ public class SelectTeam : MonoBehaviour
         //おぱしてぃーせってい
         if (IsSelect)
         {
+            PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
+                            GetComponent<PhotonCharaView>();
+
+            RedNumText.text = view.RedNum.ToString();
+
+            BlueNumText.text = view.BlueNum.ToString();
 
             //全員が決定したら
             if (IsAllSelect || IsDebug)
@@ -134,6 +138,8 @@ public class SelectTeam : MonoBehaviour
                 BlueNumDispText.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
                 RedSlashText.color= new Color(0.0f, 0.0f, 0.0f, 0.0f);
                 BlueSlashText.color= new Color(0.0f, 0.0f, 0.0f, 0.0f);
+                RedMaxNumText.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+                BlueMaxNumText.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
                 ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 0.0f);
                 TeamSelectImage.SetOpacity(0.0f);
             }
@@ -186,6 +192,7 @@ public class SelectTeam : MonoBehaviour
                 else;
                 {
                     SelectingTeam();
+
                 }
             }
 
@@ -216,13 +223,13 @@ public class SelectTeam : MonoBehaviour
         //満員だったらエラーオパシティ
         if (TeamSelect == 0 && RedIsFull)
         {
-            ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 100.0f);
+            ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 1.0f);
             curTime = 2.0f;
             return;
         }
         else if (TeamSelect == 1 && BlueIsFull)
         {
-            ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 100.0f);
+            ErrorText.color = new Color(ErrorText.color.r, ErrorText.color.g, ErrorText.color.b, 1.0f);
             curTime = 2.0f;
             return;
         }
@@ -230,7 +237,6 @@ public class SelectTeam : MonoBehaviour
         if (TeamSelect == 0)
         {
             nw_info.SetTeamColor(0);
-            
         }
         else if (TeamSelect == 1)
         {
