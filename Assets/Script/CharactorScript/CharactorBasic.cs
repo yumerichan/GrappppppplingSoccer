@@ -189,6 +189,20 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             }
         }
 
+        if (anime_.GetInteger("AnimState") == (int)CharactorStateType.STATE_TYPE_SKILL)
+        {
+           
+            AnimatorStateInfo animeStateInfo = anime_.GetCurrentAnimatorStateInfo(0);
+
+            Debug.Log(animeStateInfo.normalizedTime);
+
+            if (animeStateInfo.normalizedTime >= 0.9f)
+            {
+                state_ = CharactorStateType.STATE_TYPE_IDLE;
+                anime_.SetInteger("AnimState", (int)state_);
+            }
+        }
+
         if (anime_.GetInteger("AnimState") == (int)CharactorStateType.STATE_TYPE_JUMP && IsFall())
         {
             AnimatorStateInfo animeStateInfo = anime_.GetCurrentAnimatorStateInfo(0);
@@ -198,6 +212,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
                 anime_.SetInteger("AnimState", (int)state_);
             }
         }
+
+
 
         if(_prestate != state_)
         {
@@ -289,7 +305,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         _preIsCamBoost = is_cam_boost;
 
         //  スキル
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("Skill"))
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("Skill") && isSkill_ == false)
         {
             OnSkill();
             state_ = CharactorStateType.STATE_TYPE_SKILL;
@@ -410,8 +426,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         }
 
         //  地面に当たったら待機状態へ
-        if (other.gameObject.tag.Equals("Ground") && 
-            anime_.GetInteger("AnimState") == (int)CharactorStateType.STATE_TYPE_FALL)
+        if (other.gameObject.tag.Equals("Ground") &&
+            IsGraund() == false)
         {
             state_ = CharactorStateType.STATE_TYPE_LANDING;
             anime_.SetInteger("AnimState", (int)state_);
@@ -467,6 +483,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             case CharactorStateType.STATE_TYPE_FALL:
             case CharactorStateType.STATE_TYPE_GRAPPLE:
             case CharactorStateType.STATE_TYPE_SHOT:
+            case CharactorStateType.STATE_TYPE_SKILL:
+
                 return true;
         }
 
@@ -503,6 +521,19 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         }
 
         return true;
+    }
+
+    //  地面判定
+    private bool IsGraund()
+    {
+        switch (state_)
+        {
+            case CharactorStateType.STATE_TYPE_RUN:
+            case CharactorStateType.STATE_TYPE_IDLE:
+                return true;
+        }
+
+        return false;
     }
 
     //  トラップに引っかかった時に最初に入る処理
@@ -584,5 +615,21 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         Vector3 pos = transform.position;
         pos = init_pos;
         transform.position = pos;
+    }
+
+    public void FinSkill()
+    {
+        
+    }
+
+    public void OnCollisionStay(Collision collision)
+    {
+        //  地面と当たっていれば待機に
+        if (collision.gameObject.tag.Equals("Ground"))
+        {
+            state_ = CharactorStateType.STATE_TYPE_IDLE;
+            anime_.SetInteger("AnimState", (int)state_);
+        }
+       
     }
 }

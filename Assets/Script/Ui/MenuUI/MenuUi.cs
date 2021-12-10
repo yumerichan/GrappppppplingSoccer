@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using UnityEngine.EventSystems;
 
-public class MenuUi : MonoBehaviourPunCallbacks
+public class MenuUi : MonoBehaviour
 {
     public Image[] _menuUi;
 
@@ -18,21 +19,23 @@ public class MenuUi : MonoBehaviourPunCallbacks
         MENU_TYPE_CAM_SENSI,    //カメラ感度
         MENU_TYPE_VALUME,       //音量
         MENU_TYPE_OPERETION,    //操作設定
+
+        MENU_TYPE_NUM           //要素数
     }
 
+    [SerializeField]
+    private GameObject[] _firstSelectedObjects = new GameObject[(int)MenuType.MENU_TYPE_NUM];
 
     // Start is called before the first frame update
     void Start()
     {
         _isOpenMenu = false;
+        EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_OPTION]);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!photonView.IsMine)
-            return;
-
         //  スタートボタンで開閉
         if (Input.GetButtonDown("Option"))
         {
@@ -47,6 +50,7 @@ public class MenuUi : MonoBehaviourPunCallbacks
                 DeleteMenu();
             }
         }
+
     }
 
     //  メニュー画面開く
@@ -79,6 +83,8 @@ public class MenuUi : MonoBehaviourPunCallbacks
         SetMenuActive(MenuType.MENU_TYPE_OPTION, false);
         SetMenuActive(MenuType.MENU_TYPE_SETTING, true);
 
+        EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_SETTING]);
+
     }
 
     //  音量
@@ -87,6 +93,8 @@ public class MenuUi : MonoBehaviourPunCallbacks
         //  設定画面を閉じて音量設定画面を開く
         SetMenuActive(MenuType.MENU_TYPE_SETTING, false);
         SetMenuActive(MenuType.MENU_TYPE_VALUME, true);
+
+        EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_VALUME]);
     }
 
     //  カメラ感度
@@ -95,6 +103,8 @@ public class MenuUi : MonoBehaviourPunCallbacks
         //  設定画面を閉じてカメラ設定画面を開く
         SetMenuActive(MenuType.MENU_TYPE_SETTING, false);
         SetMenuActive(MenuType.MENU_TYPE_CAM_SENSI, true);
+        EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_CAM_SENSI]);
+
     }
 
     //  操作説明画面開く
@@ -103,5 +113,7 @@ public class MenuUi : MonoBehaviourPunCallbacks
         //  メニュー画面を閉じて設定画面を開く
         SetMenuActive(MenuType.MENU_TYPE_OPTION, false);
         SetMenuActive(MenuType.MENU_TYPE_OPERETION, true);
+
+        EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_OPERETION]);
     }
 }
