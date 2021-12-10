@@ -38,6 +38,11 @@ public class SelectUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (MyFade._myFade._isFading == false)
+        {
+            _isStart = true;
+        }
+
         switch (_state)
         {
             case State.START:

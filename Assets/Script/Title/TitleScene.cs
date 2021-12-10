@@ -24,6 +24,11 @@ public class TitleScene : MonoBehaviour
 
     [SerializeField] private EventSystem eventSystem;
 
+
+    private void Awake()
+    {
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +46,8 @@ public class TitleScene : MonoBehaviour
         Vector3 scale4 = _allButtons[_curSelect].transform.GetChild(0).transform.localScale;
         scale4.x = 0.8f;
         _allButtons[_curSelect].transform.GetChild(0).transform.localScale = scale4;
+
+        GameObject.Find("FadeManager").gameObject.GetComponent<MyFade>().StartFadeOut();
     }
 
     // Update is called once per frame
@@ -194,7 +201,8 @@ public class TitleScene : MonoBehaviour
 
     public void LoadLevel(string scene, float interval)
     {
-        StartCoroutine(TransScene(scene, interval));
+        GameObject a = GameObject.Find("FadeManager").gameObject;
+        MyFade._myFade.LoadLevel(scene, interval);
     }
 
     

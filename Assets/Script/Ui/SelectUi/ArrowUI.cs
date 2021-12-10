@@ -50,8 +50,6 @@ public class ArrowUI : MonoBehaviour
         _isCanDecide = false;
         _isDecide = false;
 
-        float time = _myFade.transform.GetComponent<MyFade>().GetFadeOutTime();
-        _fade.transform.GetComponent<Fade>().FadeOut(time, () => StartingUI());
     }
 
     // Update is called once per frame
@@ -150,13 +148,7 @@ public class ArrowUI : MonoBehaviour
             if(_countParam1 < 0f)
             {
                 //  I—¹
-                float time = _myFade.transform.GetComponent<MyFade>().GetFadeInTime();
-
-                if (_isCanDecide)
-                {
-                    _fade.transform.GetComponent<Fade>().FadeIn(time, ChangeScene);
-                    _isCanDecide = false;
-                }
+                MyFade._myFade.LoadLevel("CharactorSelect", 1f);
             }
         }
     }
