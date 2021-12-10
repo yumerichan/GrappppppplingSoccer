@@ -1188,7 +1188,7 @@ MonoBehaviour:
   ExplanationText: {fileID: 1614255959}
   RedNumText: {fileID: 1140934008}
   BlueNumText: {fileID: 1615349127}
-  IsDebug: 0
+  IsDebug: 1
 --- !u!114 &353926833
 MonoBehaviour:
   m_ObjectHideFlags: 0
