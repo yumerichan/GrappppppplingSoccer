@@ -32,7 +32,10 @@ public class CharaSkill : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             //if(!_ball.transform.gameObject.GetComponent<Ball>().GetIsIce())
-                 _ball.transform.gameObject.GetComponent<Ball>().StartIceEffect(this.gameObject);
+            _ball.GetComponent<PhotonView>()
+                            .RPC("StartIceEffect", RpcTarget.All, this.gameObject);
+
+                 //_ball.transform.gameObject.GetComponent<Ball>().StartIceEffect(this.gameObject);
         }
 
         //  •Ç

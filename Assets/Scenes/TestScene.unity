@@ -1801,7 +1801,7 @@ Transform:
   m_Children:
   - {fileID: 855797705}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 13.743, y: 0, z: 0}
 --- !u!1001 &996610483
 PrefabInstance:
@@ -1980,6 +1980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4550744543fea7747b66dffd8a2aad73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _roomName: 
 --- !u!4 &1066083363
 Transform:
   m_ObjectHideFlags: 0
@@ -3142,6 +3143,10 @@ PrefabInstance:
       propertyPath: _iceEffect
       value: 
       objectReference: {fileID: 2871888479996144742, guid: 3c4f6662ea4d15d4c9ea6967242e3b43, type: 3}
+    - target: {fileID: 6912408564876875569, guid: 0e4a770731b04704788c7218f9e32ba9, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7898679717948104168, guid: 0e4a770731b04704788c7218f9e32ba9, type: 3}
       propertyPath: m_RootOrder
       value: 19

@@ -5,8 +5,8 @@ using Photon.Pun;
 
 public class Ball : MonoBehaviour
 {
-    public float        _iceTime;           //氷結時間
-    public GameObject   _iceEffect;         //氷結エフェクト
+    public float _iceTime;           //氷結時間
+    public GameObject _iceEffect;         //氷結エフェクト
 
     public float _blackHoleTime;            //吸い込み総時間
     public float _blackHoleMaxPower;        //吸い込み最大の力
@@ -14,12 +14,12 @@ public class Ball : MonoBehaviour
     public float _blackHoleRange;           //吸い込み範囲
 
 
-    private float       _curIceTime;        //現在の氷結時間
-    private bool        _isIce;             //氷結しているかフラグ
-    private GameObject  _cloneIceEffect;    //プレイ中氷結エフェクト
-    
+    private float _curIceTime;        //現在の氷結時間
+    private bool _isIce;             //氷結しているかフラグ
+    private GameObject _cloneIceEffect;    //プレイ中氷結エフェクト
 
-    private Rigidbody   _rigidBody;         //リジッドボディ
+
+    private Rigidbody _rigidBody;         //リジッドボディ
 
     private float _curBlackHoleTime;        //現在の吸い込み時間
     private bool _isBlackHole;              //吸い込んでいるか
@@ -58,6 +58,7 @@ public class Ball : MonoBehaviour
     }
 
     //氷結スキル発動
+    [PunRPC]
     public void StartIceEffect(GameObject player)
     {
         //先にブラックホールが出てたらしゅうりょう
@@ -113,6 +114,7 @@ public class Ball : MonoBehaviour
             FinIceEffect();
         }
     }
+
 
     //ブラックホールスキル発動
     public void StartBlackHole(Vector3 pos)
