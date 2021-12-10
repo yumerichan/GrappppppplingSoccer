@@ -157,6 +157,12 @@ public class CharaScore : MonoBehaviourPunCallbacks
             ().ReceiveScoreInfo(_scoreInfo);
     }
 
+    [PunRPC]
+    public void StartGame()
+    {
+        GameObject.Find("GameCanvas/Score&Timer/Timer01/Text").GetComponent<GameTime>().StartPlay();
+    }
+
     public void SendThis()
     {
         _scoreManager.GetComponent<CharaScoreManager>().ReceiveCharaScore(this);
