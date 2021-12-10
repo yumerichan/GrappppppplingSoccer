@@ -3276,7 +3276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4550744543fea7747b66dffd8a2aad73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomName: aaa
+  _roomName: room
 --- !u!114 &1057651735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4616,7 +4616,7 @@ MonoBehaviour:
   BlueSlashText: {fileID: 887995399}
   ErrorText: {fileID: 498385130}
   TeamSelectImage: {fileID: 1259025275}
-  IsDebug: 0
+  IsDebug: 1
 --- !u!114 &1358787833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7427,6 +7427,10 @@ PrefabInstance:
     - target: {fileID: 7478115124085941011, guid: 972cfd940fafef0459c25b2ac2a79c07, type: 3}
       propertyPath: m_TagString
       value: BlueGoal
+      objectReference: {fileID: 0}
+    - target: {fileID: 9106748406584162873, guid: 972cfd940fafef0459c25b2ac2a79c07, type: 3}
+      propertyPath: m_TagString
+      value: Stage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 972cfd940fafef0459c25b2ac2a79c07, type: 3}
