@@ -101,10 +101,11 @@ public class PlayScene : MonoBehaviourPunCallbacks
         //  ボール
         _ball = GameObject.FindGameObjectWithTag("Ball");
         _ball.transform.position = new Vector3(0, 80, 0);
+        _ball.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
 
         //  スタートの演出 ==============
         //  出来たらここでリクエストする
-
+        GameObject.Find("StartDirectionCanvas(Clone)").GetComponent<PhotonView>().RPC("requestRestartDirection", RpcTarget.All);
     }
 
     //  赤チーム追加
