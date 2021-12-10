@@ -15,8 +15,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         STATE_TYPE_IDLE,    //待機
         STATE_TYPE_RUN,     //走り
         STATE_TYPE_JUMP,    //ジャンプ
-        STATE_TYPE_LANDING, //着地
         STATE_TYPE_FALL,    //落下
+        STATE_TYPE_LANDING, //着地
         STATE_TYPE_SHOT,    //アンカー発射
         STATE_TYPE_GRAPPLE, //グラップル
         STATE_TYPE_BOOST,   //ブースト
@@ -174,7 +174,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         //  スキル更新
         UpdateSkill();
 
-        if(anime_.GetInteger("AnimState") == (int)CharactorStateType.STATE_TYPE_LANDING)
+            if (anime_.GetInteger("AnimState") == (int)CharactorStateType.STATE_TYPE_LANDING)
         {
             if (isLanding) { isLanding = false; return; };
 
@@ -615,21 +615,5 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         Vector3 pos = transform.position;
         pos = init_pos;
         transform.position = pos;
-    }
-
-    public void FinSkill()
-    {
-        
-    }
-
-    public void OnCollisionStay(Collision collision)
-    {
-        //  地面と当たっていれば待機に
-        if (collision.gameObject.tag.Equals("Ground"))
-        {
-            state_ = CharactorStateType.STATE_TYPE_IDLE;
-            anime_.SetInteger("AnimState", (int)state_);
-        }
-       
     }
 }

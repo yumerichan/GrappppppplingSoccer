@@ -3401,7 +3401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4550744543fea7747b66dffd8a2aad73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomName: aaafsd
+  _roomName: q
 --- !u!114 &1057651735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4639,7 +4639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1358787828
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5607,7 +5607,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588345633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: -37.9, z: 11.5}
+  m_LocalPosition: {x: -2, y: -37.9, z: -11.8}
   m_LocalScale: {x: 0.36881, y: 1, z: 1.5149}
   m_Children: []
   m_Father: {fileID: 446904842}
@@ -5816,7 +5816,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686841393}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: -37.9, z: 308.6}
+  m_LocalPosition: {x: -2, y: -37.9, z: 325.3}
   m_LocalScale: {x: 0.3688125, y: 1, z: 1.5149}
   m_Children: []
   m_Father: {fileID: 446904842}
@@ -7463,7 +7463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4745300546444188674, guid: 1b35d5010c1c6c24c9b5981346fca689, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5081780704930449348, guid: 1b35d5010c1c6c24c9b5981346fca689, type: 3}
       propertyPath: m_Pivot.x
@@ -7663,7 +7663,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
-  m_CookingOptions: 30
+  m_CookingOptions: -1
   m_Mesh: {fileID: 2783033037182731356, guid: 158e5cb1478e81147b54485bc1c4c207, type: 3}
 --- !u!1001 &3614844822502804332
 PrefabInstance:
@@ -8151,8 +8151,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6108562975329746906, guid: 972cfd940fafef0459c25b2ac2a79c07, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108562975329746906, guid: 972cfd940fafef0459c25b2ac2a79c07, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108562975329746906, guid: 972cfd940fafef0459c25b2ac2a79c07, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 6108562975329746906, guid: 972cfd940fafef0459c25b2ac2a79c07, type: 3}
       propertyPath: m_LocalPosition.x
