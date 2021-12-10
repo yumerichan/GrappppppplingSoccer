@@ -675,6 +675,7 @@ MonoBehaviour:
   consumptionAmount_: 25
   curBoostGage_: 50
   boostUI_: {fileID: 4158588230796042012}
+  _camera: {fileID: 0}
 --- !u!114 &1179880068660331798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,7 +708,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ball: {fileID: 0}
   _wallEffect: {fileID: 0}
-  _trapEffect: {fileID: 0}
   _blackHole: {fileID: 0}
   _bomb: {fileID: 0}
 --- !u!114 &273418130534034829
