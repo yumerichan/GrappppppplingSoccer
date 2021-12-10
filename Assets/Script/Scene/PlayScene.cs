@@ -105,7 +105,7 @@ public class PlayScene : MonoBehaviourPunCallbacks
 
         //  スタートの演出 ==============
         //  出来たらここでリクエストする
-
+        GameObject.Find("StartDirectionCanvas(Clone)").GetComponent<PhotonView>().RPC("requestRestartDirection", RpcTarget.All);
     }
 
     //  赤チーム追加
