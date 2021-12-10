@@ -615,5 +615,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         Vector3 pos = transform.position;
         pos = init_pos;
         transform.position = pos;
+        charaRb_.velocity = new Vector3(0, 0, 0);
+        state_ = CharactorStateType.STATE_TYPE_IDLE;
+        anime_.SetInteger("AnimState", (int)state_);
     }
 }
