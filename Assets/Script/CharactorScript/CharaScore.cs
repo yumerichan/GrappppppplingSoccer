@@ -61,9 +61,10 @@ public class CharaScore : MonoBehaviourPunCallbacks
     {
         if (!photonView.IsMine) { return; }
 
-        StepTeamSet();
+        GetComponent<PhotonView>().RPC("StepTeamSet", RpcTarget.All); 
     }
 
+    [PunRPC]
     void StepTeamSet()
     {
         if(_isTeamSet) { return; }
@@ -107,6 +108,7 @@ public class CharaScore : MonoBehaviourPunCallbacks
 
             _scoreInfo._teamKind = _selectTeam.GetTeamSelect();
             _isTeamSet = true;
+            _scoreInfo._isData = true;
         }
     }
 
