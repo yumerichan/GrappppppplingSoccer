@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+
 using UnityEngine.EventSystems;
 
 public class MenuUi : MonoBehaviour
@@ -37,7 +38,7 @@ public class MenuUi : MonoBehaviour
         VOLUME_TYPE_NUM,
     }
 
-    private int[] _volume = new int[(int)VolumeType.VOLUME_TYPE_NUM];
+    private Slider[] _volume = new Slider[(int)VolumeType.VOLUME_TYPE_NUM];
     public Text[] _volumetext;
     public enum CameraType
     {
@@ -46,21 +47,16 @@ public class MenuUi : MonoBehaviour
         CAMERA_NUM,
     }
 
-    private int[] _camera = new int[(int)CameraType.CAMERA_NUM];
+    private Slider[] _camera = new Slider[(int)CameraType.CAMERA_NUM];
     public Text[] _cameratext;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _isOpenMenu = false;
         EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_OPTION]);
-
-
-        _volume[(int)VolumeType.VOLUME_TYPE_BGM] = (int)GameObject.Find("BgmVolSlider").GetComponent<Slider>().value;
-        _volume[(int)VolumeType.VOLUME_TYPE_SE] = (int)GameObject.Find("SeVolSlider").GetComponent<Slider>().value;
-        _volume[(int)VolumeType.VOLUME_TYPE_MASTER] = (int)GameObject.Find("MasterValSlider").GetComponent<Slider>().value;
-        _camera[(int)CameraType.CAMERA_VER] = (int)GameObject.Find("VerSlider").GetComponent<Slider>().value;
-        _camera[(int)CameraType.CAMERA_HOR] = (int)GameObject.Find("VerValueText").GetComponent<Slider>().value;
+        
     }
 
     // Update is called once per frame
@@ -86,7 +82,7 @@ public class MenuUi : MonoBehaviour
 
         Volume();
 
-
+        Camera();
     }
 
     private void CancelMenu()
@@ -102,6 +98,7 @@ public class MenuUi : MonoBehaviour
                 if (GetMenuActive((MenuType)n)) { _backmenu = n; break; }
 
             }
+
             if (_backmenu == (int)MenuType.MENU_TYPE_CAM_SENSI || _backmenu == (int)MenuType.MENU_TYPE_VALUME)
             {
                 OnValumeToSetting();
@@ -113,6 +110,11 @@ public class MenuUi : MonoBehaviour
                 OnOpeToOption();
             }
 
+
+            if(_backmenu == (int)MenuType.MENU_TYPE_OPTION)
+            {
+                DeleteMenu();
+            }
         }
     }
 
@@ -120,18 +122,55 @@ public class MenuUi : MonoBehaviour
     {
         if (!GetMenuActive(MenuType.MENU_TYPE_VALUME)) return;
 
-        _volumetext[(int)VolumeType.VOLUME_TYPE_BGM].text = _volume[(int)VolumeType.VOLUME_TYPE_BGM].ToString() + "%";
-        _volumetext[(int)VolumeType.VOLUME_TYPE_SE].text = _volume[(int)VolumeType.VOLUME_TYPE_SE].ToString() + "%";
-        _volumetext[(int)VolumeType.VOLUME_TYPE_MASTER].text = _volume[(int)VolumeType.VOLUME_TYPE_MASTER].ToString() + "%";
+        _volume[(int)VolumeType.VOLUME_TYPE_BGM] = GameObject.Find("BgmVolSlider").GetComponent<Slider>();
+        _volume[(int)VolumeType.VOLUME_TYPE_SE] = GameObject.Find("SeVolSlider").GetComponent<Slider>();
+        _volume[(int)VolumeType.VOLUME_TYPE_MASTER] = GameObject.Find("MasterValSlider").GetComponent<Slider>();
+
+        float value = _volume[(int)VolumeType.VOLUME_TYPE_BGM].value;
+        int dispvalue = (int)(value * 100.0f);
+
+        _volumetext[(int)VolumeType.VOLUME_TYPE_BGM].text = dispvalue.ToString() + "%";
+
+        value = _volume[(int)VolumeType.VOLUME_TYPE_SE].value;
+        dispvalue = (int)(value * 100.0f);
+
+        _volumetext[(int)VolumeType.VOLUME_TYPE_SE].text = dispvalue.ToString() + "%";
+
+
+        value = _volume[(int)VolumeType.VOLUME_TYPE_MASTER].value;
+        dispvalue = (int)(value * 100.0f);
+
+        _volumetext[(int)VolumeType.VOLUME_TYPE_MASTER].text = dispvalue.ToString() + "%";
+
+
+
+
+        ///Ç±Ç±Ç≈âπó ê›íË
+        ///
+
     }
 
     private void Camera()
     {
         if (!GetMenuActive(MenuType.MENU_TYPE_CAM_SENSI)) return;
 
-        _cameratext[(int)CameraType.CAMERA_HOR].text = _camera[(int)CameraType.CAMERA_HOR].ToString() + "%";
-        _cameratext[(int)CameraType.CAMERA_VER].text = _camera[(int)CameraType.CAMERA_VER].ToString() + "%";
+        _camera[(int)CameraType.CAMERA_VER] = GameObject.Find("VerSlider").GetComponent<Slider>();
+        _camera[(int)CameraType.CAMERA_HOR] = GameObject.Find("HorSlider").GetComponent<Slider>();
 
+        float value = _camera[(int)CameraType.CAMERA_HOR].value;
+        int dispvalue = (int)(value * 100.0f);
+
+        _cameratext[(int)CameraType.CAMERA_HOR].text = dispvalue.ToString();
+
+        value = _camera[(int)CameraType.CAMERA_VER].value;
+        dispvalue = (int)(value * 100.0f);
+
+        _cameratext[(int)CameraType.CAMERA_VER].text = dispvalue.ToString();
+
+        //Ç©ÇﬂÇÁ
+        FreeLookCameraInfo _freeLookCameraInfo = GameObject.Find("CM FreeLook1").GetComponent<FreeLookCameraInfo>();
+        _freeLookCameraInfo.ChangeHorSpeed(_camera[(int)CameraType.CAMERA_HOR].value);
+        _freeLookCameraInfo.ChangeVerSpeed(_camera[(int)CameraType.CAMERA_VER].value);
     }
 
     //  ÉÅÉjÉÖÅ[âÊñ äJÇ≠
