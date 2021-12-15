@@ -61,11 +61,11 @@ public class CharaScore : MonoBehaviourPunCallbacks
     {
         if (!photonView.IsMine) { return; }
 
-        GetComponent<PhotonView>().RPC("StepTeamSet", RpcTarget.All); 
+        StepTeamSet(); 
     }
 
-    [PunRPC]
-    void StepTeamSet()
+    
+    public void StepTeamSet()
     {
         if(_isTeamSet) { return; }
         if (_selectTeam.GetIsDecide() == false) { return; }
@@ -83,14 +83,14 @@ public class CharaScore : MonoBehaviourPunCallbacks
                 int red = view._redNum;
                 int blue = view._blueNum;
 
-                
+
                 view.RedNum = red + 1;
                 view.BlueNum = blue;
                 view.AllPlayerNum = all_num + 1;
 
 
             }
-            else if(_nwInfo.GetTeamColor() == 1)
+            else if (_nwInfo.GetTeamColor() == 1)
             {
                 PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                      GetComponent<PhotonCharaView>();
@@ -99,17 +99,22 @@ public class CharaScore : MonoBehaviourPunCallbacks
                 int red = view._redNum;
                 int blue = view._blueNum;
 
-                
+
                 view.RedNum = red;
                 view.BlueNum = blue + 1;
                 view.AllPlayerNum = all_num + 1;
             }
 
-
-            _scoreInfo._teamKind = _selectTeam.GetTeamSelect();
-            _isTeamSet = true;
-            _scoreInfo._isData = true;
+            GetComponent<PhotonView>().RPC("SetInfo", RpcTarget.All); 
         }
+    }
+
+    [PunRPC]
+    public void SetInfo()
+    {
+        _scoreInfo._teamKind = _selectTeam.GetTeamSelect();
+        _isTeamSet = true;
+        _scoreInfo._isData = true;
     }
 
 
