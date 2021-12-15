@@ -15,7 +15,7 @@ public class CharaScoreManager : MonoBehaviour
     private GameObject _minePlayer;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _allScoreInfo = new CharaScore.CharaScoreInfo[8];
 
