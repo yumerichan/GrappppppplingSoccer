@@ -85,7 +85,7 @@ public class Anchor : MonoBehaviourPunCallbacks
             wirePullSpeed_ * Time.deltaTime);
 
         if (disPlayer_ <= 2)
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
     }
 
     public void InitAnchor(GameObject player)
