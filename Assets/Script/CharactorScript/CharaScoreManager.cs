@@ -7,6 +7,9 @@ using Photon.Pun;
 public class CharaScoreManager : MonoBehaviour
 {
     public static CharaScore.CharaScoreInfo[] _allScoreInfo;
+    public static int _RedScore;
+    public static int _blueScore;
+
     public static int _playerCnt;
 
     private CharaScore[] _all;
@@ -39,27 +42,29 @@ public class CharaScoreManager : MonoBehaviour
         
 
         //  デバッグ終了
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
+        //if (Input.GetKeyDown(KeyCode.Alpha0))
+        //{
 
-            GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+        //    GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
 
-            for(int i = 0;i < player.Length;i++)
-            {
-                _allScoreInfo[i] = player[i].
-                    GetComponent<CharaScore>()._scoreInfo;
+        //    for(int i = 0;i < player.Length;i++)
+        //    {
+        //        _allScoreInfo[i] = player[i].
+        //            GetComponent<CharaScore>()._scoreInfo;
 
-                if(player[i] == _minePlayer)
-                {
-                    _allScoreInfo[i]._isMine = true;
-                }
-            }
+        //        if(player[i] == _minePlayer)
+        //        {
+        //            _allScoreInfo[i]._isMine = true;
+        //        }
+        //    }
 
-            SceneManager.LoadScene("ResultScene");
-        }
+        //    SceneManager.LoadScene("ResultScene");
+        //}
+
+        
     }
 
-    public void FinGame()
+    public void FinGame(GameObject mine_player)
     {
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
 
@@ -68,11 +73,17 @@ public class CharaScoreManager : MonoBehaviour
             _allScoreInfo[i] = player[i].
                 GetComponent<CharaScore>()._scoreInfo;
 
-            if (player[i] == _minePlayer)
+            if (player[i] == mine_player)
             {
                 _allScoreInfo[i]._isMine = true;
             }
         }
+
+        PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
+                     GetComponent<PhotonCharaView>();
+
+        CharaScoreManager._RedScore = view.RedScore;
+        CharaScoreManager._blueScore = view.BlueScore;
 
         SceneManager.LoadScene("ResultScene");
     }

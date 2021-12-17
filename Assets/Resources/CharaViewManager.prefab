@@ -53,6 +53,7 @@ MonoBehaviour:
   _blueTeamNum: 0
   _redScore: 0
   _blueScore: 0
+  _GetScore: 0
 --- !u!114 &6613463879485893211
 MonoBehaviour:
   m_ObjectHideFlags: 0

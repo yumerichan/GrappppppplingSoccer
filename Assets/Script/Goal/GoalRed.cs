@@ -11,6 +11,8 @@ public class GoalRed : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
+
         if (other.tag == "Ball")
         {
             Canvas canvas = GameObject.FindGameObjectWithTag("GoalCanvas").GetComponent<Canvas>();
@@ -22,8 +24,6 @@ public class GoalRed : MonoBehaviour
                          GetComponent<PhotonCharaView>();
 
             score.AddRedScore();
-
-            view.RedScore = score.GetRedScore();
 
             //  ゴール演出リクエスト
             _goalImage.GetComponent<PhotonView>().RPC("RequestGoalDirecting", RpcTarget.All);

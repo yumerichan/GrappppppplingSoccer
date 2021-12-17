@@ -20,7 +20,16 @@ public class ResultScore : MonoBehaviour
         public Text _scoreTxt;
     }
 
+    public GameObject _blueScore;
+    public GameObject _redScore;
+
+    public GameObject _WIN;
+    public GameObject _LOSE;
+    public GameObject _DRAW;
+
     private int _myTeamNumber;
+
+    private int _mineTeamKind;
 
     private ResultScoreInfo[] _resultInfo;
 
@@ -81,6 +90,7 @@ public class ResultScore : MonoBehaviour
             if(info._isMine)
             {
                 _resultInfo[i]._nameTxt.text = "YOU";
+                _mineTeamKind = info._teamKind;
             }
             else if(info._teamKind == _myTeamNumber)
             {
@@ -108,7 +118,40 @@ public class ResultScore : MonoBehaviour
         }
 
 
-        
+        _blueScore.GetComponent<Text>().text = CharaScoreManager._blueScore.ToString();
+        _redScore.GetComponent<Text>().text = CharaScoreManager._RedScore.ToString();
+
+
+        if (CharaScoreManager._blueScore == CharaScoreManager._RedScore)
+        {
+            _WIN.SetActive(false);
+            _LOSE.SetActive(false);
+        }
+        else if(CharaScoreManager._blueScore < CharaScoreManager._RedScore)
+        {
+            if(_mineTeamKind == 0)
+            {
+                _LOSE.SetActive(false);
+            }
+            else
+            {
+                _WIN.SetActive(false);
+            }
+            _DRAW.SetActive(false);
+        }
+        else
+        {
+            if (_mineTeamKind == 0)
+            {
+                _WIN.SetActive(false);
+            }
+            else
+            {
+                _LOSE.SetActive(false);
+            }
+            _DRAW.SetActive(false);
+        }
+
     }
 
     // Update is called once per frame

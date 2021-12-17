@@ -77,12 +77,14 @@ public class MenuUi : MonoBehaviour
             }
         }
 
+        if (_isOpenMenu)
+        {
+            CancelMenu();
 
-        CancelMenu();
+            Volume();
 
-        Volume();
-
-        Camera();
+            Camera();
+        }
     }
 
     private void CancelMenu()
