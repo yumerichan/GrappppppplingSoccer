@@ -101,7 +101,10 @@ public class CharaSkill : MonoBehaviour
     public void OnSkillFriaze()
     {
         GameObject ball = GameObject.Find("Ball(Clone)");
-        ball.transform.gameObject.GetComponent<Ball>().StartIceEffect(this.gameObject);
+        //ball.transform.gameObject.GetComponent<Ball>().StartIceEffect(this.gameObject);
+
+        ball.GetComponent<PhotonView>()
+                            .RPC("StartIceEffect", RpcTarget.All, this.gameObject);
     }
 
     //  ƒgƒ‰ƒbƒv

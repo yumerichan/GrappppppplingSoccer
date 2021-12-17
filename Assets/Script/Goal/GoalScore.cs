@@ -19,16 +19,14 @@ public class GoalScore : MonoBehaviour
 
     public void Update()
     {
-        if (!_GetScore) { return; }
         PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                         GetComponent<PhotonCharaView>();
 
-
-        _redScoreText.text = view.RedScore.ToString();
-        _buleScoreText.text = view.BlueScore.ToString();
-
         if(view.GetScore)
         {
+            _redScoreText.text = view.RedScore.ToString();
+            _buleScoreText.text = view.BlueScore.ToString();
+
             _CheckTime -= Time.deltaTime;
 
             if(_CheckTime <= 0.0f)
