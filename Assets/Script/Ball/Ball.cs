@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class Ball : MonoBehaviour
+public class Ball : MonoBehaviourPunCallbacks
 {
     public float _iceTime;           //氷結時間
     public GameObject _iceEffect;         //氷結エフェクト
@@ -30,6 +30,9 @@ public class Ball : MonoBehaviour
 
     private GoalScore _goalScore;
 
+    private Vector3 networkPosition;
+    private Quaternion networkRotation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +58,7 @@ public class Ball : MonoBehaviour
     {
         UpdateIceEffect();
         UpdateBlackHole();
+        FixedUpdate();
     }
 
     //氷結スキル発動
@@ -173,12 +177,21 @@ public class Ball : MonoBehaviour
         }
         else
         {
-            _rigidBody.position = (Vector3)stream.ReceiveNext();
-            _rigidBody.rotation = (Quaternion)stream.ReceiveNext();
+            networkPosition = (Vector3)stream.ReceiveNext();
+            networkRotation = (Quaternion)stream.ReceiveNext();
             _rigidBody.velocity = (Vector3)stream.ReceiveNext();
 
             float lag = Mathf.Abs((float)(PhotonNetwork.Time - info.timestamp));
-            _rigidBody.position += (this._rigidBody.velocity * lag);
+            networkPosition += (this._rigidBody.velocity * lag);
+        }
+    }
+
+    public void FixedUpdate()
+    {
+        if (!photonView.IsMine)
+        {
+            _rigidBody.position = Vector3.MoveTowards(_rigidBody.position, networkPosition, Time.fixedDeltaTime);
+            _rigidBody.rotation = Quaternion.RotateTowards(_rigidBody.rotation, networkRotation, Time.fixedDeltaTime * 100.0f);
         }
     }
 
