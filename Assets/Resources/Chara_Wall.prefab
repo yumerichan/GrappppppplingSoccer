@@ -1437,9 +1437,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed_: 2
   jumpPower_: 25
-  maxMoveSpeed_: 9
-  maxGrappleSpeed_: 12
+  maxMoveSpeed_: 18
+  maxGrappleSpeed_: 24
   maxRestrantTime: 5
+  _strengthTime: 0
+  _strengthAmount: 0
   charaCanvas_: {fileID: 8236514690248359011}
 --- !u!114 &8236514690341640755
 MonoBehaviour:

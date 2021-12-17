@@ -33,22 +33,22 @@ public class GoalRed : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Canvas canvas = GameObject.FindGameObjectWithTag("GoalCanvas").GetComponent<Canvas>();
-            _goalImage = canvas.transform.Find("GoalImage").GetComponent<Image>();
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    Canvas canvas = GameObject.FindGameObjectWithTag("GoalCanvas").GetComponent<Canvas>();
+        //    _goalImage = canvas.transform.Find("GoalImage").GetComponent<Image>();
 
-            GoalScore score = GameObject.Find("Score&Timer").GetComponent<GoalScore>();
+        //    GoalScore score = GameObject.Find("Score&Timer").GetComponent<GoalScore>();
 
-            PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
-                         GetComponent<PhotonCharaView>();
+        //    PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
+        //                 GetComponent<PhotonCharaView>();
 
-            score.AddRedScore();
+        //    score.AddRedScore();
 
-            view.RedScore = score.GetRedScore();
+        //    view.RedScore = score.GetRedScore();
 
-            //  ゴール演出リクエスト
-            _goalImage.GetComponent<PhotonView>().RPC("RequestGoalDirecting", RpcTarget.All);
-        }
+        //    //  ゴール演出リクエスト
+        //    _goalImage.GetComponent<PhotonView>().RPC("RequestGoalDirecting", RpcTarget.All);
+        //}
     }
 }

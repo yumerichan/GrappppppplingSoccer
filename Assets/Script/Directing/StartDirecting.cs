@@ -53,7 +53,7 @@ public class StartDirecting : MonoBehaviour
                         _curCountDown -= Time.deltaTime;
                         count = (int)_curCountDown;
 
-                        _text.text = count.ToString();
+                        _text.text = (1 + count).ToString();
 
                         //  残り0.1秒になったらスタート画像表示
                         if (_curCountDown < 0.1)
@@ -100,5 +100,6 @@ public class StartDirecting : MonoBehaviour
         _text.gameObject.SetActive(false);
         _curCountDown = _countDownTime;
         _phase = Phase.Count;
+        _curImageDispTime = 0.0f;
     }
 }
