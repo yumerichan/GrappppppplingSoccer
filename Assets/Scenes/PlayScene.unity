@@ -1099,7 +1099,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1189100866609478043, guid: 11f9b79d640bb424f91521010d14cd0e, type: 3}
       propertyPath: m_Name
-      value: CharaScoreManager
+      value: CharaScoreManager1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1189100866609478040, guid: 11f9b79d640bb424f91521010d14cd0e, type: 3}

@@ -32,6 +32,16 @@ public class CharaScore : MonoBehaviourPunCallbacks
     public SelectTeam _selectTeam;
 
     bool _isTeamSet;
+    bool _isCheck;
+
+    private void Awake()
+    {
+        _nwInfo = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
+
+        _scoreManager = GameObject.Find("CharaScoreManager1");
+        _scoreManager.GetComponent<CharaScoreManager>().SetMinePlayer(this.gameObject);
+        _isCheck = false;
+    }
 
 
     // Start is called before the first frame update
@@ -39,15 +49,14 @@ public class CharaScore : MonoBehaviourPunCallbacks
     {
         //if (!photonView.IsMine) { return; }
 
-        _scoreManager = GameObject.Find("CharaScoreManager");
-        _scoreManager.GetComponent<CharaScoreManager>().SetMinePlayer(this.gameObject);
+        
         _scoreInfo._goal = _scoreInfo._grap = _scoreInfo._skill = _scoreInfo._skillCnt = 0;
         _scoreInfo._ballAtk = 0;
         _scoreInfo._teamKind = -1;
         _scoreInfo._goalNum = 0;
         _scoreInfo._isMine = false;
         _scoreInfo._isData = true;
-        _nwInfo = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
+       
 
         _isTeamSet = false;
 
@@ -61,9 +70,24 @@ public class CharaScore : MonoBehaviourPunCallbacks
     {
         if (!photonView.IsMine) { return; }
 
-        StepTeamSet(); 
-    }
+        StepTeamSet();
 
+        //Debug.Log(_nwInfo.GetTeamColor() + "")
+
+        if (!_isCheck)
+        {
+            if ((int)PhotonNetwork.CurrentRoom.PlayerCount == (int)PhotonNetwork.CurrentRoom.MaxPlayers)
+            {
+                GetComponent<PhotonView>().RPC("SetInfo", RpcTarget.All, _nwInfo.GetTeamColor());
+                _isCheck = true;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            _scoreManager.GetComponent<CharaScoreManager>().FinGame(this.gameObject);
+        }
+    }
     
     public void StepTeamSet()
     {
@@ -104,15 +128,13 @@ public class CharaScore : MonoBehaviourPunCallbacks
                 view.BlueNum = blue + 1;
                 view.AllPlayerNum = all_num + 1;
             }
-
-            GetComponent<PhotonView>().RPC("SetInfo", RpcTarget.All); 
         }
     }
 
     [PunRPC]
-    public void SetInfo()
+    public void SetInfo(int team_kind)
     {
-        _scoreInfo._teamKind = _selectTeam.GetTeamSelect();
+        _scoreInfo._teamKind = team_kind;
         _isTeamSet = true;
         _scoreInfo._isData = true;
     }

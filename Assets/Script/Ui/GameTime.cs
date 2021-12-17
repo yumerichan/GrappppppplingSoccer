@@ -89,6 +89,6 @@ public class GameTime : MonoBehaviour
 
     private void StepFin()
     {
-        GameObject.Find("CharaScoreManager").GetComponent<CharaScoreManager>().FinGame();
+        //GameObject.Find("CharaScoreManager").GetComponent<CharaScoreManager>().FinGame();
     }
 }
