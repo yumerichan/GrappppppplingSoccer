@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Boost : MonoBehaviour
+public class Boost : MonoBehaviourPunCallbacks
 {
     private GameObject ball_;               //ボール
     private Rigidbody rb_;                  //リジットボディ
     private GameObject player_;             //プレイあー
     private float maxBoostGage_ = 100.0f;   //ブーストゲージ最大量
     private float initBoostGage_ = 50.0f;   //ブーストゲージ初期値
+
 
     [SerializeField]
     private float boostPower_;              //ブーストのパワー
@@ -29,12 +31,13 @@ public class Boost : MonoBehaviour
     {
         //  カメラ取得
         _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     //  ブーストボタンが押されたら
