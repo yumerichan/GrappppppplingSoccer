@@ -12,6 +12,7 @@ public class GoalRed : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
+        if (GameObject.Find("NetWork").GetComponent<NewWorkInfo>().GetNumber() != 0) return;
 
         if (other.tag == "Ball")
         {
