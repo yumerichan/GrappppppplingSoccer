@@ -232,8 +232,6 @@ MonoBehaviour:
   consumptionAmount_: 25
   curBoostGage_: 50
   boostUI_: {fileID: 3212432621958025729}
-  _accelTime: 0.5
-  _brakeTime: 0.5
   _camera: {fileID: 0}
 --- !u!114 &5917087414711958534
 MonoBehaviour:
@@ -249,8 +247,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed_: 2
   jumpPower_: 25
-  maxMoveSpeed_: 18
-  maxGrappleSpeed_: 24
+  maxMoveSpeed_: 15
+  maxGrappleSpeed_: 20
   maxRestrantTime: 5
   _strengthTime: 0
   _strengthAmount: 0
