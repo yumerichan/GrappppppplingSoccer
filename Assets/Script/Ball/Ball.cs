@@ -163,6 +163,24 @@ public class Ball : MonoBehaviour
             FinBlackHole();
         }
     }
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(this._rigidBody.position);
+            stream.SendNext(this._rigidBody.rotation);
+            stream.SendNext(this._rigidBody.velocity);
+        }
+        else
+        {
+            _rigidBody.position = (Vector3)stream.ReceiveNext();
+            _rigidBody.rotation = (Quaternion)stream.ReceiveNext();
+            _rigidBody.velocity = (Vector3)stream.ReceiveNext();
+
+            float lag = Mathf.Abs((float)(PhotonNetwork.Time - info.timestamp));
+            _rigidBody.position += (this._rigidBody.velocity * lag);
+        }
+    }
 
     public bool GetIsIce()
     {
