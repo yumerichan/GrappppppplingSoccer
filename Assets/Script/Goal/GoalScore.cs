@@ -41,10 +41,12 @@ public class GoalScore : MonoBehaviour
     //  赤チームスコア加算
     public void AddRedScore()
     {
-        if (_GetScore) return;
-
         PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
-                       GetComponent<PhotonCharaView>();
+                     GetComponent<PhotonCharaView>();
+
+        if (view.GetScore) return;
+
+      
         view.RedScore = view.RedScore + 1;
         view.GetScore = true;
         _CheckTime = 2.0f;
@@ -53,10 +55,12 @@ public class GoalScore : MonoBehaviour
     //  青チームスコア加算
     public void AddBuleScore()
     {
-        if (_GetScore) return;
-
         PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                       GetComponent<PhotonCharaView>();
+
+        if (  view.GetScore) return;
+
+        
         view.BlueScore = view.BlueScore + 1;
 
         view.GetScore = true;
