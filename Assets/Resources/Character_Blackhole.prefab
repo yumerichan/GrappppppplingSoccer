@@ -321,9 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 209ffdfaa4b001f44b194cdffb02a5a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostPower_: 270
+  boostPower_: 250
   boostGageSpeed_: 5
-  consumptionAmount_: 25
+  consumptionAmount_: 20
   curBoostGage_: 50
   boostUI_: {fileID: 8019488097296792714}
   _camera: {fileID: 0}
