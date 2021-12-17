@@ -62,6 +62,10 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     private float maxGrappleSpeed_;     //グラップル中最高速度
     [SerializeField]
     private float maxRestrantTime;      //罠拘束時間
+    [SerializeField]
+    private float _strengthTime;        //強化時間
+    [SerializeField]
+    private float _strengthAmount;      //強化倍率
 
     public Canvas charaCanvas_;         //キャラクターのUIキャンバス
     [HideInInspector]
@@ -80,6 +84,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     private float curRestrantTime;      //現在の拘束時間
     private bool _preIsBallBoost;           //前フレのブースト入力
     private bool _preIsCamBoost;           //前フレのブースト入力
+    private bool _isStrength;               //強化フラグ
+    private float _curStrengthTime;         //強化カウント
 
     //  チームカラー
     [HideInInspector]
@@ -141,6 +147,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         curRestrantTime = 0f;
         _preIsBallBoost = false;
         _preIsCamBoost = false;
+        _isStrength = false;
+        _curStrengthTime = 0.0f;
 
         //  キャラごとの初期設定
         if (photonView.IsMine)
@@ -174,7 +182,12 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         //  スキル更新
         UpdateSkill();
 
-            if (anime_.GetInteger("AnimState") == (int)CharactorStateType.STATE_TYPE_LANDING)
+
+        //  強化スキル更新
+        if (_isStrength)
+            UpdateStrength();
+
+        if (anime_.GetInteger("AnimState") == (int)CharactorStateType.STATE_TYPE_LANDING)
         {
             if (isLanding) { isLanding = false; return; };
 
@@ -371,6 +384,9 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             {
                 max_speed = maxGrappleSpeed_;
 
+                if (_isStrength)
+                    max_speed *= _strengthAmount;
+
                 //  最高速度に達していたら
                 if (charaRb_.velocity.magnitude > max_speed)
                     charaRb_.velocity = charaRb_.velocity.normalized * max_speed;
@@ -379,6 +395,9 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             else
             {
                 max_speed = maxMoveSpeed_;
+
+                if (_isStrength)
+                    max_speed *= _strengthAmount;
 
                 //  最高速度に達していたら
                 if (charaRb_.velocity.magnitude > max_speed)
@@ -462,11 +481,11 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             skillFunc_ = this.GetComponent<CharaSkill>().OnSkillTrap;
         }
         //  ブラックホール
-        else if (charaName_ == "Chara_BlackHole")
+        else if (charaName_ == "Character_Blackhole")
         {
             skillType_ = SkillType.SKILL_TYPE_BLACKHOLE;
             skillCoolTime_ = BlackHoleSkillCoolTime_;
-            skillFunc_ = this.GetComponent<CharaSkill>().OnSkillBlackHole;
+            skillFunc_ = OnSkillStrength;
         }
 
     }
@@ -597,6 +616,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         
         if (curSkillCoolTime_ < skillCoolTime_)
             curSkillCoolTime_ += Time.deltaTime;
+
     }
 
     public float GetCurSkillCoolTime()
@@ -607,6 +627,29 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     public float GetSkillCoolTime()
     {
         return skillCoolTime_;
+    }
+
+    private void OnSkillStrength()
+    {
+        //  強化スキルエフェクト発生
+
+        //  
+        _isStrength = true;
+    }
+
+    //  強化スキル更新
+    private void UpdateStrength()
+    {
+        _curStrengthTime += Time.deltaTime;
+
+        if (_curStrengthTime > _strengthTime)
+        {
+            _isStrength = false;
+            isSkill_ = false;
+            _curStrengthTime = 0.0f;
+
+            //  強化エフェクト削除
+        }
     }
 
     [PunRPC]
