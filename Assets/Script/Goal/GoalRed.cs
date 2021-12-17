@@ -23,8 +23,6 @@ public class GoalRed : MonoBehaviour
 
             score.AddRedScore();
 
-            view.RedScore = score.GetRedScore();
-
             //  ゴール演出リクエスト
             _goalImage.GetComponent<PhotonView>().RPC("RequestGoalDirecting", RpcTarget.All);
         }

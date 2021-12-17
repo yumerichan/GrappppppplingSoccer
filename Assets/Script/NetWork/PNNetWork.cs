@@ -22,7 +22,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
         IsCheck = false;
 
         nw_info = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
-
+        PhotonNetwork.SendRate = 600;
        
     }
 

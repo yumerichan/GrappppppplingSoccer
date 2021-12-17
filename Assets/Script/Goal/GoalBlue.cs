@@ -22,9 +22,6 @@ public class GoalBlue : MonoBehaviour
                         GetComponent<PhotonCharaView>();
 
             score.AddBuleScore();
-
-            view.RedScore = score.GetRedScore();
-
             //  ゴール演出リクエスト
             _goalImage.GetComponent<PhotonView>().RPC("RequestGoalDirecting", RpcTarget.All);
         }
