@@ -34,6 +34,8 @@ public class CharaScore : MonoBehaviourPunCallbacks
     bool _isTeamSet;
     bool _isCheck;
 
+    float _checkTime;
+
     private void Awake()
     {
         _nwInfo = GameObject.Find("NetWork").GetComponent<NewWorkInfo>();
@@ -41,6 +43,7 @@ public class CharaScore : MonoBehaviourPunCallbacks
         _scoreManager = GameObject.Find("CharaScoreManager1");
         _scoreManager.GetComponent<CharaScoreManager>().SetMinePlayer(this.gameObject);
         _isCheck = false;
+        _checkTime = 3f;
     }
 
 
@@ -78,8 +81,13 @@ public class CharaScore : MonoBehaviourPunCallbacks
         {
             if ((int)PhotonNetwork.CurrentRoom.PlayerCount == (int)PhotonNetwork.CurrentRoom.MaxPlayers)
             {
-                GetComponent<PhotonView>().RPC("SetInfo", RpcTarget.All, _nwInfo.GetTeamColor());
-                _isCheck = true;
+                _checkTime -= Time.deltaTime;
+
+                if (_checkTime <= 0f)
+                {
+                    GetComponent<PhotonView>().RPC("SetInfo", RpcTarget.All, _nwInfo.GetTeamColor());
+                    _isCheck = true;
+                }
             }
         }
 
@@ -128,6 +136,8 @@ public class CharaScore : MonoBehaviourPunCallbacks
                 view.BlueNum = blue + 1;
                 view.AllPlayerNum = all_num + 1;
             }
+
+            _isTeamSet = true;
         }
     }
 
@@ -135,7 +145,6 @@ public class CharaScore : MonoBehaviourPunCallbacks
     public void SetInfo(int team_kind)
     {
         _scoreInfo._teamKind = team_kind;
-        _isTeamSet = true;
         _scoreInfo._isData = true;
     }
 
