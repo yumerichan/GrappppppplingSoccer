@@ -27,13 +27,13 @@ public class GoalScore : MonoBehaviour
         _redScoreText.text = view.RedScore.ToString();
         _buleScoreText.text = view.BlueScore.ToString();
 
-        if(_GetScore)
+        if(view.GetScore)
         {
             _CheckTime -= Time.deltaTime;
 
             if(_CheckTime <= 0.0f)
             {
-                _GetScore = false;
+                view.GetScore = false;
             }
         }
     }
@@ -46,7 +46,7 @@ public class GoalScore : MonoBehaviour
         PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                        GetComponent<PhotonCharaView>();
         view.RedScore = view.RedScore + 1;
-        _GetScore = true;
+        view.GetScore = true;
         _CheckTime = 2.0f;
     }
 
@@ -59,7 +59,7 @@ public class GoalScore : MonoBehaviour
                       GetComponent<PhotonCharaView>();
         view.BlueScore = view.BlueScore + 1;
 
-        _GetScore = true;
+        view.GetScore = true;
         _CheckTime = 2.0f;
     }
 
