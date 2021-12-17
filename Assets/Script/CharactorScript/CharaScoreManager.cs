@@ -7,6 +7,9 @@ using Photon.Pun;
 public class CharaScoreManager : MonoBehaviour
 {
     public static CharaScore.CharaScoreInfo[] _allScoreInfo;
+    public static int _RedScore;
+    public static int _blueScore;
+
     public static int _playerCnt;
 
     private CharaScore[] _all;
@@ -70,11 +73,17 @@ public class CharaScoreManager : MonoBehaviour
             _allScoreInfo[i] = player[i].
                 GetComponent<CharaScore>()._scoreInfo;
 
-            if (player[i] == _minePlayer)
+            if (player[i] == mine_player)
             {
                 _allScoreInfo[i]._isMine = true;
             }
         }
+
+        PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
+                     GetComponent<PhotonCharaView>();
+
+        CharaScoreManager._RedScore = view.RedScore;
+        CharaScoreManager._blueScore = view.BlueScore;
 
         SceneManager.LoadScene("ResultScene");
     }
