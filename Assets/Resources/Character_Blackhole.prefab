@@ -326,8 +326,6 @@ MonoBehaviour:
   consumptionAmount_: 25
   curBoostGage_: 50
   boostUI_: {fileID: 8019488097296792714}
-  _accelTime: 0.5
-  _brakeTime: 0.5
   _camera: {fileID: 0}
 --- !u!114 &2137047718628146773
 MonoBehaviour:

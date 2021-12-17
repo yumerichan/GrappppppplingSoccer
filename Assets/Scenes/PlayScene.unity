@@ -3369,7 +3369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4550744543fea7747b66dffd8a2aad73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomName: h
+  _roomName: gh
 --- !u!114 &1057651735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7994,42 +7994,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1367586994092596934, guid: 158e5cb1478e81147b54485bc1c4c207, type: 3}
---- !u!1 &6415649844794250515 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6415649844333608225, guid: 972cfd940fafef0459c25b2ac2a79c07, type: 3}
-  m_PrefabInstance: {fileID: 6415649844794250512}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6415649844794250516 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6415649843631124017, guid: 972cfd940fafef0459c25b2ac2a79c07, type: 3}
-  m_PrefabInstance: {fileID: 6415649844794250512}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6415649844794250517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6415649844794250515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abcba2b1304ec2a47851d0a0dd5072a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _goalImage: {fileID: 0}
---- !u!114 &6415649844794250518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6415649844794250516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeae72606bd97144d923ca7f0173ba1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _goalImage: {fileID: 0}
 --- !u!1001 &6772187700405113333
 PrefabInstance:
   m_ObjectHideFlags: 0
