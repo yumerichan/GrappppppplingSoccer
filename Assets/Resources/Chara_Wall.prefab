@@ -1437,8 +1437,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed_: 2
   jumpPower_: 25
-  maxMoveSpeed_: 18
-  maxGrappleSpeed_: 24
+  maxMoveSpeed_: 15
+  maxGrappleSpeed_: 20
   maxRestrantTime: 5
   _strengthTime: 0
   _strengthAmount: 0
