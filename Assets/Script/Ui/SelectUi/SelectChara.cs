@@ -13,8 +13,8 @@ public class SelectChara : MonoBehaviour
     private string[] name_ = { "Chara_Wall", "Chara_Freeze" ,
         "Chara_Trap" , "Character_Blackhole" };     //名前
 
-    private string[] charaname_ = { "卓哉", "フリーザァ" ,
-        "ジャッキー" , "ベイル" };     //名前
+    private string[] charaname_ = { "一八", "氷輪丸" ,
+        "Luminous" , "ベイル" };     //名前
     private string[] skill_ = { "壁を張るらしい！ \nボールや敵を止めれるぞ！", "その場で一時的にボールを止めれる！", "トラップを設置して敵プレイヤーを妨害！", "自分の能力を強化！ \n相手に有利をとれ！" };
 
     private int charaNumber_;   //番号

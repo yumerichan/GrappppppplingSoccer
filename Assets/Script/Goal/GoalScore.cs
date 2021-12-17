@@ -19,7 +19,7 @@ public class GoalScore : MonoBehaviour
 
     public void Update()
     {
-
+        if (!_GetScore) { return; }
         PhotonCharaView view = GameObject.Find("CharaViewManager(Clone)").
                         GetComponent<PhotonCharaView>();
 
@@ -34,6 +34,7 @@ public class GoalScore : MonoBehaviour
             if(_CheckTime <= 0.0f)
             {
                 view.GetScore = false;
+                _GetScore = false;
             }
         }
     }
@@ -50,7 +51,7 @@ public class GoalScore : MonoBehaviour
       
         view.RedScore = view.RedScore + 1;
 
-        view.GetScore = true;
+        view.GetScore = _GetScore = true;
         _CheckTime = 2.0f;
     }
 
@@ -65,7 +66,7 @@ public class GoalScore : MonoBehaviour
         
         view.BlueScore = view.BlueScore + 1;
 
-        view.GetScore = true;
+        view.GetScore = _GetScore = true;
         _CheckTime = 2.0f;
     }
 
