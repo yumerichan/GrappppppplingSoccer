@@ -43,7 +43,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 
         //Debug.Log("ismine");
 
-        if ((int)PhotonNetwork.CurrentRoom.PlayerCount == 0&& !IsCheck)
+        if ((int)PhotonNetwork.CurrentRoom.PlayerCount == 0 && !IsCheck)
         {
             IsCheck = true;
            
@@ -132,12 +132,21 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
 
         }
 
+        nw_info.SetNumber((int)PhotonNetwork.CurrentRoom.PlayerCount - 1);
+
         if ((int)PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             PhotonNetwork.Instantiate("Ball", new Vector3(0, 30, 0), Quaternion.identity);
             PhotonNetwork.Instantiate("CharaViewManager", new Vector3(0, 30, 0), Quaternion.identity);
             PhotonNetwork.Instantiate("GoalCanvas", new Vector3(0, 0, 0), Quaternion.identity);
             PhotonNetwork.Instantiate("StartDirectionCanvas", new Vector3(0, 0, 0), Quaternion.identity);
+            //var instance = PhotonNetwork.Instantiate("RedGoalColl", new Vector3(-2.0f, 40.4f, -189.2f), Quaternion.identity);
+            //PhotonNetwork.Instantiate("BlueGoalColl", new Vector3(-2.0f, 47.3f, 194.7f), Quaternion.identity);
+
+
+            //instance.SetActive(true);
+            //GameObject.Find("BlueGoalColl(Clone)").SetActive(true);
+
         }
 
         // ルームが満員になったら、以降そのルームへの参加を不許可にする

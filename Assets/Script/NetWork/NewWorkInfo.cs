@@ -5,7 +5,7 @@ using UnityEngine;
 public class NewWorkInfo : MonoBehaviour
 {
     private int TeamColor;              //0 == ê‘ 1 == ê¬
-
+    private int Number;
     private bool IsInstantiate;         //ê∂ê¨ÇµÇƒÇÊÇ¢Ç©ÅH
 
     // Start is called before the first frame update
@@ -25,6 +25,11 @@ public class NewWorkInfo : MonoBehaviour
         IsInstantiate = ins;
     }
 
+    public void SetNumber(int number)
+    {
+        Number = number;
+    }
+
     public bool GetInstiate()
     {
         return IsInstantiate;
@@ -34,4 +39,10 @@ public class NewWorkInfo : MonoBehaviour
     {
         return TeamColor;
     }
+
+    public int GetNumber()
+    {
+        return Number;
+    }
+
 }

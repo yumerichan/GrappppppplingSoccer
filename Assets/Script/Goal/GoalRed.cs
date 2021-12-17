@@ -11,6 +11,9 @@ public class GoalRed : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
+        if (GameObject.Find("NetWork").GetComponent<NewWorkInfo>().GetNumber() != 0) return;
+
         if (other.tag == "Ball")
         {
             Canvas canvas = GameObject.FindGameObjectWithTag("GoalCanvas").GetComponent<Canvas>();

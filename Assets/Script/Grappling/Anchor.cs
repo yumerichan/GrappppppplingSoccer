@@ -81,11 +81,7 @@ public class Anchor : MonoBehaviourPunCallbacks
     //  ƒAƒ“ƒJ[‚ğèŒJ‚é
     private void PullAnchor()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player_.transform.position,
-            wirePullSpeed_ * Time.deltaTime);
-
-        if (disPlayer_ <= 2)
-            PhotonNetwork.Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 
     public void InitAnchor(GameObject player)

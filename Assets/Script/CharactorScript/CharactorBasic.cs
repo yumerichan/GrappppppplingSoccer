@@ -353,7 +353,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         if((move_.x <= 0.3 && move_.x >= -0.3) &&
             (move_.z <= 0.3 && move_.z >= -0.3))
         {
-            charaRb_.velocity = new Vector3(0, charaRb_.velocity.y, 0);
+            //charaRb_.velocity = new Vector3(0, charaRb_.velocity.y, 0);
 
             if (anime_.GetInteger("AnimState") == (int)CharactorStateType.STATE_TYPE_RUN)
             {
@@ -370,6 +370,9 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             state_ = CharactorStateType.STATE_TYPE_RUN;
             anime_.SetInteger("AnimState", (int)state_);
         }
+
+        if (_isStrength)
+            move_ *= _strengthAmount;
 
         //  —Í‚ð‚ð‰Á‚¦‚é
         charaRb_.AddForce(move_, ForceMode.Impulse);
