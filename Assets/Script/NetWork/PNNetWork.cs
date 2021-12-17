@@ -138,6 +138,8 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
             PhotonNetwork.Instantiate("CharaViewManager", new Vector3(0, 30, 0), Quaternion.identity);
             PhotonNetwork.Instantiate("GoalCanvas", new Vector3(0, 0, 0), Quaternion.identity);
             PhotonNetwork.Instantiate("StartDirectionCanvas", new Vector3(0, 0, 0), Quaternion.identity);
+            PhotonNetwork.Instantiate("RedGoalColl", new Vector3(-2.0f, -37.9f, -11.8f), Quaternion.identity);
+            PhotonNetwork.Instantiate("BlueGoalColl", new Vector3(-2.0f, -37.9f, 325.3f), Quaternion.identity);
         }
 
         // ルームが満員になったら、以降そのルームへの参加を不許可にする

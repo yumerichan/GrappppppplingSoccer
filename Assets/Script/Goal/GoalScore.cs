@@ -38,6 +38,7 @@ public class GoalScore : MonoBehaviour
         }
     }
 
+    
     //  赤チームスコア加算
     public void AddRedScore()
     {
