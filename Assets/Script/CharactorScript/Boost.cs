@@ -11,6 +11,17 @@ public class Boost : MonoBehaviourPunCallbacks
     private float maxBoostGage_ = 100.0f;   //ブーストゲージ最大量
     private float initBoostGage_ = 50.0f;   //ブーストゲージ初期値
 
+    public enum BoostType
+    {
+        BoostTypeNone = -1,
+
+        BallBoost,      //ボール方向にブースト
+        CamBoost,       //カメラ方向にブースト
+
+        BoostTypeNum,
+    }
+
+    public BoostType _boostType { get; set; }
 
     [SerializeField]
     private float boostPower_;              //ブーストのパワー
@@ -32,6 +43,7 @@ public class Boost : MonoBehaviourPunCallbacks
         //  カメラ取得
         _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
+        _boostType = BoostType.BoostTypeNone;
     }
 
     // Update is called once per frame
@@ -65,6 +77,8 @@ public class Boost : MonoBehaviourPunCallbacks
         //  ゲージ更新処理
         curBoostGage_ -= consumptionAmount_;
         boostUI_.GetComponent<CircleSlider>().SetBoost(curBoostGage_);
+
+        _boostType = BoostType.BallBoost;
     }
 
     //  カメラ方向にブースト
@@ -91,6 +105,8 @@ public class Boost : MonoBehaviourPunCallbacks
         //  ゲージ更新処理
         curBoostGage_ -= consumptionAmount_;
         boostUI_.GetComponent<CircleSlider>().SetBoost(curBoostGage_);
+        _boostType = BoostType.CamBoost;
+
     }
 
     //  ブーストキャンセル

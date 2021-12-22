@@ -258,6 +258,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         bool is_ball_boost = false;
         bool is_cam_boost = false;
 
+        Boost boost = this.GetComponent<Boost>();
+
         //  トリガーの値で入力された動作分け
         if ((trigger_value > 0 || Input.GetKeyDown(KeyCode.E)))
             is_ball_boost = true;
@@ -303,15 +305,16 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         if (is_ball_boost && _preIsBallBoost == false)
         {
             //  すでにブースト状態だったらブーストキャンセル
-            if (state_ == CharactorStateType.STATE_TYPE_BOOST)
+            if (state_ == CharactorStateType.STATE_TYPE_BOOST &&
+                boost._boostType == Boost.BoostType.BallBoost)
             {
-                this.GetComponent<Boost>().CancelBoost();
+                boost.CancelBoost();
                 state_ = CharactorStateType.STATE_TYPE_FALL;
                 anime_.SetInteger("AnimState", (int)state_);
             }
             else
             {
-                this.GetComponent<Boost>().OnBallBoost();
+                boost.OnBallBoost();
                 state_ = CharactorStateType.STATE_TYPE_BOOST;
                 anime_.SetInteger("AnimState", (int)state_);
             }  
@@ -319,15 +322,16 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         else if(is_cam_boost && _preIsCamBoost == false)
         {
             //  すでにブースト状態だったらブーストキャンセル
-            if (state_ == CharactorStateType.STATE_TYPE_BOOST)
+            if (state_ == CharactorStateType.STATE_TYPE_BOOST &&
+                boost._boostType == Boost.BoostType.CamBoost)
             {
-                this.GetComponent<Boost>().CancelBoost();
+                boost.CancelBoost();
                 state_ = CharactorStateType.STATE_TYPE_FALL;
                 anime_.SetInteger("AnimState", (int)state_);
             }
             else
             {
-                this.GetComponent<Boost>().OnCamBoost();
+                boost.OnCamBoost();
                 state_ = CharactorStateType.STATE_TYPE_BOOST;
                 anime_.SetInteger("AnimState", (int)state_);
             }
