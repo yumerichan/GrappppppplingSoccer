@@ -302,15 +302,35 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         //   ブースト
         if (is_ball_boost && _preIsBallBoost == false)
         {
-            this.GetComponent<Boost>().OnBallBoost();
-            state_ = CharactorStateType.STATE_TYPE_BOOST;
-            anime_.SetInteger("AnimState", (int)state_);
+            //  すでにブースト状態だったらブーストキャンセル
+            if (state_ == CharactorStateType.STATE_TYPE_BOOST)
+            {
+                this.GetComponent<Boost>().CancelBoost();
+                state_ = CharactorStateType.STATE_TYPE_FALL;
+                anime_.SetInteger("AnimState", (int)state_);
+            }
+            else
+            {
+                this.GetComponent<Boost>().OnBallBoost();
+                state_ = CharactorStateType.STATE_TYPE_BOOST;
+                anime_.SetInteger("AnimState", (int)state_);
+            }  
         }
         else if(is_cam_boost && _preIsCamBoost == false)
         {
-            this.GetComponent<Boost>().OnCamBoost();
-            state_ = CharactorStateType.STATE_TYPE_BOOST;
-            anime_.SetInteger("AnimState", (int)state_);
+            //  すでにブースト状態だったらブーストキャンセル
+            if (state_ == CharactorStateType.STATE_TYPE_BOOST)
+            {
+                this.GetComponent<Boost>().CancelBoost();
+                state_ = CharactorStateType.STATE_TYPE_FALL;
+                anime_.SetInteger("AnimState", (int)state_);
+            }
+            else
+            {
+                this.GetComponent<Boost>().OnCamBoost();
+                state_ = CharactorStateType.STATE_TYPE_BOOST;
+                anime_.SetInteger("AnimState", (int)state_);
+            }
         }
 
         //  ブースト入力保存
@@ -326,8 +346,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         }
     }
 
-        //  移動処理
-        private void MoveUpdate()
+    //  移動処理
+    private void MoveUpdate()
     {
         //  トラップ拘束中は移動できない
         if (isCaughtTrap)

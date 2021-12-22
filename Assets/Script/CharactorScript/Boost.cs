@@ -93,6 +93,13 @@ public class Boost : MonoBehaviourPunCallbacks
         boostUI_.GetComponent<CircleSlider>().SetBoost(curBoostGage_);
     }
 
+    //  ブーストキャンセル
+    public void CancelBoost()
+    {
+        //  移動量セット
+        rb_.velocity = new Vector3(0, 0, 0);
+    }
+
     public float GetBoostPower()
     {
         return boostPower_;
