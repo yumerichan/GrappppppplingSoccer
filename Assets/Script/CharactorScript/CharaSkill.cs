@@ -103,8 +103,16 @@ public class CharaSkill : MonoBehaviour
         GameObject ball = GameObject.FindGameObjectWithTag("Ball");
         //ball.transform.gameObject.GetComponent<Ball>().StartIceEffect(this.gameObject);
 
-        ball.GetComponent<PhotonView>()
-                            .RPC("StartIceEffect", RpcTarget.All, this.gameObject);
+        GetComponent<PhotonView>()
+                            .RPC("StartIce", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void StartIce()
+    {
+        GameObject ball = GameObject.FindGameObjectWithTag("Ball");
+
+        ball.transform.gameObject.GetComponent<Ball>().StartIceEffect(this.gameObject);
     }
 
     //  ƒgƒ‰ƒbƒv
