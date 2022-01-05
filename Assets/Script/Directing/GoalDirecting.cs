@@ -74,7 +74,7 @@ public class GoalDirecting : MonoBehaviour
 
                     //  チームUI移動
                     Vector3 team_pos = _Teamrect.localPosition;
-                    pos.x += _moveSpeed * Time.unscaledDeltaTime * 15;
+                    team_pos.x += _moveSpeed * Time.unscaledDeltaTime * 15;
 
 
                     //  座標を反映
@@ -110,7 +110,7 @@ public class GoalDirecting : MonoBehaviour
 
     [PunRPC]
    //   赤ゴール
-    public void RequestGoalDirecting()
+    public void RequestRedGoalDirecting()
     {
         //  ゲームをスローモーションにする
         Time.timeScale = _slowTime;
@@ -120,7 +120,7 @@ public class GoalDirecting : MonoBehaviour
 
         //  赤チーム
         _goalTeam = GoalTeam.Red;
-        _Teamrect = _teamImages[(int)_goalTeam].GetComponent<RectTransform>();
+        _Teamrect = _teamImages[(int)_goalTeam].gameObject.GetComponent<RectTransform>();
 
         //  リスタートのフラグを折っておく
         GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>()._isGoalDirecting = false;
@@ -138,7 +138,7 @@ public class GoalDirecting : MonoBehaviour
 
         //  青チーム設定
         _goalTeam = GoalTeam.Blue;
-        _Teamrect = _teamImages[(int)_goalTeam].GetComponent<RectTransform>();
+        _Teamrect = _teamImages[(int)_goalTeam].gameObject.GetComponent<RectTransform>();
 
         //  リスタートのフラグを折っておく
         GameObject.FindGameObjectWithTag("playManager").GetComponent<PlayScene>()._isGoalDirecting = false;
@@ -154,6 +154,10 @@ public class GoalDirecting : MonoBehaviour
         Vector3 pos = _Goalrect.localPosition;
         pos = _initGoalPos;
         _Goalrect.localPosition = pos;
+
+        Vector3 team_pos = _Teamrect.localPosition;
+        team_pos = _initTeamPos;
+        _Teamrect.localPosition = team_pos;
 
         //  表示時間リセット
         _dispCount = 0.0f;

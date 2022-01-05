@@ -44,25 +44,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6430013069681245269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4865512805343354484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 515f097fe624fd7418a07609422d8037, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dispTime: 2
-  _moveSpeed: 1000
-  _slowTime: 0.05
-  _initGoalPos: {x: 0, y: 0, z: 0}
-  _initTeamPos: {x: 0, y: 0, z: 0}
-  _goalImage: {fileID: 0}
-  _teamImages: []
 --- !u!114 &3088872100693835068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,25 +66,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6451721890657746887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6761013637055074533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 515f097fe624fd7418a07609422d8037, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dispTime: 2
-  _moveSpeed: 1000
-  _slowTime: 0.05
-  _initGoalPos: {x: 0, y: 0, z: 0}
-  _initTeamPos: {x: 0, y: 0, z: 0}
-  _goalImage: {fileID: 0}
-  _teamImages: []
 --- !u!1 &7449783137893490475
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +208,7 @@ MonoBehaviour:
   _moveSpeed: 1000
   _slowTime: 0.05
   _initGoalPos: {x: 930, y: 0, z: 0}
-  _initTeamPos: {x: -930, y: 0, z: 0}
+  _initTeamPos: {x: -930, y: 158, z: 0}
   _goalImage: {fileID: 1023552626717220787}
   _teamImages:
   - {fileID: 6647505216540188229}
