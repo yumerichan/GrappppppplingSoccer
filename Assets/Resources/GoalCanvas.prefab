@@ -584,6 +584,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueTeamImage
       objectReference: {fileID: 0}
+    - target: {fileID: 3968977276659761556, guid: d32ba5dba4757c841bd50f093783f02a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5969230837534101157, guid: d32ba5dba4757c841bd50f093783f02a, type: 3}
       propertyPath: m_Text
       value: "- \u9752\u30C1\u30FC\u30E0 -"
