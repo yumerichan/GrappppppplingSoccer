@@ -220,13 +220,21 @@ public class Ball : MonoBehaviourPunCallbacks
     //  ゴール判定
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "RedGoal")
+        if(other.gameObject.tag == "RedGoal")
         {
-            _hitPlayer.transform.GetComponent<CharaScore>().AddGoal();
+            //  ブルーの人ならゴール数追加
+            //if(_hitPlayer.GetComponent<CharaScore>()._scoreInfo._teamKind == 1)
+            //{
+                _hitPlayer.GetComponent<PhotonView>().RPC("AddGoal", RpcTarget.All);
+            //}
         }
-        else if(other.tag == "BuleGoal")
+        else if(other.gameObject.tag == "BlueGoal")
         {
-            _hitPlayer.transform.GetComponent<CharaScore>().AddGoal();
+            //  レッドの人ならゴール数追加
+            //if (_hitPlayer.GetComponent<CharaScore>()._scoreInfo._teamKind == 0)
+            //{
+                _hitPlayer.GetComponent<PhotonView>().RPC("AddGoal", RpcTarget.All);
+            //}
         }
     }
 }
