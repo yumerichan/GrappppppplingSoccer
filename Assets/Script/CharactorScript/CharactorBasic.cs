@@ -182,6 +182,9 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
         //  スキル更新
         UpdateSkill();
 
+        //  オーナーチェック
+        CheckBallOwner();
+
 
         //  強化スキル更新
         if (_isStrength)
@@ -234,6 +237,32 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             Debug.Log(anime_.GetInteger("AnimState"));
         }
 
+    }
+
+    //ボールオーナー判定
+    private void CheckBallOwner()
+    {
+        Vector3 ball_pos = GameObject.FindGameObjectWithTag("Ball").transform.position;
+
+        //  まず自分とボールの距離を出す
+        float mine_distance = Vector3.Distance(this.transform.position, ball_pos);
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        for(int i = 0; i < players.Length; i++)
+        {
+            if(players[i] == this.gameObject) { continue; }
+
+            float distance = Vector3.Distance(players[i].transform.position, ball_pos);
+
+            if(mine_distance > distance)
+            {
+                return;
+            }
+        }
+
+        GameObject.FindGameObjectWithTag("Ball").
+                     GetComponent<BallOwnerView>().RequestOwner();
     }
 
     //  入力関連===============================================
@@ -479,6 +508,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             anime_.SetInteger("AnimState", (int)state_);
             isLanding = true;
         }
+
+        
     }
 
     //  キャラごとの初期設定関数

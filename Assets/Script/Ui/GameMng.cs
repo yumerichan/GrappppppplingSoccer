@@ -34,6 +34,7 @@ public class GameMng : MonoBehaviour
                    GetComponent<PhotonCharaView>();
                 _curRed = view._redNum;
                 _curBlue = view._blueNum;
+
                 //  —¼•û‚Ìƒ`[ƒ€‚ª–„‚Ü‚Á‚½‚ç
                 if (_curRed == _teamMaxNum &&
                     _curBlue == _teamMaxNum)
