@@ -95,6 +95,15 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
     private delegate void SkillFunc();
     SkillFunc skillFunc_;
 
+    /* サウンド関連 */
+    AudioSource _audioSource;
+    public AudioClip _grappleSE;  //グラップルSE
+    public AudioClip _boostSE;  //ブーストSE
+    public AudioClip _skillSE;  //スキルSE
+    public AudioClip _skillChargeSE;  //スキルがたまったSE
+    public AudioClip _boostHitSE;  //ブースト時に何かに当たるSE
+    public AudioClip _hitSE;  //何かに当たるSE
+
     /*   デバッグ用 */
     private CharactorStateType _prestate;
 
@@ -158,6 +167,7 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             charaName_ = network.GetComponent<PNNetWork>().charaName_;
             CharaTypeInit();
             _teamColor = -1;
+            _audioSource = GetComponent<AudioSource>();
         }
     }
 
@@ -319,6 +329,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             {
                 this.GetComponent<Grappling>().ShotAnchor();
 
+                _audioSource.PlayOneShot(_grappleSE);
+
                 //グラップルスコア加算
                 GetComponent<PhotonView>().RPC("AddGrap", RpcTarget.All);
             }
@@ -346,6 +358,8 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
                 boost.OnBallBoost();
                 state_ = CharactorStateType.STATE_TYPE_BOOST;
                 anime_.SetInteger("AnimState", (int)state_);
+
+                _audioSource.PlayOneShot(_boostSE);
             }  
         }
         else if(is_cam_boost && _preIsCamBoost == false)
@@ -363,6 +377,9 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
                 boost.OnCamBoost();
                 state_ = CharactorStateType.STATE_TYPE_BOOST;
                 anime_.SetInteger("AnimState", (int)state_);
+
+                _audioSource.PlayOneShot(_boostSE);
+
             }
         }
 
@@ -376,6 +393,9 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             OnSkill();
             state_ = CharactorStateType.STATE_TYPE_SKILL;
             anime_.SetInteger("AnimState", (int)state_);
+
+            _audioSource.PlayOneShot(_skillSE);
+
         }
     }
 
@@ -498,7 +518,12 @@ public class CharactorBasic : MonoBehaviourPunCallbacks
             charaRb_.velocity = new Vector3(0, 0, 0);
             state_ = CharactorStateType.STATE_TYPE_FALL;
             anime_.SetInteger("AnimState", (int)state_);
+
+            _audioSource.PlayOneShot(_boostHitSE);
+
         }
+        else
+            _audioSource.PlayOneShot(_hitSE);
 
         //  地面に当たったら待機状態へ
         if (other.gameObject.tag.Equals("Ground") &&

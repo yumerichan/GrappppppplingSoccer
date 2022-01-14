@@ -10,8 +10,15 @@ public class MenuUi : MonoBehaviour
 {
     public Image[] _menuUi;
 
-    public bool _isOpenMenu { get; set; }
+    /* サウンド関連 */
+    AudioSource _audioSource;
+    public AudioClip _menu;     //メニュー
+    public AudioClip _cursor;   //カーソル
+    public AudioClip _diside;   //決定
+    public AudioClip _cancel;   //キャンセル
 
+
+    public bool _isOpenMenu { get; set; }
 
     //  メニュー画面タイプ
     public enum MenuType
@@ -56,7 +63,7 @@ public class MenuUi : MonoBehaviour
     {
         _isOpenMenu = false;
         EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_OPTION]);
-        
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -105,15 +112,19 @@ public class MenuUi : MonoBehaviour
             {
                 OnValumeToSetting();
                 OnCamToSetting();
+
+                _audioSource.PlayOneShot(_cancel);
             }
             else
             {
                 OnSettingToOption();
                 OnOpeToOption();
+                _audioSource.PlayOneShot(_cancel);
+
             }
 
 
-            if(_backmenu == (int)MenuType.MENU_TYPE_OPTION)
+            if (_backmenu == (int)MenuType.MENU_TYPE_OPTION)
             {
                 DeleteMenu();
             }
@@ -181,6 +192,8 @@ public class MenuUi : MonoBehaviour
         _menuUi[(int)MenuType.MENU_TYPE_OPTION].gameObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_OPTION]);
         _isOpenMenu = true;
+
+        _audioSource.PlayOneShot(_menu);
     }
 
     //  メニュー画面削除
@@ -190,6 +203,7 @@ public class MenuUi : MonoBehaviour
         {
             image.gameObject.SetActive(false);
             _isOpenMenu = false;
+            _audioSource.PlayOneShot(_cancel);
         }
     }
 
@@ -213,6 +227,8 @@ public class MenuUi : MonoBehaviour
         SetMenuActive(MenuType.MENU_TYPE_SETTING, true);
 
         EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_SETTING]);
+        _audioSource.PlayOneShot(_diside);
+
 
     }
 
@@ -222,6 +238,7 @@ public class MenuUi : MonoBehaviour
         SetMenuActive(MenuType.MENU_TYPE_OPTION, true);
 
         EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_OPTION]);
+
     }
 
     public void OnValumeToSetting()
@@ -230,6 +247,7 @@ public class MenuUi : MonoBehaviour
         SetMenuActive(MenuType.MENU_TYPE_SETTING, true);
 
         EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_SETTING]);
+
     }
 
     public void OnCamToSetting()
@@ -238,6 +256,7 @@ public class MenuUi : MonoBehaviour
         SetMenuActive(MenuType.MENU_TYPE_SETTING, true);
 
         EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_SETTING]);
+
     }
 
     public void OnOpeToOption()
@@ -246,6 +265,7 @@ public class MenuUi : MonoBehaviour
         SetMenuActive(MenuType.MENU_TYPE_OPTION, true);
 
         EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_OPTION]);
+
     }
 
     //  音量
@@ -256,6 +276,8 @@ public class MenuUi : MonoBehaviour
         SetMenuActive(MenuType.MENU_TYPE_VALUME, true);
 
         EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_VALUME]);
+        _audioSource.PlayOneShot(_diside);
+
     }
 
     //  カメラ感度
@@ -265,6 +287,8 @@ public class MenuUi : MonoBehaviour
         SetMenuActive(MenuType.MENU_TYPE_SETTING, false);
         SetMenuActive(MenuType.MENU_TYPE_CAM_SENSI, true);
         EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_CAM_SENSI]);
+        _audioSource.PlayOneShot(_diside);
+
 
     }
 
@@ -276,5 +300,7 @@ public class MenuUi : MonoBehaviour
         SetMenuActive(MenuType.MENU_TYPE_OPERETION, true);
 
         EventSystem.current.SetSelectedGameObject(_firstSelectedObjects[(int)MenuType.MENU_TYPE_OPERETION]);
+        _audioSource.PlayOneShot(_diside);
+
     }
 }
