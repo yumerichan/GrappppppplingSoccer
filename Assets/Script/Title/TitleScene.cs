@@ -90,6 +90,11 @@ public class TitleScene : MonoBehaviour
 
                 _curSelect++;
 
+                if (_curSelect > 2)
+                {
+                    _curSelect = 0;
+                }
+
                 Vector3 scale2 = _allButtons[_curSelect].transform.localScale;
                 scale2.x = 1.3f;
                 _allButtons[_curSelect].transform.localScale = scale2;
@@ -98,10 +103,7 @@ public class TitleScene : MonoBehaviour
                 scale4.x = 0.8f;
                 _allButtons[_curSelect].transform.GetChild(0).transform.localScale = scale4;
 
-                if (_curSelect > 2)
-                {
-                    _curSelect = 0;
-                }
+              
 
                 _coolTime = 0.5f;
 
@@ -122,6 +124,11 @@ public class TitleScene : MonoBehaviour
 
                 _curSelect--;
 
+                if (_curSelect < 0)
+                {
+                    _curSelect = 2;
+                }
+
                 Vector3 scale2 = _allButtons[_curSelect].transform.localScale;
                 scale2.x = 1.3f;
                 _allButtons[_curSelect].transform.localScale = scale2;
@@ -130,10 +137,7 @@ public class TitleScene : MonoBehaviour
                 scale4.x = 0.8f;
                 _allButtons[_curSelect].transform.GetChild(0).transform.localScale = scale4;
 
-                if (_curSelect < 0)
-                {
-                    _curSelect = 2;
-                }
+                
 
                 _coolTime = 0.5f;
 
