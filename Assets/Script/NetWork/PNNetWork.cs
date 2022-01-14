@@ -140,6 +140,7 @@ public class PNNetWork : MonoBehaviourPunCallbacks,IMatchmakingCallbacks
             PhotonNetwork.Instantiate("CharaViewManager", new Vector3(0, 30, 0), Quaternion.identity);
             PhotonNetwork.Instantiate("GoalCanvas", new Vector3(0, 0, 0), Quaternion.identity);
             PhotonNetwork.Instantiate("StartDirectionCanvas", new Vector3(0, 0, 0), Quaternion.identity);
+            PhotonNetwork.Instantiate("GoalCollision", new Vector3(0, 0, 0), Quaternion.identity);
             //var instance = PhotonNetwork.Instantiate("RedGoalColl", new Vector3(-2.0f, 40.4f, -189.2f), Quaternion.identity);
             //PhotonNetwork.Instantiate("BlueGoalColl", new Vector3(-2.0f, 47.3f, 194.7f), Quaternion.identity);
 
