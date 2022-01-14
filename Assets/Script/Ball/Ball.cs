@@ -33,6 +33,9 @@ public class Ball : MonoBehaviourPunCallbacks
     private Vector3 networkPosition;
     private Quaternion networkRotation;
 
+    private bool _isGoal;
+    private float _notGoalTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +45,8 @@ public class Ball : MonoBehaviourPunCallbacks
         _cloneIceEffect = null;
         _hitPlayer = null;
         _goalScore = GetComponent<GoalScore>();
+        _isGoal = false;
+        _notGoalTime = 3f;
     }
 
     private void Awake()
@@ -59,6 +64,15 @@ public class Ball : MonoBehaviourPunCallbacks
         UpdateIceEffect();
         UpdateBlackHole();
         FixedUpdate();
+
+        if (_isGoal)
+        {
+            _notGoalTime -= Time.deltaTime;
+            if (_notGoalTime <= 0f)
+            {
+                _isGoal = false;
+            }
+        }
     }
 
     //氷結スキル発動
@@ -89,9 +103,10 @@ public class Ball : MonoBehaviourPunCallbacks
         _rigidBody.velocity = Vector3.zero;
 
         _player = player;
-        
+
     }
 
+    [PunRPC]
     private void FinIceEffect()
     {
         //子を削除
@@ -213,28 +228,37 @@ public class Ball : MonoBehaviourPunCallbacks
 
 
             if (_isIce == true)
-                FinIceEffect();
+            {
+                GetComponent<PhotonView>().RPC("FinIceEffect", RpcTarget.All);
+            }
         }
     }
 
     //  ゴール判定
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "RedGoal")
+        if (!_isGoal)
         {
-            //  ブルーの人ならゴール数追加
-            //if(_hitPlayer.GetComponent<CharaScore>()._scoreInfo._teamKind == 1)
-            //{
-                _hitPlayer.GetComponent<PhotonView>().RPC("AddGoal", RpcTarget.All);
-            //}
-        }
-        else if(other.gameObject.tag == "BlueGoal")
-        {
-            //  レッドの人ならゴール数追加
-            //if (_hitPlayer.GetComponent<CharaScore>()._scoreInfo._teamKind == 0)
-            //{
-                _hitPlayer.GetComponent<PhotonView>().RPC("AddGoal", RpcTarget.All);
-            //}
+            if (other.gameObject.tag == "RedGoal")
+            {
+                //  ブルーの人ならゴール数追加
+                //if(_hitPlayer.GetComponent<CharaScore>()._scoreInfo._teamKind == 1)
+                //{
+                    _hitPlayer.GetComponent<PhotonView>().RPC("AddGoal", RpcTarget.All);
+                //}
+                _isGoal = true;
+                _notGoalTime = 3f;
+            }
+            else if (other.gameObject.tag == "BlueGoal")
+            {
+                //  レッドの人ならゴール数追加
+                //if (_hitPlayer.GetComponent<CharaScore>()._scoreInfo._teamKind == 0)
+                //{
+                    _hitPlayer.GetComponent<PhotonView>().RPC("AddGoal", RpcTarget.All);
+                //}
+                _isGoal = true;
+                _notGoalTime = 3f;
+            }
         }
     }
 }
