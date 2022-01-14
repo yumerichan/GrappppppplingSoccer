@@ -24,6 +24,11 @@ public class TitleScene : MonoBehaviour
 
     [SerializeField] private EventSystem eventSystem;
 
+    /* サウンド関連 */
+    private AudioSource _audioSource;   //オーディオソース
+    public AudioClip _cursor;           //カーソル
+    public AudioClip _diside;           //決定
+
 
     private void Awake()
     {
@@ -46,6 +51,8 @@ public class TitleScene : MonoBehaviour
         Vector3 scale4 = _allButtons[_curSelect].transform.GetChild(0).transform.localScale;
         scale4.x = 0.8f;
         _allButtons[_curSelect].transform.GetChild(0).transform.localScale = scale4;
+
+        _audioSource = GetComponent<AudioSource>();
 
         //GameObject.Find("FadeManager").gameObject.GetComponent<MyFade>().StartFadeOut();
     }
@@ -97,6 +104,9 @@ public class TitleScene : MonoBehaviour
                 }
 
                 _coolTime = 0.5f;
+
+                //  カーソル音再生
+                _audioSource.PlayOneShot(_cursor);
             }
 
             if (Input.GetKeyDown(KeyCode.UpArrow) || is_down)
@@ -126,12 +136,18 @@ public class TitleScene : MonoBehaviour
                 }
 
                 _coolTime = 0.5f;
+
+                //  カーソル音再生
+                _audioSource.PlayOneShot(_cursor);
             }
 
 
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Enter"))
             {
                 eventSystem.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
+
+                //  決定音再生
+                _audioSource.PlayOneShot(_diside);
             }
         }
         else
