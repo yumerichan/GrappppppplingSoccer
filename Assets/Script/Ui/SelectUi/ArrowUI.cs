@@ -35,6 +35,11 @@ public class ArrowUI : MonoBehaviour
 
     private float _coolTime;
 
+    /* サウンド関連 */
+    private AudioSource _audioSource;   //オーディオソース
+    public AudioClip _cursor;           //カーソル
+    public AudioClip _diside;           //決定
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +54,8 @@ public class ArrowUI : MonoBehaviour
         gameObject.SetActive(false);
         _isCanDecide = false;
         _isDecide = false;
+
+        _audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -83,6 +90,9 @@ public class ArrowUI : MonoBehaviour
                 }
 
                 _coolTime = 0.4f;
+
+                //  カーソル音再生
+                _audioSource.PlayOneShot(_cursor);
             }
 
             //  上に移動
@@ -95,6 +105,9 @@ public class ArrowUI : MonoBehaviour
                 }
 
                 _coolTime = 0.4f;
+
+                //  カーソル音再生
+                _audioSource.PlayOneShot(_cursor);
             }
         }
         else
@@ -129,6 +142,8 @@ public class ArrowUI : MonoBehaviour
 
                     gameObject.SetActive(true);
                     _isDecide = true;
+                    //  決定音再生
+                    _audioSource.PlayOneShot(_diside);
                 }
             }
         }
