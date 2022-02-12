@@ -1660,5 +1660,25 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2752301772687895716, guid: 29243c2849ac77b4392b26dbbf66518e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 3350.5928
+      objectReference: {fileID: 0}
+    - target: {fileID: 2752301772687895716, guid: 29243c2849ac77b4392b26dbbf66518e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 2190.897
+      objectReference: {fileID: 0}
+    - target: {fileID: 2752301772687895716, guid: 29243c2849ac77b4392b26dbbf66518e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -56.09992
+      objectReference: {fileID: 0}
+    - target: {fileID: 2752301772687895716, guid: 29243c2849ac77b4392b26dbbf66518e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -127.49768
+      objectReference: {fileID: 0}
+    - target: {fileID: 6302713231404393484, guid: 29243c2849ac77b4392b26dbbf66518e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29243c2849ac77b4392b26dbbf66518e, type: 3}
