@@ -142,11 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1280, y: 720}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -207,8 +207,8 @@ MonoBehaviour:
   _dispTime: 2
   _moveSpeed: 1000
   _slowTime: 0.05
-  _initGoalPos: {x: 940, y: -150, z: 0}
-  _initTeamPos: {x: -930, y: 160, z: 0}
+  _initGoalPos: {x: 950, y: -150, z: 0}
+  _initTeamPos: {x: -950, y: 160, z: 0}
   _goalImage: {fileID: 1023552626717220787}
   _teamImages:
   - {fileID: 6647505216540188229}
@@ -298,7 +298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3750258481391888152, guid: d32ba5dba4757c841bd50f093783f02a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 940
+      value: 950
       objectReference: {fileID: 0}
     - target: {fileID: 3750258481391888152, guid: d32ba5dba4757c841bd50f093783f02a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -428,7 +428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3750258481391888152, guid: d32ba5dba4757c841bd50f093783f02a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -930
+      value: -950
       objectReference: {fileID: 0}
     - target: {fileID: 3750258481391888152, guid: d32ba5dba4757c841bd50f093783f02a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -586,7 +586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3750258481391888152, guid: d32ba5dba4757c841bd50f093783f02a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -930
+      value: -950
       objectReference: {fileID: 0}
     - target: {fileID: 3750258481391888152, guid: d32ba5dba4757c841bd50f093783f02a, type: 3}
       propertyPath: m_AnchoredPosition.y
